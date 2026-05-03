@@ -1,4 +1,56 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+
+const CARDS = [
+  {
+    title: 'BUILT DIFFERENT',
+    episode: 'EP 47',
+    gradient: 'from-[#2a1c1c] via-[#1a1a1a] to-[#0f0f0f]',
+  },
+  {
+    title: 'VISIONARIES',
+    episode: 'EP 23',
+    gradient: 'from-[#1c1e2a] via-[#1a1a1a] to-[#0f0f0f]',
+  },
+  {
+    title: 'UNFILTERED',
+    episode: 'EP 12',
+    gradient: 'from-[#1c2a1c] via-[#1a1a1a] to-[#0f0f0f]',
+  },
+]
+
+// Per-position visual styling: front → middle → back
+const POSITIONS = [
+  {
+    // Front: centre, upright
+    zIndex: 30,
+    transform: 'rotate(-1deg) translate(0px, 0px)',
+  },
+  {
+    // Middle: slightly right and raised, tilted clockwise
+    zIndex: 20,
+    transform: 'rotate(5deg) translate(18px, -10px)',
+  },
+  {
+    // Back: slightly left and raised more, tilted counter-clockwise
+    zIndex: 10,
+    transform: 'rotate(-4deg) translate(-12px, -20px)',
+  },
+]
+
 export default function Hero() {
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  // Cycle front card every 2.5 s
+  useEffect(() => {
+    const id = setInterval(
+      () => setActiveIndex(i => (i + 1) % CARDS.length),
+      2500,
+    )
+    return () => clearInterval(id)
+  }, [])
+
   return (
     <section className="min-h-screen pt-28 pb-20 px-6 lg:px-12" id="work">
       <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -49,43 +101,46 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* RIGHT COLUMN — stacked landscape photo cards */}
-        <div className="relative hidden lg:block" style={{ height: '540px' }}>
+        {/* RIGHT COLUMN — 3 cycling podcast cards */}
+        <div className="relative hidden lg:block" style={{ height: '520px' }}>
 
-          {/* Card 1 — landscape, upper right, rotated +3deg */}
-          <div
-            className="absolute bg-[#1a1a1a] rounded-2xl border border-white/[0.08] overflow-hidden"
-            style={{
-              width: '90%',
-              height: '52%',
-              top: 0,
-              right: 0,
-              transform: 'rotate(3deg)',
-              transformOrigin: 'top right',
-            }}
-          >
-            {/* REPLACE WITH IMAGE */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[#2a1c1c] via-[#1a1a1a] to-[#0f0f0f]" />
+          {/* Card deck */}
+          <div className="absolute inset-x-0" style={{ top: '8%', bottom: '60px' }}>
+            {CARDS.map((card, i) => {
+              const pos = (i - activeIndex + CARDS.length) % CARDS.length
+              const { zIndex, transform } = POSITIONS[pos]
+
+              return (
+                <div
+                  key={card.title}
+                  className="absolute bg-[#1a1a1a] rounded-2xl border border-white/[0.08] overflow-hidden cursor-pointer"
+                  style={{
+                    inset: 0,
+                    zIndex,
+                    transform,
+                    transition: 'transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                  }}
+                  onClick={() => setActiveIndex(i)}
+                  aria-label={`${card.title} — ${card.episode}`}
+                >
+                  {/* REPLACE WITH IMAGE */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${card.gradient}`} />
+                  {/* Show label overlay */}
+                  <div className="absolute bottom-5 left-5">
+                    <p className="text-white/35 text-[10px] uppercase tracking-[0.18em]">
+                      {card.episode}
+                    </p>
+                    <p className="text-white/60 font-black text-sm uppercase tracking-tight mt-0.5">
+                      {card.title}
+                    </p>
+                  </div>
+                </div>
+              )
+            })}
           </div>
 
-          {/* Card 2 — landscape, lower left, rotated -2deg */}
-          <div
-            className="absolute bg-[#1a1a1a] rounded-2xl border border-white/[0.08] overflow-hidden"
-            style={{
-              width: '85%',
-              height: '50%',
-              bottom: 40,
-              left: 0,
-              transform: 'rotate(-2deg)',
-              transformOrigin: 'bottom left',
-            }}
-          >
-            {/* REPLACE WITH IMAGE */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[#1c1e2a] via-[#1a1a1a] to-[#0f0f0f]" />
-          </div>
-
-          {/* Spinning circular badge — overlaps top-right corner */}
-          <div className="absolute top-0 right-0 z-20 w-[88px] h-[88px] translate-x-3 -translate-y-3">
+          {/* Spinning circular badge — top-right, above cards */}
+          <div className="absolute top-0 right-0 z-40 w-[88px] h-[88px] translate-x-2 -translate-y-2">
             <svg
               viewBox="0 0 88 88"
               className="spin-badge w-full h-full"
@@ -124,7 +179,7 @@ export default function Hero() {
 
           {/* Decorative pink slash marks — lower right */}
           <svg
-            className="absolute bottom-20 right-4 opacity-50 z-10"
+            className="absolute bottom-16 right-2 opacity-50 z-10"
             width="34"
             height="60"
             viewBox="0 0 34 60"
@@ -136,16 +191,36 @@ export default function Hero() {
           </svg>
 
           {/* Navigation indicator */}
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex items-center gap-3 text-[#BFBFBF] text-sm select-none">
-            <button aria-label="Previous" className="hover:text-white transition-colors duration-200">←</button>
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex items-center gap-3 text-[#BFBFBF] text-sm select-none z-40">
+            <button
+              aria-label="Previous"
+              className="hover:text-white transition-colors duration-200"
+              onClick={() => setActiveIndex(i => (i - 1 + CARDS.length) % CARDS.length)}
+            >
+              ←
+            </button>
             <div className="flex items-center gap-1.5">
-              <span className="w-5 h-0.5 bg-white/20 rounded-full" />
-              <span className="w-5 h-0.5 bg-[#E07BA3] rounded-full" />
-              <span className="text-xs text-[#BFBFBF] mx-1">2/5</span>
-              <span className="w-5 h-0.5 bg-white/20 rounded-full" />
-              <span className="w-5 h-0.5 bg-white/20 rounded-full" />
+              {CARDS.map((_, i) => (
+                <button
+                  key={i}
+                  aria-label={`Go to card ${i + 1}`}
+                  onClick={() => setActiveIndex(i)}
+                  className={`h-0.5 rounded-full transition-all duration-300 ${
+                    i === activeIndex ? 'w-6 bg-[#E07BA3]' : 'w-4 bg-white/20'
+                  }`}
+                />
+              ))}
+              <span className="text-xs text-[#BFBFBF] ml-1">
+                {activeIndex + 1}/{CARDS.length}
+              </span>
             </div>
-            <button aria-label="Next" className="hover:text-white transition-colors duration-200">→</button>
+            <button
+              aria-label="Next"
+              className="hover:text-white transition-colors duration-200"
+              onClick={() => setActiveIndex(i => (i + 1) % CARDS.length)}
+            >
+              →
+            </button>
           </div>
 
         </div>
