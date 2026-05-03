@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 // Waveform: 60 bars, symmetric (up + down from center), ~50% played
 const BARS = Array.from({ length: 60 }, (_, i) => {
   const heights = [
@@ -68,13 +70,21 @@ export default function CaseStudyEpisode() {
             The future of embedded finance and B2B platforms
           </h3>
 
-          {/* Show artwork placeholder */}
-          <div className="relative w-full aspect-square max-w-[180px] bg-[#1c1c1c] rounded-xl flex flex-col items-center justify-center border border-white/[0.08]">
-            {/* REPLACE WITH IMAGE */}
-            <p className="text-white font-black text-sm text-center px-4 leading-tight">
-              API PERSPECTIVES
-            </p>
-            <p className="text-[#BFBFBF] text-xs mt-1">by Needle</p>
+          {/* Show artwork */}
+          <div className="relative w-full aspect-square max-w-[180px] rounded-xl overflow-hidden border border-white/[0.08]">
+            <Image
+              src="/images/episode-artwork.jpg"
+              alt="API Perspectives podcast artwork"
+              fill
+              className="object-cover"
+              sizes="180px"
+            />
+            <div className="absolute inset-0 flex flex-col items-center justify-end p-3 bg-gradient-to-t from-black/70 to-transparent">
+              <p className="text-white font-black text-sm text-center leading-tight">
+                API PERSPECTIVES
+              </p>
+              <p className="text-[#BFBFBF] text-xs mt-0.5">by Needle</p>
+            </div>
           </div>
 
           {/* Waveform visualisation */}

@@ -1,16 +1,21 @@
+import Image from 'next/image'
+
 const featured = {
   title: 'How to grow a B2B podcast in 2024 (that actually drives pipeline)',
   date: 'May 8, 2024 · 6 min read',
+  image: '/images/insights-featured.jpg',
 }
 
 const articles = [
   {
     title: "Why most B2B podcasts fail — and how to avoid the same mistakes",
     date: "April 22, 2024 · 5 min read",
+    image: '/images/insights-thumb-1.jpg',
   },
   {
     title: "Turning podcast content into a predictable demand engine",
     date: "April 10, 2024 · 7 min read",
+    image: '/images/insights-thumb-2.jpg',
   },
 ]
 
@@ -34,10 +39,16 @@ export default function Insights() {
             href="#"
             className="group bg-[#141414] border border-white/[0.08] rounded-2xl overflow-hidden flex flex-col hover:-translate-y-1 transition-transform duration-200"
           >
-            {/* Photo placeholder */}
-            <div className="relative w-full h-52 bg-[#1c1c1c]">
-              {/* REPLACE WITH IMAGE */}
-              <span className="absolute top-4 left-4 bg-[#E07BA3] text-black text-[10px] font-black uppercase tracking-[0.15em] px-3 py-1 rounded-full">
+            {/* Photo */}
+            <div className="relative w-full h-52">
+              <Image
+                src={featured.image}
+                alt={featured.title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+              <span className="absolute top-4 left-4 bg-[#E07BA3] text-black text-[10px] font-black uppercase tracking-[0.15em] px-3 py-1 rounded-full z-10">
                 Featured
               </span>
             </div>
@@ -54,15 +65,21 @@ export default function Insights() {
 
           {/* Right: two smaller articles stacked */}
           <div className="flex flex-col gap-6">
-            {articles.map(({ title, date }) => (
+            {articles.map(({ title, date, image }) => (
               <a
                 key={title}
                 href="#"
                 className="group bg-[#141414] border border-white/[0.08] rounded-2xl p-6 flex items-start gap-5 hover:-translate-y-1 transition-transform duration-200"
               >
-                {/* Thumbnail placeholder */}
-                <div className="w-20 h-20 flex-shrink-0 bg-[#1c1c1c] rounded-xl border border-white/[0.08]">
-                  {/* REPLACE WITH IMAGE */}
+                {/* Thumbnail */}
+                <div className="relative w-20 h-20 flex-shrink-0 rounded-xl border border-white/[0.08] overflow-hidden">
+                  <Image
+                    src={image}
+                    alt={title}
+                    fill
+                    className="object-cover"
+                    sizes="80px"
+                  />
                 </div>
                 <div className="flex-1 flex flex-col gap-2">
                   <h3 className="text-white font-black text-base leading-snug group-hover:text-[#E07BA3] transition-colors duration-200">

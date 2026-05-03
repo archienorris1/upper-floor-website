@@ -1,22 +1,26 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 
 const CARDS = [
   {
     title: 'BUILT DIFFERENT',
     episode: 'EP 47',
     gradient: 'from-[#2a1c1c] via-[#1a1a1a] to-[#0f0f0f]',
+    image: '/images/hero-card-1.jpg',
   },
   {
     title: 'VISIONARIES',
     episode: 'EP 23',
     gradient: 'from-[#1c1e2a] via-[#1a1a1a] to-[#0f0f0f]',
+    image: '/images/hero-card-2.jpg',
   },
   {
     title: 'UNFILTERED',
     episode: 'EP 12',
     gradient: 'from-[#1c2a1c] via-[#1a1a1a] to-[#0f0f0f]',
+    image: '/images/hero-card-3.jpg',
   },
 ]
 
@@ -123,8 +127,15 @@ export default function Hero() {
                   onClick={() => setActiveIndex(i)}
                   aria-label={`${card.title} — ${card.episode}`}
                 >
-                  {/* REPLACE WITH IMAGE */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${card.gradient}`} />
+                  <Image
+                    src={card.image}
+                    alt={card.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 0px, 50vw"
+                    priority={i === 0}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                   {/* Show label overlay */}
                   <div className="absolute bottom-5 left-5">
                     <p className="text-white/35 text-[10px] uppercase tracking-[0.18em]">
