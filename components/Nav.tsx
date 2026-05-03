@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 
 const navLinks = [
   { label: 'WORK', href: '#work' },
@@ -27,11 +28,15 @@ export default function Nav() {
       aria-label="Main navigation"
     >
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-5 flex items-center justify-between">
-        <a
-          href="#"
-          className="text-white font-black text-xl tracking-[-0.03em] uppercase hover:text-[#E07BA3] transition-colors duration-200"
-        >
-          UPPER FLOOR
+        <a href="#" className="flex items-center" aria-label="Upper Floor — home">
+          <Image
+            src="/logo.png"
+            alt="Upper Floor"
+            width={96}
+            height={96}
+            className="h-11 w-auto"
+            priority
+          />
         </a>
 
         {/* Desktop nav */}

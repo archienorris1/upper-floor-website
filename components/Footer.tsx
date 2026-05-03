@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 const navLinks = ['WORK', 'ABOUT', 'SERVICES', 'RESOURCES']
 
 const socialLinks = [
@@ -40,11 +42,14 @@ export default function Footer() {
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
 
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-10">
-          <a
-            href="#"
-            className="text-white font-black text-xl tracking-[-0.03em] uppercase hover:text-[#E07BA3] transition-colors duration-200"
-          >
-            UPPER FLOOR
+          <a href="#" aria-label="Upper Floor — home">
+            <Image
+              src="/logo.png"
+              alt="Upper Floor"
+              width={80}
+              height={80}
+              className="h-9 w-auto"
+            />
           </a>
 
           <nav className="flex flex-wrap gap-6" aria-label="Footer navigation">
