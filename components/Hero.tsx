@@ -1,137 +1,155 @@
-const WAVE_HEIGHTS = [
-  40, 65, 30, 80, 55, 70, 45, 90, 35, 75,
-  60, 85, 40, 70, 50, 65, 55, 45, 80, 60,
-  35, 75, 85, 50, 65, 70, 45, 80, 55, 40,
-  90, 65, 50, 75, 60, 35, 70, 50, 65, 45,
-]
-
 export default function Hero() {
   return (
-    <section className="min-h-screen bg-black flex items-center pt-24 pb-16" id="work">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+    <section className="min-h-screen pt-28 pb-20 px-6 lg:px-12" id="work">
+      <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-          {/* Left: Headline */}
-          <div>
-            <p className="text-[#BFBFBF] text-xs uppercase tracking-[0.2em] mb-8">
-              Podcast Agency
-            </p>
-            <h1 className="text-[clamp(3.5rem,8vw,7.5rem)] font-black tracking-[-0.03em] leading-none uppercase text-white mb-8">
-              WE BUILD<br />
-              PODCASTS<br />
-              THAT GROW<br />
-              <span className="text-[#E07BA3]">BRANDS.</span>
-            </h1>
-            <p className="text-[#BFBFBF] text-lg leading-relaxed mb-10 max-w-[420px]">
-              Upper Floor is a full-service podcast agency. We turn brands into authorities — and listeners into leads.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <a
-                href="#contact"
-                className="bg-[#E07BA3] text-black font-black px-7 py-3.5 uppercase tracking-wide text-sm hover:bg-[#cc6d95] transition-colors duration-200"
-              >
-                BOOK A CALL ↗
-              </a>
-              <a
-                href="#services"
-                className="border border-white/30 text-white font-black px-7 py-3.5 uppercase tracking-wide text-sm hover:border-white hover:bg-white hover:text-black transition-all duration-200"
-              >
-                SEE OUR WORK →
-              </a>
-            </div>
+        {/* LEFT COLUMN */}
+        <div className="flex flex-col gap-8">
+          <p className="text-[#E07BA3] text-xs font-black uppercase tracking-[0.2em]">
+            B2B Podcast Production Agency
+          </p>
+
+          <h1
+            className="font-black tracking-tight leading-[1.0] uppercase"
+            style={{ fontSize: 'clamp(2.8rem, 5.5vw, 5rem)' }}
+          >
+            <span className="text-white block">PODCASTS THAT</span>
+            <span className="text-white block">DRIVE PIPELINE,</span>
+            <span className="text-[#E07BA3] block">NOT VANITY.</span>
+          </h1>
+
+          <p className="text-[#BFBFBF] text-lg leading-relaxed max-w-[480px]">
+            We produce, grow and scale podcasts that actually drive pipeline — not vanity metrics.
+          </p>
+
+          <div className="flex flex-wrap gap-4">
+            <a
+              href="#contact"
+              className="bg-[#fde8ef] text-[#c05080] border border-[#E07BA3]/30 rounded-full px-6 py-3 font-medium text-sm hover:bg-[#fbd5e3] transition-colors duration-200 inline-flex items-center gap-1.5"
+            >
+              Book a strategy call <span>↗</span>
+            </a>
+            <a
+              href="#work"
+              className="border border-white/20 text-white bg-transparent rounded-full px-6 py-3 font-medium text-sm hover:bg-white/5 transition-colors duration-200"
+            >
+              View our work
+            </a>
           </div>
 
-          {/* Right: Stacked podcast cards */}
-          <div className="flex flex-col gap-3 w-full max-w-lg lg:max-w-none ml-auto">
-
-            {/* Card 1: BUILT DIFFERENT */}
-            <div className="card-hover flex items-center gap-4 bg-[#0a0a0a] border border-white/10 hover:border-white/25 p-4 cursor-pointer">
-              {/* REPLACE WITH IMAGE */}
-              <div className="w-[60px] h-[60px] flex-shrink-0 bg-[#111111] relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#3a1a2a] to-[#0a0a0a]" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-[#BFBFBF] text-[10px] uppercase tracking-[0.15em] mb-1">EP 47</p>
-                <h3 className="text-white font-black uppercase tracking-[-0.02em] text-[15px] leading-tight mb-0.5">
-                  BUILT DIFFERENT
-                </h3>
-                <p className="text-[#BFBFBF] text-xs truncate">
-                  Why the best brands don&apos;t follow the playbook
-                </p>
-              </div>
-              <div className="flex-shrink-0 text-right pl-2">
-                <p className="text-[#BFBFBF] text-xs">42 MIN</p>
-              </div>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center -space-x-3">
+              <div className="w-9 h-9 rounded-full bg-[#7c5cbf] border-2 border-[#0d0d0d]" />
+              <div className="w-9 h-9 rounded-full bg-[#4a8fc7] border-2 border-[#0d0d0d]" />
+              <div className="w-9 h-9 rounded-full bg-[#e08060] border-2 border-[#0d0d0d]" />
             </div>
-
-            {/* Card 2: VISIONARIES */}
-            <div className="card-hover flex items-center gap-4 bg-[#0a0a0a] border border-white/10 hover:border-white/25 p-4 cursor-pointer">
-              {/* REPLACE WITH IMAGE */}
-              <div className="w-[60px] h-[60px] flex-shrink-0 bg-[#111111] relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a3a] to-[#0a0a0a]" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-[#BFBFBF] text-[10px] uppercase tracking-[0.15em] mb-1">EP 23</p>
-                <h3 className="text-white font-black uppercase tracking-[-0.02em] text-[15px] leading-tight mb-0.5">
-                  VISIONARIES
-                </h3>
-                <p className="text-[#BFBFBF] text-xs truncate">
-                  Redefining leadership in the age of AI
-                </p>
-              </div>
-              <div className="flex-shrink-0 text-right pl-2">
-                <p className="text-[#BFBFBF] text-xs">58 MIN</p>
-              </div>
-            </div>
-
-            {/* Card 3: UNFILTERED — active player */}
-            <div className="card-hover flex flex-col gap-4 bg-[#0f0f0f] border border-[#E07BA3]/40 hover:border-[#E07BA3]/70 p-5 cursor-pointer">
-              <div className="flex items-center gap-4">
-                {/* REPLACE WITH IMAGE */}
-                <div className="w-[60px] h-[60px] flex-shrink-0 bg-[#111111] relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#3a1a25] to-[#0a0a0a]" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-[#E07BA3] text-[10px] uppercase tracking-[0.15em] mb-1">
-                    NOW PLAYING · EP 12
-                  </p>
-                  <h3 className="text-white font-black uppercase tracking-[-0.02em] text-[15px] leading-tight mb-0.5">
-                    UNFILTERED
-                  </h3>
-                  <p className="text-[#BFBFBF] text-xs truncate">
-                    What it really takes to build from zero
-                  </p>
-                </div>
-                <button
-                  className="w-10 h-10 rounded-full bg-[#E07BA3] flex items-center justify-center flex-shrink-0 hover:bg-[#cc6d95] transition-colors"
-                  aria-label="Play episode"
-                >
-                  <svg width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden>
-                    <path d="M1.5 1.5L10.5 7L1.5 12.5V1.5Z" fill="black" />
-                  </svg>
-                </button>
-              </div>
-
-              {/* Waveform visualiser */}
-              <div>
-                <div className="flex items-end gap-[2px] h-7 mb-2">
-                  {WAVE_HEIGHTS.map((h, i) => (
-                    <div
-                      key={i}
-                      className={`flex-1 rounded-[1px] ${i < 14 ? 'bg-[#E07BA3]' : 'bg-white/15'}`}
-                      style={{ height: `${h}%` }}
-                    />
-                  ))}
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-[#BFBFBF] text-[10px]">14:22</span>
-                  <span className="text-[#BFBFBF] text-[10px]">35:00</span>
-                </div>
-              </div>
-            </div>
-
+            <p className="text-[#BFBFBF] text-sm">
+              Trusted by B2B brands across SaaS, finance and tech.
+            </p>
           </div>
         </div>
+
+        {/* RIGHT COLUMN — stacked landscape photo cards */}
+        <div className="relative hidden lg:block" style={{ height: '540px' }}>
+
+          {/* Card 1 — landscape, upper right, rotated +3deg */}
+          <div
+            className="absolute bg-[#1a1a1a] rounded-2xl border border-white/[0.08] overflow-hidden"
+            style={{
+              width: '90%',
+              height: '52%',
+              top: 0,
+              right: 0,
+              transform: 'rotate(3deg)',
+              transformOrigin: 'top right',
+            }}
+          >
+            {/* REPLACE WITH IMAGE */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#2a1c1c] via-[#1a1a1a] to-[#0f0f0f]" />
+          </div>
+
+          {/* Card 2 — landscape, lower left, rotated -2deg */}
+          <div
+            className="absolute bg-[#1a1a1a] rounded-2xl border border-white/[0.08] overflow-hidden"
+            style={{
+              width: '85%',
+              height: '50%',
+              bottom: 40,
+              left: 0,
+              transform: 'rotate(-2deg)',
+              transformOrigin: 'bottom left',
+            }}
+          >
+            {/* REPLACE WITH IMAGE */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#1c1e2a] via-[#1a1a1a] to-[#0f0f0f]" />
+          </div>
+
+          {/* Spinning circular badge — overlaps top-right corner */}
+          <div className="absolute top-0 right-0 z-20 w-[88px] h-[88px] translate-x-3 -translate-y-3">
+            <svg
+              viewBox="0 0 88 88"
+              className="spin-badge w-full h-full"
+              aria-hidden="true"
+            >
+              <defs>
+                <path
+                  id="badgeCircle"
+                  d="M 44,44 m -36,0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0"
+                />
+              </defs>
+              <circle cx="44" cy="44" r="43" fill="#161616" stroke="#E07BA3" strokeWidth="1" />
+              <text fill="#E07BA3" fontSize="7.5" fontWeight="700" letterSpacing="1.5">
+                <textPath href="#badgeCircle">
+                  STRATEGY · PRODUCTION · GROWTH · SHOW ·
+                </textPath>
+              </text>
+            </svg>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#E07BA3"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+                <polyline points="16 7 22 7 22 13" />
+              </svg>
+            </div>
+          </div>
+
+          {/* Decorative pink slash marks — lower right */}
+          <svg
+            className="absolute bottom-20 right-4 opacity-50 z-10"
+            width="34"
+            height="60"
+            viewBox="0 0 34 60"
+            fill="none"
+            aria-hidden="true"
+          >
+            <line x1="0" y1="60" x2="26" y2="0" stroke="#E07BA3" strokeWidth="2.5" strokeLinecap="round" />
+            <line x1="8" y1="60" x2="34" y2="0" stroke="#E07BA3" strokeWidth="2.5" strokeLinecap="round" />
+          </svg>
+
+          {/* Navigation indicator */}
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex items-center gap-3 text-[#BFBFBF] text-sm select-none">
+            <button aria-label="Previous" className="hover:text-white transition-colors duration-200">←</button>
+            <div className="flex items-center gap-1.5">
+              <span className="w-5 h-0.5 bg-white/20 rounded-full" />
+              <span className="w-5 h-0.5 bg-[#E07BA3] rounded-full" />
+              <span className="text-xs text-[#BFBFBF] mx-1">2/5</span>
+              <span className="w-5 h-0.5 bg-white/20 rounded-full" />
+              <span className="w-5 h-0.5 bg-white/20 rounded-full" />
+            </div>
+            <button aria-label="Next" className="hover:text-white transition-colors duration-200">→</button>
+          </div>
+
+        </div>
+
       </div>
     </section>
   )

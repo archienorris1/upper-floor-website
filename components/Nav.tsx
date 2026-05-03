@@ -4,10 +4,11 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 
 const navLinks = [
-  { label: 'WORK', href: '#work' },
-  { label: 'ABOUT', href: '#about' },
-  { label: 'SERVICES', href: '#services' },
-  { label: 'RESOURCES', href: '#resources' },
+  { label: 'Work', href: '#work' },
+  { label: 'Process', href: '#process' },
+  { label: 'About', href: '#about' },
+  { label: 'Insights', href: '#insights' },
+  { label: 'Contact', href: '#contact' },
 ]
 
 export default function Nav() {
@@ -23,7 +24,7 @@ export default function Nav() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
-        scrolled || menuOpen ? 'bg-black' : 'bg-transparent'
+        scrolled || menuOpen ? 'bg-[#0d0d0d]' : 'bg-transparent'
       }`}
       aria-label="Main navigation"
     >
@@ -32,9 +33,9 @@ export default function Nav() {
           <Image
             src="/logo.png"
             alt="Upper Floor"
-            width={96}
-            height={96}
-            className="h-11 w-auto"
+            width={120}
+            height={40}
+            className="h-10 w-auto"
             priority
           />
         </a>
@@ -45,16 +46,16 @@ export default function Nav() {
             <a
               key={label}
               href={href}
-              className="text-white text-sm font-medium tracking-wide hover:text-[#BFBFBF] transition-colors duration-200"
+              className="text-white text-sm font-normal hover:text-[#BFBFBF] transition-colors duration-200"
             >
               {label}
             </a>
           ))}
           <a
             href="#contact"
-            className="bg-[#E07BA3] text-black text-sm font-black px-5 py-2.5 uppercase tracking-wide hover:bg-[#cc6d95] transition-colors duration-200"
+            className="bg-[#fde8ef] text-[#c05080] text-sm font-medium px-5 py-2.5 rounded-full border border-[#E07BA3]/30 hover:bg-[#fbd5e3] transition-colors duration-200"
           >
-            BOOK A CALL ↗
+            Book a strategy call ↗
           </a>
         </div>
 
@@ -80,12 +81,12 @@ export default function Nav() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="md:hidden bg-black border-t border-white/10 px-6 py-6 flex flex-col gap-5">
+        <div className="md:hidden bg-[#0d0d0d] border-t border-white/10 px-6 py-6 flex flex-col gap-5">
           {navLinks.map(({ label, href }) => (
             <a
               key={label}
               href={href}
-              className="text-white text-lg font-black uppercase tracking-[-0.02em]"
+              className="text-white text-lg font-normal"
               onClick={() => setMenuOpen(false)}
             >
               {label}
@@ -93,10 +94,10 @@ export default function Nav() {
           ))}
           <a
             href="#contact"
-            className="inline-block bg-[#E07BA3] text-black text-sm font-black px-5 py-3 uppercase tracking-wide text-center mt-2"
+            className="inline-block bg-[#fde8ef] text-[#c05080] text-sm font-medium px-5 py-3 rounded-full border border-[#E07BA3]/30 text-center mt-2"
             onClick={() => setMenuOpen(false)}
           >
-            BOOK A CALL ↗
+            Book a strategy call ↗
           </a>
         </div>
       )}
