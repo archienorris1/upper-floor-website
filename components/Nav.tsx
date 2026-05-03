@@ -28,14 +28,15 @@ export default function Nav() {
       }`}
       aria-label="Main navigation"
     >
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-5 flex items-center justify-between">
+      <div className="max-w-[1400px] mx-auto pr-6 lg:pr-12 flex items-center justify-between" style={{ minHeight: '100px', paddingLeft: '40px' }}>
         <a href="#" className="flex items-center" aria-label="Upper Floor — home">
           <Image
             src="/logo.png"
             alt="Upper Floor"
-            width={120}
-            height={40}
-            className="h-10 w-auto"
+            width={240}
+            height={80}
+            className="w-auto"
+            style={{ height: '80px', width: 'auto', display: 'block' }}
             priority
           />
         </a>

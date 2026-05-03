@@ -56,7 +56,7 @@ export default function Hero() {
   }, [])
 
   return (
-    <section className="min-h-screen pt-28 pb-20 px-6 lg:px-12" id="work">
+    <section className="min-h-screen pb-20 px-6 lg:px-12" style={{ paddingTop: '120px' }} id="work">
       <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
         {/* LEFT COLUMN */}
