@@ -23,7 +23,7 @@ const steps = [
 
 export default function Process() {
   return (
-    <section className="py-24 lg:py-32 px-6 lg:px-12 border-t border-white/[0.06]" id="process">
+    <section className="px-6 lg:px-12 border-t border-white/[0.06]" style={{ paddingTop: '80px', paddingBottom: '80px' }} id="process">
       <div className="max-w-[1400px] mx-auto">
         <p className="text-[#E07BA3] text-xs font-black uppercase tracking-[0.2em] mb-12">
           Our Process

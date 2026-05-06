@@ -36,7 +36,7 @@ const services = [
 
 export default function WhatWeDo() {
   return (
-    <section className="py-24 lg:py-32 px-6 lg:px-12 border-t border-white/[0.06]">
+    <section className="px-6 lg:px-12 border-t border-white/[0.06]" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
       <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
 
         {/* LEFT */}

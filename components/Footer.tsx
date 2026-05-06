@@ -9,7 +9,6 @@ const colOne = [
 const colTwo = [
   { label: 'Insights', href: '#insights' },
   { label: 'Contact', href: '#contact' },
-  { label: 'Careers', href: '#careers' },
 ]
 
 const socialLinks = [
@@ -121,7 +120,7 @@ export default function Footer() {
         {/* Bottom row: copyright */}
         <div className="pt-8 border-t border-white/[0.06]">
           <p className="text-[#BFBFBF] text-sm">
-            © 2024 Upper Floor. All rights reserved.
+            © 2026 Upper Floor. All rights reserved.
           </p>
         </div>
 

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import EpisodePreviewButton from './EpisodePreviewButton'
 
 const CARDS = [
   {
@@ -75,16 +76,13 @@ export default function Hero() {
           </h1>
 
           <p className="text-[#BFBFBF] text-lg leading-relaxed max-w-[480px]">
-            We produce, grow and scale podcasts that actually drive pipeline — not vanity metrics.
+            Upper Floor is a B2B podcast agency for SaaS, fintech, and professional services companies who want their podcast to generate pipeline — not just downloads.
           </p>
 
           <div className="flex flex-wrap gap-4">
-            <a
-              href="#contact"
-              className="bg-[#fde8ef] text-[#c05080] border border-[#E07BA3]/30 rounded-full px-6 py-3 font-medium text-sm hover:bg-[#fbd5e3] transition-colors duration-200 inline-flex items-center gap-1.5"
-            >
-              Book a strategy call <span>↗</span>
-            </a>
+            <EpisodePreviewButton className="bg-[#E07BA3] text-black font-black border-0 rounded-full px-6 py-3 text-sm hover:bg-[#cc6d95] transition-colors duration-200 inline-flex items-center gap-1.5">
+              Get a Free Episode Preview →
+            </EpisodePreviewButton>
             <a
               href="#work"
               className="border border-white/20 text-white bg-transparent rounded-full px-6 py-3 font-medium text-sm hover:bg-white/5 transition-colors duration-200"
@@ -93,16 +91,9 @@ export default function Hero() {
             </a>
           </div>
 
-          <div className="flex items-center gap-4">
-            <div className="flex items-center -space-x-3">
-              <div className="w-9 h-9 rounded-full bg-[#7c5cbf] border-2 border-[#0d0d0d]" />
-              <div className="w-9 h-9 rounded-full bg-[#4a8fc7] border-2 border-[#0d0d0d]" />
-              <div className="w-9 h-9 rounded-full bg-[#e08060] border-2 border-[#0d0d0d]" />
-            </div>
-            <p className="text-[#BFBFBF] text-sm">
-              Trusted by B2B brands across SaaS, finance and tech.
-            </p>
-          </div>
+          <p className="text-[#BFBFBF] text-sm">
+            Trusted by B2B brands across SaaS, finance and tech.
+          </p>
         </div>
 
         {/* RIGHT COLUMN — 3 cycling podcast cards */}

@@ -1,3 +1,5 @@
+import EpisodePreviewButton from './EpisodePreviewButton'
+
 export default function CTA() {
   return (
     <section id="contact" className="bg-[#E07BA3] py-24 lg:py-32 px-6 lg:px-12 relative overflow-hidden">
@@ -41,12 +43,9 @@ export default function CTA() {
 
         {/* Button */}
         <div className="flex-shrink-0">
-          <a
-            href="mailto:hello@upperfloor.co.uk"
-            className="inline-block bg-black text-white font-black text-sm px-8 py-4 rounded-full hover:bg-[#1a1a1a] transition-colors duration-200"
-          >
-            Book a strategy call ↗
-          </a>
+          <EpisodePreviewButton className="inline-block bg-black text-white font-black text-sm px-8 py-4 rounded-full hover:bg-[#1a1a1a] transition-colors duration-200">
+            Get a Free Episode Preview →
+          </EpisodePreviewButton>
         </div>
 
       </div>

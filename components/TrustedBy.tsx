@@ -1,29 +1,26 @@
-const companies = [
-  { name: 'Calendly', weight: '700', size: '1.1rem' },
-  { name: 'monday.com', weight: '900', size: '1rem' },
-  { name: 'Clari', weight: '400', size: '1.2rem' },
-  { name: 'Brex', weight: '800', size: '1.3rem' },
-  { name: 'PandaDoc', weight: '600', size: '1rem' },
-  { name: 'Needle', weight: '700', size: '1.05rem' },
-  { name: 'Vanta', weight: '900', size: '1.15rem' },
-]
+const LOGO_WIDTHS = [120, 100, 140, 110, 130, 105]
 
 export default function TrustedBy() {
   return (
-    <section className="py-12 border-t border-b border-white/[0.06]">
+    <section className="py-12 border-t border-b border-white/[0.06] relative overflow-hidden">
+      {/* Fade edges */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-16 z-10" style={{ background: 'linear-gradient(to right, #0d0d0d, transparent)' }} />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-16 z-10" style={{ background: 'linear-gradient(to left, #0d0d0d, transparent)' }} />
+
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         <p className="text-[#BFBFBF] text-xs uppercase tracking-[0.2em] mb-8">
           Trusted by teams at
         </p>
-        <div className="flex items-center justify-between flex-wrap gap-6">
-          {companies.map(({ name, weight, size }) => (
-            <span
-              key={name}
-              className="text-white opacity-70 hover:opacity-100 transition-opacity duration-200"
-              style={{ fontWeight: weight, fontSize: size }}
+        <div className="flex items-center gap-6 flex-wrap">
+          {LOGO_WIDTHS.map((w, i) => (
+            <div
+              key={i}
+              className="bg-[#1a1a1a] border border-[#333] flex-shrink-0"
+              style={{ width: `${w}px`, height: '32px', borderRadius: '6px' }}
+              aria-hidden="true"
             >
-              {name}
-            </span>
+              {/* REPLACE WITH CLIENT LOGO */}
+            </div>
           ))}
         </div>
       </div>

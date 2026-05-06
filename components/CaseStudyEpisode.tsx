@@ -35,7 +35,7 @@ export default function CaseStudyEpisode() {
           </div>
 
           {/* Stats row */}
-          <div className="grid grid-cols-3 gap-4">
+          <div id="stats" className="grid grid-cols-3 gap-4">
             <div>
               <p className="text-white text-2xl font-black">+320%</p>
               <p className="text-[#BFBFBF] text-xs mt-1">Audience growth</p>
@@ -54,7 +54,7 @@ export default function CaseStudyEpisode() {
             We repositioned the show, rebuilt distribution across key platforms, and created content that now drives consistent pipeline for the business.
           </p>
 
-          <a href="#" className="text-white text-sm font-medium hover:text-[#E07BA3] transition-colors duration-200 flex items-center gap-2">
+          <a href="#stats" className="text-white text-sm font-medium hover:text-[#E07BA3] transition-colors duration-200 flex items-center gap-2">
             View full case study
             <span className="text-[#E07BA3]">↗</span>
           </a>

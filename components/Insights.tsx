@@ -1,20 +1,20 @@
 import Image from 'next/image'
 
 const featured = {
-  title: 'How to grow a B2B podcast in 2024 (that actually drives pipeline)',
-  date: 'May 8, 2024 · 6 min read',
+  title: 'Why most B2B podcasts fail to generate pipeline — and how to fix it',
+  date: 'March 12, 2026 · 6 min read',
   image: '/images/insights-featured.jpg',
 }
 
 const articles = [
   {
-    title: "Why most B2B podcasts fail — and how to avoid the same mistakes",
-    date: "April 22, 2024 · 5 min read",
+    title: 'Turning your podcast into a predictable demand engine for your sales team',
+    date: 'February 28, 2026 · 5 min read',
     image: '/images/insights-thumb-1.jpg',
   },
   {
-    title: "Turning podcast content into a predictable demand engine",
-    date: "April 10, 2024 · 7 min read",
+    title: 'The short-form content strategy that took a fintech podcast to 250K downloads',
+    date: 'January 15, 2026 · 7 min read',
     image: '/images/insights-thumb-2.jpg',
   },
 ]

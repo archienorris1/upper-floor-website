@@ -56,7 +56,7 @@ export default function Nav() {
             href="#contact"
             className="bg-[#fde8ef] text-[#c05080] text-sm font-medium px-5 py-2.5 rounded-full border border-[#E07BA3]/30 hover:bg-[#fbd5e3] transition-colors duration-200"
           >
-            Book a strategy call ↗
+            Book a call ↗
           </a>
         </div>
 
@@ -98,7 +98,7 @@ export default function Nav() {
             className="inline-block bg-[#fde8ef] text-[#c05080] text-sm font-medium px-5 py-3 rounded-full border border-[#E07BA3]/30 text-center mt-2"
             onClick={() => setMenuOpen(false)}
           >
-            Book a strategy call ↗
+            Book a call ↗
           </a>
         </div>
       )}
