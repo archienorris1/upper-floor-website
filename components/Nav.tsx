@@ -58,6 +58,12 @@ export default function Nav() {
           >
             Book a call ↗
           </a>
+          <a
+            href="/login"
+            className="text-white text-sm font-black uppercase tracking-wider px-5 py-2.5 rounded-full border border-white hover:bg-[#E07BA3] hover:text-black hover:border-[#E07BA3] transition-all duration-200"
+          >
+            Client Portal →
+          </a>
         </div>
 
         {/* Mobile hamburger */}
@@ -99,6 +105,13 @@ export default function Nav() {
             onClick={() => setMenuOpen(false)}
           >
             Book a call ↗
+          </a>
+          <a
+            href="/login"
+            className="inline-block text-white text-sm font-black uppercase tracking-wider px-5 py-3 rounded-full border border-white text-center hover:bg-[#E07BA3] hover:text-black hover:border-[#E07BA3] transition-all duration-200"
+            onClick={() => setMenuOpen(false)}
+          >
+            Client Portal →
           </a>
         </div>
       )}

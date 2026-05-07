@@ -37,6 +37,24 @@
   will-change: transform;
 }
 
+/* Loading dots (login page) */
+@keyframes loading-dot {
+  0%, 60%, 100% { opacity: 0.2; transform: scale(0.8); }
+  30% { opacity: 1; transform: scale(1); }
+}
+
+.loading-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #E07BA3;
+  animation: loading-dot 1.4s ease-in-out infinite;
+}
+.loading-dot:nth-child(1) { animation-delay: 0s; }
+.loading-dot:nth-child(2) { animation-delay: 0.2s; }
+.loading-dot:nth-child(3) { animation-delay: 0.4s; }
+
 /* Spinning badge */
 @keyframes spin {
   from { transform: rotate(0deg); }

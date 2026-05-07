@@ -9,6 +9,7 @@ const colOne = [
 const colTwo = [
   { label: 'Insights', href: '#insights' },
   { label: 'Contact', href: '#contact' },
+  { label: 'Client Portal', href: '/login' },
 ]
 
 const socialLinks = [
