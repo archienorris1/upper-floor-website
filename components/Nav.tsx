@@ -2,12 +2,12 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import EpisodePreviewButton from './EpisodePreviewButton'
 
 const navLinks = [
   { label: 'Work', href: '#work' },
   { label: 'Process', href: '#process' },
   { label: 'About', href: '#about' },
-  { label: 'Insights', href: '#insights' },
   { label: 'Contact', href: '#contact' },
 ]
 
@@ -52,12 +52,9 @@ export default function Nav() {
               {label}
             </a>
           ))}
-          <a
-            href="#contact"
-            className="bg-[#fde8ef] text-[#c05080] text-sm font-medium px-5 py-2.5 rounded-full border border-[#E07BA3]/30 hover:bg-[#fbd5e3] transition-colors duration-200"
-          >
-            Book a call ↗
-          </a>
+          <EpisodePreviewButton className="bg-[#E07BA3] text-black font-black text-sm px-5 py-2.5 rounded-full hover:bg-[#cc6d95] transition-colors duration-200">
+            Get a Free Episode Preview →
+          </EpisodePreviewButton>
           <a
             href="/login"
             className="text-white text-sm font-black uppercase tracking-wider px-5 py-2.5 rounded-full border border-white hover:bg-[#E07BA3] hover:text-black hover:border-[#E07BA3] transition-all duration-200"
@@ -99,13 +96,9 @@ export default function Nav() {
               {label}
             </a>
           ))}
-          <a
-            href="#contact"
-            className="inline-block bg-[#fde8ef] text-[#c05080] text-sm font-medium px-5 py-3 rounded-full border border-[#E07BA3]/30 text-center mt-2"
-            onClick={() => setMenuOpen(false)}
-          >
-            Book a call ↗
-          </a>
+          <EpisodePreviewButton className="inline-block w-full bg-[#E07BA3] text-black font-black text-sm px-5 py-3 rounded-full text-center hover:bg-[#cc6d95] transition-colors duration-200">
+            Get a Free Episode Preview →
+          </EpisodePreviewButton>
           <a
             href="/login"
             className="inline-block text-white text-sm font-black uppercase tracking-wider px-5 py-3 rounded-full border border-white text-center hover:bg-[#E07BA3] hover:text-black hover:border-[#E07BA3] transition-all duration-200"
