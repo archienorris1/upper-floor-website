@@ -1,60 +1,68 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import Image from 'next/image'
 import EpisodePreviewButton from './EpisodePreviewButton'
 
 const CARDS = [
   {
-    title: 'BUILT DIFFERENT',
+    title: 'PODCAST DUO',
     episode: 'EP 47',
-    gradient: 'from-[#2a1c1c] via-[#1a1a1a] to-[#0f0f0f]',
-    image: '/images/hero-card-1.jpg',
+    image: '/images/podcast-duo-dark.jpg',
   },
   {
-    title: 'VISIONARIES',
+    title: 'THE BUSINESS SHIFT',
     episode: 'EP 23',
-    gradient: 'from-[#1c1e2a] via-[#1a1a1a] to-[#0f0f0f]',
-    image: '/images/hero-card-2.jpg',
+    image: '/images/podcast-women-neon.jpg',
   },
   {
     title: 'UNFILTERED',
     episode: 'EP 12',
-    gradient: 'from-[#1c2a1c] via-[#1a1a1a] to-[#0f0f0f]',
-    image: '/images/hero-card-3.jpg',
-  },
-]
-
-// Per-position visual styling: front → middle → back
-const POSITIONS = [
-  {
-    // Front: centre, upright
-    zIndex: 30,
-    transform: 'rotate(-1deg) translate(0px, 0px)',
-  },
-  {
-    // Middle: slightly right and raised, tilted clockwise
-    zIndex: 20,
-    transform: 'rotate(5deg) translate(18px, -10px)',
-  },
-  {
-    // Back: slightly left and raised more, tilted counter-clockwise
-    zIndex: 10,
-    transform: 'rotate(-4deg) translate(-12px, -20px)',
+    image: '/images/podcast-woman-closeup.jpg',
   },
 ]
 
 export default function Hero() {
   const [activeIndex, setActiveIndex] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
+  const touchStartX = useRef<number>(0)
+  const touchStartY = useRef<number>(0)
+  const resumeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  // Cycle front card every 2.5 s
-  useEffect(() => {
-    const id = setInterval(
-      () => setActiveIndex(i => (i + 1) % CARDS.length),
-      2500,
-    )
-    return () => clearInterval(id)
+  const next = useCallback(() => setActiveIndex(i => (i + 1) % CARDS.length), [])
+  const prev = useCallback(() => setActiveIndex(i => (i - 1 + CARDS.length) % CARDS.length), [])
+
+  const pauseAndResume = useCallback(() => {
+    setIsPaused(true)
+    if (resumeTimer.current) clearTimeout(resumeTimer.current)
+    resumeTimer.current = setTimeout(() => setIsPaused(false), 2000)
   }, [])
+
+  // Auto-advance every 3 s, pause while isPaused
+  useEffect(() => {
+    if (isPaused) return
+    const id = setInterval(next, 3000)
+    return () => clearInterval(id)
+  }, [isPaused, next])
+
+  // Cleanup resume timer on unmount
+  useEffect(() => () => { if (resumeTimer.current) clearTimeout(resumeTimer.current) }, [])
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX
+    touchStartY.current = e.touches[0].clientY
+    pauseAndResume()
+  }
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const dx = e.changedTouches[0].clientX - touchStartX.current
+    const dy = e.changedTouches[0].clientY - touchStartY.current
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+      dx < 0 ? next() : prev()
+    }
+  }
+
+  const goTo = (i: number) => { setActiveIndex(i); pauseAndResume() }
 
   return (
     <section className="min-h-screen pb-20 px-6 lg:px-12" style={{ paddingTop: '120px' }} id="work">
@@ -70,13 +78,15 @@ export default function Hero() {
             className="font-black tracking-tight leading-[1.0] uppercase"
             style={{ fontSize: 'clamp(2.8rem, 5.5vw, 5rem)' }}
           >
-            <span className="text-white block">PODCASTS THAT</span>
-            <span className="text-white block">DRIVE PIPELINE,</span>
-            <span className="text-[#E07BA3] block">NOT VANITY.</span>
+            <span className="text-white block">MORE THAN JUST</span>
+            <span className="text-white block">A PODCAST.</span>
+            <span className="text-[#E07BA3] block">BECOME THE MOST</span>
+            <span className="text-[#E07BA3] block">TRUSTED VOICE</span>
+            <span className="text-[#E07BA3] block">IN YOUR INDUSTRY.</span>
           </h1>
 
-          <p className="text-[#BFBFBF] text-lg leading-relaxed max-w-[480px]">
-            Upper Floor is a B2B podcast agency for SaaS, fintech, and professional services companies who want their podcast to generate pipeline — not just downloads.
+          <p className="text-white max-w-[480px]" style={{ fontSize: '18px', lineHeight: '1.6' }}>
+            We produce, position and grow podcasts that make your brand the go-to authority in your space.
           </p>
 
           <div className="flex flex-wrap gap-4">
@@ -96,135 +106,141 @@ export default function Hero() {
           </p>
         </div>
 
-        {/* RIGHT COLUMN — 3 cycling podcast cards */}
-        <div className="relative hidden lg:block" style={{ height: '520px' }}>
-
-          {/* Card deck */}
-          <div className="absolute inset-x-0" style={{ top: '8%', bottom: '60px' }}>
-            {CARDS.map((card, i) => {
-              const pos = (i - activeIndex + CARDS.length) % CARDS.length
-              const { zIndex, transform } = POSITIONS[pos]
-
-              return (
-                <div
-                  key={card.title}
-                  className="absolute bg-[#1a1a1a] rounded-2xl border border-white/[0.08] overflow-hidden cursor-pointer"
-                  style={{
-                    inset: 0,
-                    zIndex,
-                    transform,
-                    transition: 'transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                  }}
-                  onClick={() => setActiveIndex(i)}
-                  aria-label={`${card.title} — ${card.episode}`}
-                >
-                  <Image
-                    src={card.image}
-                    alt={card.title}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 0px, 50vw"
-                    priority={i === 0}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                  {/* Show label overlay */}
-                  <div className="absolute bottom-5 left-5">
-                    <p className="text-white/35 text-[10px] uppercase tracking-[0.18em]">
-                      {card.episode}
-                    </p>
-                    <p className="text-white/60 font-black text-sm uppercase tracking-tight mt-0.5">
-                      {card.title}
-                    </p>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-
-          {/* Spinning circular badge — top-right, above cards */}
-          <div className="absolute top-0 right-0 z-40 w-[88px] h-[88px] translate-x-2 -translate-y-2">
-            <svg
-              viewBox="0 0 88 88"
-              className="spin-badge w-full h-full"
-              aria-hidden="true"
-            >
-              <defs>
-                <path
-                  id="badgeCircle"
-                  d="M 44,44 m -36,0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0"
-                />
-              </defs>
-              <circle cx="44" cy="44" r="43" fill="#161616" stroke="#E07BA3" strokeWidth="1" />
-              <text fill="#E07BA3" fontSize="7.5" fontWeight="700" letterSpacing="1.5">
-                <textPath href="#badgeCircle">
-                  STRATEGY · PRODUCTION · GROWTH · SHOW ·
-                </textPath>
-              </text>
-            </svg>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#E07BA3"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
-                <polyline points="16 7 22 7 22 13" />
-              </svg>
-            </div>
-          </div>
-
-          {/* Decorative pink slash marks — lower right */}
-          <svg
-            className="absolute bottom-16 right-2 opacity-50 z-10"
-            width="34"
-            height="60"
-            viewBox="0 0 34 60"
-            fill="none"
-            aria-hidden="true"
+        {/* RIGHT COLUMN — desktop portrait carousel 3:4 */}
+        <div className="relative hidden lg:flex flex-col">
+          <div
+            className="relative w-full overflow-hidden rounded-[20px]"
+            style={{ aspectRatio: '3/4' }}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
           >
-            <line x1="0" y1="60" x2="26" y2="0" stroke="#E07BA3" strokeWidth="2.5" strokeLinecap="round" />
-            <line x1="8" y1="60" x2="34" y2="0" stroke="#E07BA3" strokeWidth="2.5" strokeLinecap="round" />
-          </svg>
-
-          {/* Navigation indicator */}
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex items-center gap-3 text-[#BFBFBF] text-sm select-none z-40">
-            <button
-              aria-label="Previous"
-              className="hover:text-white transition-colors duration-200"
-              onClick={() => setActiveIndex(i => (i - 1 + CARDS.length) % CARDS.length)}
-            >
-              ←
-            </button>
-            <div className="flex items-center gap-1.5">
-              {CARDS.map((_, i) => (
-                <button
-                  key={i}
-                  aria-label={`Go to card ${i + 1}`}
-                  onClick={() => setActiveIndex(i)}
-                  className={`h-0.5 rounded-full transition-all duration-300 ${
-                    i === activeIndex ? 'w-6 bg-[#E07BA3]' : 'w-4 bg-white/20'
-                  }`}
+            {CARDS.map((card, i) => (
+              <div
+                key={card.image}
+                className="absolute inset-0"
+                style={{
+                  opacity: i === activeIndex ? 1 : 0,
+                  zIndex: i === activeIndex ? 1 : 0,
+                  transition: 'opacity 0.7s ease',
+                }}
+              >
+                <Image
+                  src={card.image}
+                  alt={card.title}
+                  fill
+                  className="object-cover"
+                  style={{ objectPosition: 'center top' }}
+                  sizes="(max-width: 1024px) 0px, 45vw"
+                  priority={i === 0}
                 />
-              ))}
-              <span className="text-xs text-[#BFBFBF] ml-1">
-                {activeIndex + 1}/{CARDS.length}
-              </span>
+                <div
+                  className="absolute inset-0"
+                  style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0) 55%)' }}
+                />
+                <div className="absolute bottom-5 left-5 z-10">
+                  <p className="text-white/50 text-[10px] uppercase tracking-[0.18em]">{card.episode}</p>
+                  <p className="text-white/80 font-black text-sm uppercase tracking-tight mt-0.5">{card.title}</p>
+                </div>
+              </div>
+            ))}
+
+            {/* Spinning circular badge — inside top-right of card */}
+            <div className="absolute top-3 right-3 z-40 w-[88px] h-[88px]">
+              <svg viewBox="0 0 88 88" className="spin-badge w-full h-full" aria-hidden="true">
+                <defs>
+                  <path id="badgeCircle" d="M 44,44 m -36,0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0" />
+                </defs>
+                <circle cx="44" cy="44" r="43" fill="#161616" stroke="#E07BA3" strokeWidth="1" />
+                <text fill="#E07BA3" fontSize="7.5" fontWeight="700" letterSpacing="1.5">
+                  <textPath href="#badgeCircle">
+                    STRATEGY · PRODUCTION · GROWTH · SHOW ·
+                  </textPath>
+                </text>
+              </svg>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E07BA3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+                  <polyline points="16 7 22 7 22 13" />
+                </svg>
+              </div>
             </div>
-            <button
-              aria-label="Next"
-              className="hover:text-white transition-colors duration-200"
-              onClick={() => setActiveIndex(i => (i + 1) % CARDS.length)}
+
+            {/* Decorative pink slash marks — inside lower-right of card */}
+            <svg
+              className="absolute bottom-16 right-3 opacity-50 z-10"
+              width="34" height="60" viewBox="0 0 34 60" fill="none" aria-hidden="true"
             >
-              →
-            </button>
+              <line x1="0" y1="60" x2="26" y2="0" stroke="#E07BA3" strokeWidth="2.5" strokeLinecap="round" />
+              <line x1="8" y1="60" x2="34" y2="0" stroke="#E07BA3" strokeWidth="2.5" strokeLinecap="round" />
+            </svg>
           </div>
 
+          {/* Dot indicators below card */}
+          <div className="flex items-center justify-center gap-2 mt-5">
+            {CARDS.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goTo(i)}
+                aria-label={`Go to slide ${i + 1}`}
+                className="rounded-full transition-all duration-300"
+                style={{
+                  width: i === activeIndex ? '24px' : '8px',
+                  height: '8px',
+                  backgroundColor: i === activeIndex ? '#E07BA3' : '#333333',
+                }}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* MOBILE carousel — 16:9, dots overlaid inside */}
+        <div
+          className="relative lg:hidden overflow-hidden rounded-[20px]"
+          style={{ aspectRatio: '16/9' }}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
+          {CARDS.map((card, i) => (
+            <div
+              key={`m-${card.image}`}
+              className="absolute inset-0"
+              style={{
+                opacity: i === activeIndex ? 1 : 0,
+                zIndex: i === activeIndex ? 1 : 0,
+                transition: 'opacity 0.7s ease',
+              }}
+            >
+              <Image
+                src={card.image}
+                alt={card.title}
+                fill
+                className="object-cover"
+                style={{ objectPosition: 'center top' }}
+                sizes="100vw"
+                priority={i === 0}
+              />
+              <div
+                className="absolute inset-0"
+                style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0) 55%)' }}
+              />
+            </div>
+          ))}
+          {/* Overlaid dots */}
+          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 z-20">
+            {CARDS.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goTo(i)}
+                aria-label={`Go to slide ${i + 1}`}
+                className="rounded-full transition-all duration-300"
+                style={{
+                  width: i === activeIndex ? '20px' : '6px',
+                  height: '6px',
+                  backgroundColor: i === activeIndex ? '#E07BA3' : 'rgba(255,255,255,0.4)',
+                }}
+              />
+            ))}
+          </div>
         </div>
 
       </div>

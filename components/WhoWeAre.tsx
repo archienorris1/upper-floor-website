@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import EpisodePreviewButton from './EpisodePreviewButton'
 
 export default function WhoWeAre() {
@@ -24,16 +25,16 @@ export default function WhoWeAre() {
           </EpisodePreviewButton>
         </div>
 
-        {/* RIGHT — team photo placeholder */}
+        {/* RIGHT — studio photo */}
         <div className="flex flex-col gap-4">
-          <div
-            className="w-full rounded-[20px] bg-[#111111] border border-white/[0.08]"
-            style={{
-              aspectRatio: '4/3',
-              background: 'linear-gradient(135deg, #1a1a1a 0%, #111111 60%, #0d0d0d 100%)',
-            }}
-          >
-            {/* REPLACE WITH TEAM PHOTO */}
+          <div className="relative w-full rounded-[20px] overflow-hidden" style={{ aspectRatio: '4/3' }}>
+            <Image
+              src="/images/podcast-studio-empty.jpg"
+              alt="Upper Floor podcast studio"
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
           </div>
           <p className="text-[#BFBFBF] text-xs">
             Archie &amp; the Upper Floor team — London.
