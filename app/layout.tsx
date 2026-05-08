@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import EpisodePreviewModal from '@/components/EpisodePreviewModal'
 
 export const metadata: Metadata = {
   title: 'Upper Floor — Podcast Agency',
@@ -33,7 +34,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        <EpisodePreviewModal />
+      </body>
     </html>
   )
 }

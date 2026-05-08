@@ -64,3 +64,5 @@
 .spin-badge {
   animation: spin 15s linear infinite;
 }
+
+.hide-scrollbar::-webkit-scrollbar { display: none; }

@@ -43,7 +43,7 @@ export default function Testimonials() {
           What Our Clients Say
         </p>
         <h2 className="text-white font-black text-3xl uppercase tracking-tight mb-12">
-          Real Results. Real Feedback.
+          The Proof Is In The Pudding.
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
