@@ -3,6 +3,7 @@ import Hero from '@/components/Hero'
 import TrustedBy from '@/components/TrustedBy'
 import WhatWeDo from '@/components/WhatWeDo'
 import ThreePillars from '@/components/ThreePillars'
+import HowWeStandOut from '@/components/HowWeStandOut'
 import CaseStudyEpisode from '@/components/CaseStudyEpisode'
 import OurWork from '@/components/OurWork'
 import Testimonials from '@/components/Testimonials'
@@ -20,6 +21,7 @@ export default function Home() {
       <TrustedBy />
       <WhatWeDo />
       <ThreePillars />
+      <HowWeStandOut />
       <CaseStudyEpisode />
       <OurWork />
       <Testimonials />
