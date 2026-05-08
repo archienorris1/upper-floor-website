@@ -85,7 +85,10 @@ export default function Hero() {
             <span className="text-[#E07BA3] block">IN YOUR INDUSTRY.</span>
           </h1>
 
-          <p className="text-white max-w-[480px]" style={{ fontSize: '18px', lineHeight: '1.6' }}>
+          <p
+            className="text-[#BFBFBF] font-normal max-w-[420px] sm:text-base text-sm"
+            style={{ fontSize: '16px', lineHeight: '1.6', marginTop: '24px' }}
+          >
             We produce, position and grow podcasts that make your brand the go-to authority in your space.
           </p>
 
