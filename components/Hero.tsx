@@ -76,10 +76,14 @@ export default function Hero() {
           >
             <span className="text-white block">MORE THAN JUST</span>
             <span className="text-white block">A PODCAST.</span>
-            <span className="text-[#E07BA3] block">BECOME THE MOST</span>
-            <span className="text-[#E07BA3] block">TRUSTED VOICE</span>
-            <span className="text-[#E07BA3] block">IN YOUR INDUSTRY.</span>
           </h1>
+
+          <p
+            className="text-[#E07BA3] font-black uppercase tracking-tight leading-tight"
+            style={{ fontSize: 'clamp(1.1rem, 2vw, 1.5rem)', marginTop: '-16px' }}
+          >
+            Become the most trusted voice<br />in your industry.
+          </p>
 
           <p
             className="text-[#BFBFBF] font-normal max-w-[420px]"
