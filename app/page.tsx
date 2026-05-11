@@ -1,6 +1,5 @@
 import Nav from '@/components/Nav'
 import Hero from '@/components/Hero'
-import TrustedBy from '@/components/TrustedBy'
 import WhatWeDo from '@/components/WhatWeDo'
 import ThreePillars from '@/components/ThreePillars'
 import HowWeStandOut from '@/components/HowWeStandOut'
@@ -18,7 +17,6 @@ export default function Home() {
     <main>
       <Nav />
       <Hero />
-      <TrustedBy />
       <WhatWeDo />
       <ThreePillars />
       <HowWeStandOut />

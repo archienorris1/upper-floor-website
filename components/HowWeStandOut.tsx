@@ -4,19 +4,43 @@ import { useEffect, useRef } from 'react'
 
 const WAVE_HEIGHTS = [35, 60, 80, 50, 90, 65, 45, 75]
 
-const PLATFORM_ICONS = [
-  { label: 'S', bg: '#1DB954', title: 'Spotify' },
-  { label: 'A', bg: '#ffffff', color: '#000', title: 'Apple' },
-  { label: 'Y', bg: '#FF0000', title: 'YouTube' },
-  { label: 'In', bg: '#0A66C2', title: 'LinkedIn' },
-]
-
-const PIPELINE_STEPS = [
-  { icon: '🎙', label: 'RECORD' },
-  { icon: '▶', label: 'EDIT' },
-  { icon: '✂', label: 'CLIPS' },
-  { icon: '📅', label: 'DISTRIBUTE' },
-  { icon: '📊', label: 'GROW' },
+const PLATFORM_SVGS = [
+  {
+    title: 'Spotify',
+    svg: (
+      <svg viewBox="0 0 24 24" width="28" height="28" aria-label="Spotify">
+        <circle cx="12" cy="12" r="12" fill="#1DB954"/>
+        <path fill="white" d="M17.9 10.9C14.7 9 9.35 8.8 6.3 9.75c-.5.15-1-.15-1.15-.6-.15-.5.15-1 .6-1.15 3.55-1.05 9.45-.85 13.2 1.35.45.25.6.85.35 1.3-.25.35-.85.5-1.3.25zm-.1 2.8c-.25.35-.75.5-1.1.25-2.7-1.65-6.8-2.15-9.95-1.15-.4.1-.85-.1-.95-.5-.1-.4.1-.85.5-.95 3.65-1.1 8.15-.55 11.25 1.35.3.15.45.65.25 1zm-1.3 2.7c-.2.3-.6.4-.9.2-2.35-1.45-5.3-1.75-8.8-.95-.35.1-.65-.15-.75-.45-.1-.35.15-.65.45-.75 3.8-.85 7.1-.5 9.7 1.1.3.15.4.55.3.85z"/>
+      </svg>
+    ),
+  },
+  {
+    title: 'Apple Podcasts',
+    svg: (
+      <svg viewBox="0 0 24 24" width="28" height="28" aria-label="Apple Podcasts">
+        <circle cx="12" cy="12" r="12" fill="#9933CC"/>
+        <path fill="white" d="M12 3C7.03 3 3 7.03 3 12s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 4c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 12.5c-2.33 0-4.31-1.46-5.11-3.5h10.22c-.8 2.04-2.78 3.5-5.11 3.5z"/>
+      </svg>
+    ),
+  },
+  {
+    title: 'YouTube',
+    svg: (
+      <svg viewBox="0 0 24 24" width="28" height="28" aria-label="YouTube">
+        <circle cx="12" cy="12" r="12" fill="#FF0000"/>
+        <path fill="white" d="M19.6 8.2c-.2-.8-.8-1.4-1.6-1.6C16.6 6.3 12 6.3 12 6.3s-4.6 0-6 .3c-.8.2-1.4.8-1.6 1.6-.3 1.4-.3 4.3-.3 4.3s0 2.9.3 4.3c.2.8.8 1.4 1.6 1.6 1.4.3 6 .3 6 .3s4.6 0 6-.3c.8-.2 1.4-.8 1.6-1.6.3-1.4.3-4.3.3-4.3s0-2.9-.3-4.3zm-8.9 6.9V8.9l5.2 3.1-5.2 3.1z"/>
+      </svg>
+    ),
+  },
+  {
+    title: 'LinkedIn',
+    svg: (
+      <svg viewBox="0 0 24 24" width="28" height="28" aria-label="LinkedIn">
+        <circle cx="12" cy="12" r="12" fill="#0A66C2"/>
+        <path fill="white" d="M8.5 6.5C8.5 7.33 7.83 8 7 8S5.5 7.33 5.5 6.5 6.17 5 7 5s1.5.67 1.5 1.5zM6 9.5h2v9H6v-9zm3.5 0H12v1.2c.4-.7 1.4-1.4 2.5-1.4 2.4 0 3 1.6 3 3.7v5.5h-2v-4.9c0-1.2-.4-2-1.5-2-1.6 0-2 1.2-2 2.4v4.5H9.5v-9z"/>
+      </svg>
+    ),
+  },
 ]
 
 const cardBase: React.CSSProperties = {
@@ -90,7 +114,6 @@ export default function HowWeStandOut() {
           .hwso-card-11 { grid-column: 2;           grid-row: 4; }
           .hwso-card-12 { grid-column: 3;           grid-row: 4; }
           .hwso-card-13 { grid-column: 4;           grid-row: 4; }
-          .hwso-bar     { grid-column: 1 / span 4; }
         }
       `}</style>
 
@@ -358,23 +381,10 @@ export default function HowWeStandOut() {
           >
             <CardTitle>Content Distribution</CardTitle>
             <CardBody>Scheduling, posting and optimisation handled across every key platform.</CardBody>
-            <div className="flex items-center gap-1.5 mt-4 flex-wrap">
-              {PLATFORM_ICONS.map(({ label, bg, color, title }) => (
-                <div
-                  key={title}
-                  title={title}
-                  className="flex items-center justify-center flex-shrink-0"
-                  style={{
-                    width: '28px',
-                    height: '28px',
-                    backgroundColor: bg,
-                    borderRadius: '50%',
-                    fontSize: '10px',
-                    fontWeight: 700,
-                    color: color ?? '#fff',
-                  }}
-                >
-                  {label}
+            <div className="flex items-center gap-2 mt-4">
+              {PLATFORM_SVGS.map(({ title, svg }) => (
+                <div key={title} title={title} className="flex-shrink-0">
+                  {svg}
                 </div>
               ))}
             </div>
@@ -473,52 +483,6 @@ export default function HowWeStandOut() {
                     flexShrink: 0,
                   }}
                 />
-              ))}
-            </div>
-          </div>
-
-          {/* ── FULL WIDTH BOTTOM BAR ── */}
-          <div
-            ref={r(14) as React.Ref<HTMLDivElement>}
-            className="hwso-bar hover:border-[#E07BA3]"
-            style={{
-              ...cardBase,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              flexWrap: 'wrap',
-              gap: '20px',
-              padding: '28px 32px',
-            }}
-          >
-            {/* Left: label + body */}
-            <div style={{ maxWidth: '340px' }}>
-              <p className="text-white font-bold uppercase text-[16px]" style={{ letterSpacing: '0.05em' }}>
-                Full Content Engine
-              </p>
-              <div style={{ width: '32px', height: '2px', background: '#E07BA3', margin: '8px 0' }} />
-              <p className="text-[#BFBFBF] text-[13px]">
-                One recording transformed into a complete pipeline of long and short form content.
-              </p>
-            </div>
-
-            {/* Right: pipeline steps */}
-            <div className="flex items-center gap-2 flex-wrap">
-              {PIPELINE_STEPS.map((step, i) => (
-                <div key={step.label} className="flex items-center gap-2">
-                  <div className="flex flex-col items-center gap-1">
-                    <span style={{ fontSize: '20px', color: '#E07BA3', lineHeight: 1 }}>{step.icon}</span>
-                    <span
-                      className="text-[#BFBFBF]"
-                      style={{ fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.08em' }}
-                    >
-                      {step.label}
-                    </span>
-                  </div>
-                  {i < PIPELINE_STEPS.length - 1 && (
-                    <span style={{ color: '#444', fontSize: '14px', alignSelf: 'center', marginBottom: '14px' }}>→</span>
-                  )}
-                </div>
               ))}
             </div>
           </div>
