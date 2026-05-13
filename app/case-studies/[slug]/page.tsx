@@ -24,7 +24,7 @@ export default function CaseStudyPage() {
           COMING SOON.
         </h1>
         <p className="text-[#BFBFBF] text-base leading-relaxed max-w-[480px]">
-          We&apos;re building out our full case study library. Check back soon — or get in touch to hear about our work directly.
+          We&apos;re building out our full case study library. Check back soon. Or get in touch to hear about our work directly.
         </p>
         <EpisodePreviewButton className="self-start bg-[#E07BA3] text-black font-black text-sm px-6 py-3 rounded-full hover:bg-[#cc6d95] transition-colors duration-200">
           Get a Free Episode Preview →

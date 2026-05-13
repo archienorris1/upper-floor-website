@@ -97,7 +97,7 @@ export default function EpisodePreviewModal() {
           <div>
             <label className="block text-[#BFBFBF] text-xs mb-2">
               Upload your recording{' '}
-              <span className="text-white/40">.mp3 .mp4 .wav .mov — Max 500MB</span>
+              <span className="text-white/40">.mp3 .mp4 .wav .mov. Max 500MB</span>
             </label>
             <input
               type="file"

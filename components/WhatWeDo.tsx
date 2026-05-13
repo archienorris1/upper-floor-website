@@ -20,7 +20,7 @@ const services = [
       </svg>
     ),
     title: 'Production',
-    description: 'We handle everything — from recording and editing to publishing and show management.',
+    description: 'We handle everything. From recording and editing to publishing and show management.',
   },
   {
     icon: (
@@ -45,7 +45,7 @@ export default function WhatWeDo() {
             What we do
           </p>
           <h2
-            className="font-black text-white tracking-tight leading-tight"
+            className="font-black text-white tracking-tight leading-tight reveal-headline"
             style={{ fontSize: 'clamp(2rem, 3.5vw, 3rem)' }}
           >
             End-to-end podcast production that drives real business{' '}
@@ -73,7 +73,7 @@ export default function WhatWeDo() {
         {/* RIGHT — 3 service columns */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
           {services.map(({ icon, title, description }) => (
-            <div key={title} className="flex flex-col gap-4">
+            <div key={title} className="flex flex-col gap-4 reveal-on-scroll">
               <div>{icon}</div>
               <h3 className="text-white font-black text-lg">{title}</h3>
               <p className="text-[#BFBFBF] text-sm leading-relaxed">{description}</p>

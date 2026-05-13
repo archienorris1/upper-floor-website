@@ -209,6 +209,8 @@ interface DynamicFrameLayoutProps {
   hoverSize?: number
   gapSize?: number
   focusedIndex?: number | null
+  scrollRef?: React.RefObject<HTMLDivElement | null>
+  onScrollIndexChange?: (index: number) => void
 }
 
 export function DynamicFrameLayout({
@@ -217,9 +219,13 @@ export function DynamicFrameLayout({
   hoverSize = 6,
   gapSize = 12,
   focusedIndex = null,
+  scrollRef,
+  onScrollIndexChange,
 }: DynamicFrameLayoutProps) {
   const [mouseHover, setMouseHover] = useState<number | null>(null)
   const [isMobile, setIsMobile] = useState(false)
+  const internalRef = useRef<HTMLDivElement>(null)
+  const containerRef = scrollRef || internalRef
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768)
@@ -239,15 +245,27 @@ export function DynamicFrameLayout({
   }
 
   if (isMobile) {
+    const handleScroll = () => {
+      const el = containerRef.current
+      if (!el || !onScrollIndexChange) return
+      const cardWidth = el.clientWidth * 0.8 + 16
+      const index = Math.round(el.scrollLeft / cardWidth)
+      onScrollIndexChange(Math.min(index, frames.length - 1))
+    }
+
     return (
-      <div className={`flex flex-col ${className}`} style={{ gap: `${gapSize}px` }}>
+      <div
+        ref={containerRef as React.RefObject<HTMLDivElement>}
+        className={`mobile-swipe-scroll ${className}`}
+        onScroll={handleScroll}
+      >
         {frames.map((frame, index) => (
           <motion.div
             key={frame.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.08, duration: 0.5 }}
-            style={{ height: '280px' }}
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: index * 0.06, duration: 0.4 }}
+            style={{ flex: '0 0 80vw', height: '320px', scrollSnapAlign: 'center' }}
           >
             <FrameCard
               frame={frame}

@@ -60,7 +60,7 @@ export default function ContactPage() {
             LET&apos;S<br />TALK.
           </h1>
           <p className="text-white text-base leading-relaxed max-w-[360px]">
-            Whether you have a question, want to learn more about our process, or just want to say hello — we&apos;d love to hear from you.
+            Whether you have a question, want to learn more about our process, or just want to say hello. We&apos;d love to hear from you.
           </p>
           <div>
             <p className="text-[#BFBFBF] text-sm mb-1">Or email us directly:</p>

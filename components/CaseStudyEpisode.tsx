@@ -20,8 +20,8 @@ export default function CaseStudyEpisode() {
     <section className="py-24 lg:py-32 px-6 lg:px-12">
       <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-        {/* LEFT CARD — Case Study */}
-        <div className="bg-[#141414] border border-white/[0.08] rounded-2xl overflow-hidden flex flex-col hover:-translate-y-1 transition-transform duration-200">
+        {/* LEFT CARD */}
+        <div className="bg-[#141414] border border-white/[0.08] rounded-2xl overflow-hidden flex flex-col hover:-translate-y-1 transition-transform duration-200 reveal-on-scroll">
           {/* Header image */}
           <div className="relative w-full flex-shrink-0" style={{ height: '200px' }}>
             <Image
@@ -76,8 +76,8 @@ export default function CaseStudyEpisode() {
           </div>
         </div>
 
-        {/* RIGHT CARD — Latest Episode */}
-        <div className="bg-[#141414] border border-white/[0.08] rounded-2xl p-8 flex flex-col gap-6 hover:-translate-y-1 transition-transform duration-200">
+        {/* RIGHT CARD */}
+        <div className="bg-[#141414] border border-white/[0.08] rounded-2xl p-8 flex flex-col gap-6 hover:-translate-y-1 transition-transform duration-200 reveal-on-scroll">
           <p className="text-[#BFBFBF] text-xs font-medium uppercase tracking-[0.2em]">
             Latest Episode
           </p>

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import EpisodePreviewModal from '@/components/EpisodePreviewModal'
+import ScrollReveal from '@/components/ScrollReveal'
 
 export const metadata: Metadata = {
   title: 'Upper Floor — Podcast Agency',
@@ -37,6 +38,7 @@ export default function RootLayout({
       <body>
         {children}
         <EpisodePreviewModal />
+        <ScrollReveal />
       </body>
     </html>
   )

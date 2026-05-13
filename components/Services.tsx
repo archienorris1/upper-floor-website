@@ -9,7 +9,7 @@ const services = [
     number: '02',
     title: 'PRODUCTION',
     description:
-      'End-to-end audio and video production. Edited, mixed, mastered, and published on schedule — every time.',
+      'End-to-end audio and video production. Edited, mixed, mastered, and published on schedule. Every time.',
   },
   {
     number: '03',

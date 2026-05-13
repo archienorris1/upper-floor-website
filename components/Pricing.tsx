@@ -17,13 +17,13 @@ export default function Pricing() {
 
         <div className="text-center mb-16">
           <p className="text-[#BFBFBF] text-xs uppercase tracking-[0.2em] mb-5">Pricing</p>
-          <h2 className="text-[clamp(2.5rem,5vw,5rem)] font-black tracking-[-0.03em] leading-none uppercase text-white">
+          <h2 className="text-[clamp(2.5rem,5vw,5rem)] font-black tracking-[-0.03em] leading-none uppercase text-white reveal-headline">
             ONE PLAN.<br />EVERYTHING INCLUDED.
           </h2>
         </div>
 
         <div className="max-w-[520px] mx-auto">
-          <div className="bg-[#080808] border border-white/10 p-8 lg:p-10">
+          <div className="bg-[#080808] border border-white/10 p-8 lg:p-10 reveal-on-scroll">
 
             {/* Price header */}
             <div className="pb-8 mb-8 border-b border-white/10">
@@ -61,7 +61,7 @@ export default function Pricing() {
               href="#contact"
               className="block w-full bg-[#E07BA3] text-black text-center font-black uppercase tracking-wide py-4 text-sm hover:bg-[#cc6d95] transition-colors duration-200"
             >
-              GET STARTED — FREE SAMPLE FIRST ↗
+              GET STARTED. FREE SAMPLE FIRST ↗
             </a>
 
           </div>
