@@ -34,7 +34,7 @@ export default function CTA() {
         {/* Content */}
         <div className="flex-1">
           <h2
-            className="text-black font-black tracking-tight leading-tight"
+            className="text-black font-black tracking-tight leading-tight reveal-headline"
             style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}
           >
             Let&apos;s build your podcast into a growth channel.

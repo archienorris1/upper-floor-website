@@ -111,7 +111,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
             Ready to build your podcast?
           </p>
           <p className="text-white font-black text-2xl leading-tight">
-            Let us show you what we can do — for free.
+            Let us show you what we can do. For free.
           </p>
           <p className="text-[#BFBFBF] text-sm leading-relaxed max-w-[400px]">
             We&apos;ll produce a full episode preview at no cost so you can see exactly what Upper Floor delivers before committing to anything.

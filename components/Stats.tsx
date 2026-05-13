@@ -81,7 +81,7 @@ export default function Stats() {
                 i < statsData.length - 1 ? 'border-r border-white/10' : ''
               }`}
             >
-              <div className="text-[clamp(2rem,4vw,3.5rem)] font-black tracking-[-0.03em] leading-none text-white mb-3">
+              <div className="text-[clamp(2rem,4vw,3.5rem)] font-black tracking-[-0.03em] leading-none text-white mb-3 reveal-scale">
                 <CountUp target={stat.target} suffix={stat.suffix} isVisible={isVisible} />
               </div>
               <div className="text-[#BFBFBF] text-xs uppercase tracking-[0.15em] leading-snug">

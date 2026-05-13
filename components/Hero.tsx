@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import Image from 'next/image'
 import EpisodePreviewButton from './EpisodePreviewButton'
 
@@ -22,7 +22,6 @@ const CARDS = [
   },
 ]
 
-// pos 0 = front, pos 1 = mid, pos 2 = back
 const STACK = [
   {
     width: '88%',
@@ -53,25 +52,48 @@ const STACK = [
 export default function Hero() {
   const [activeIndex, setActiveIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
+  const mobileScrollRef = useRef<HTMLDivElement>(null)
+  const touchStartX = useRef(0)
+  const touchDeltaX = useRef(0)
 
   useEffect(() => {
     if (isPaused) return
-    const id = setInterval(() => setActiveIndex(i => (i + 1) % CARDS.length), 2500)
+    const id = setInterval(() => setActiveIndex(i => (i + 1) % CARDS.length), 3000)
     return () => clearInterval(id)
   }, [isPaused])
+
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX
+    touchDeltaX.current = 0
+    setIsPaused(true)
+  }, [])
+
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    touchDeltaX.current = e.touches[0].clientX - touchStartX.current
+  }, [])
+
+  const handleTouchEnd = useCallback(() => {
+    if (Math.abs(touchDeltaX.current) > 50) {
+      if (touchDeltaX.current < 0) {
+        setActiveIndex(i => Math.min(i + 1, CARDS.length - 1))
+      } else {
+        setActiveIndex(i => Math.max(i - 1, 0))
+      }
+    }
+    setTimeout(() => setIsPaused(false), 3000)
+  }, [])
 
   return (
     <section className="min-h-screen pb-20 px-6 lg:px-12" style={{ paddingTop: '120px' }} id="work">
       <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-        {/* LEFT COLUMN */}
         <div className="flex flex-col gap-8">
           <p className="text-[#E07BA3] text-xs font-black uppercase tracking-[0.2em]">
             B2B Podcast Production Agency
           </p>
 
           <h1
-            className="font-black tracking-tight leading-[1.0] uppercase"
+            className="font-black tracking-tight leading-[1.0] uppercase hero-headline"
             style={{ fontSize: 'clamp(2.8rem, 5.5vw, 5rem)' }}
           >
             <span className="text-white block">MORE THAN JUST</span>
@@ -93,12 +115,12 @@ export default function Hero() {
           </p>
 
           <div className="flex flex-wrap gap-4">
-            <EpisodePreviewButton className="bg-[#E07BA3] text-black font-black border-0 rounded-full px-6 py-3 text-sm hover:bg-[#cc6d95] transition-colors duration-200 inline-flex items-center gap-1.5">
+            <EpisodePreviewButton className="bg-[#E07BA3] text-black font-black border-0 rounded-full px-6 py-3 text-sm hover:bg-[#cc6d95] transition-colors duration-200 inline-flex items-center gap-1.5 w-full sm:w-auto justify-center">
               Get a Free Episode Preview →
             </EpisodePreviewButton>
             <a
               href="#work"
-              className="border border-white/20 text-white bg-transparent rounded-full px-6 py-3 font-medium text-sm hover:bg-white/5 transition-colors duration-200"
+              className="border border-white/20 text-white bg-transparent rounded-full px-6 py-3 font-medium text-sm hover:bg-white/5 transition-colors duration-200 w-full sm:w-auto text-center"
             >
               View our work
             </a>
@@ -109,7 +131,7 @@ export default function Hero() {
           </p>
         </div>
 
-        {/* RIGHT COLUMN — stacked card deck, desktop only */}
+        {/* Desktop stacked card deck */}
         <div
           className="relative hidden lg:block"
           style={{ height: '520px' }}
@@ -137,7 +159,7 @@ export default function Hero() {
                   transition: 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
                 }}
                 onClick={() => setActiveIndex(i)}
-                aria-label={`${card.label} — ${card.sublabel}`}
+                aria-label={`${card.label} ${card.sublabel}`}
               >
                 <Image
                   src={card.image}
@@ -148,14 +170,10 @@ export default function Hero() {
                   sizes="45vw"
                   priority={i === 0}
                 />
-
-                {/* Bottom gradient overlay */}
                 <div
                   className="absolute inset-0"
                   style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 50%)' }}
                 />
-
-                {/* Front card episode player */}
                 {isFront && (
                   <div className="absolute left-4 right-4 z-10" style={{ bottom: '52px' }}>
                     <p className="text-white/50 text-[9px] font-black uppercase tracking-[0.15em] mb-2">
@@ -179,8 +197,6 @@ export default function Hero() {
                     </div>
                   </div>
                 )}
-
-                {/* Bottom label */}
                 <div className="absolute bottom-4 left-4 z-10">
                   <p className="text-white font-black text-[11px] uppercase tracking-[0.1em] leading-tight">
                     {card.label}
@@ -193,7 +209,6 @@ export default function Hero() {
             )
           })}
 
-          {/* Spinning circular badge — top-right, above cards */}
           <div className="absolute top-0 right-0 z-40 w-[88px] h-[88px] translate-x-2 -translate-y-2">
             <svg viewBox="0 0 88 88" className="spin-badge w-full h-full" aria-hidden="true">
               <defs>
@@ -214,7 +229,6 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Decorative pink slash marks — lower right */}
           <svg
             className="absolute bottom-16 right-2 opacity-50 z-10"
             width="34" height="60" viewBox="0 0 34 60" fill="none" aria-hidden="true"
@@ -223,8 +237,69 @@ export default function Hero() {
             <line x1="8" y1="60" x2="34" y2="0" stroke="#E07BA3" strokeWidth="2.5" strokeLinecap="round" />
           </svg>
 
-          {/* Dot navigation */}
           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex items-center gap-2 z-40">
+            {CARDS.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActiveIndex(i)}
+                aria-label={`Go to card ${i + 1}`}
+                className="rounded-full transition-all duration-300"
+                style={{
+                  width: i === activeIndex ? '24px' : '8px',
+                  height: '8px',
+                  backgroundColor: i === activeIndex ? '#E07BA3' : '#333333',
+                }}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Mobile card carousel */}
+        <div
+          className="lg:hidden relative"
+          ref={mobileScrollRef}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          <div className="overflow-hidden rounded-[20px]" style={{ height: '380px' }}>
+            {CARDS.map((card, i) => (
+              <div
+                key={card.image}
+                className="absolute inset-0 transition-all duration-500 ease-out"
+                style={{
+                  opacity: i === activeIndex ? 1 : 0,
+                  transform: i === activeIndex ? 'translateX(0)' : i > activeIndex ? 'translateX(100%)' : 'translateX(-100%)',
+                  borderRadius: '20px',
+                  overflow: 'hidden',
+                }}
+              >
+                <Image
+                  src={card.image}
+                  alt={card.label}
+                  fill
+                  className="object-cover"
+                  style={{ objectPosition: 'center top' }}
+                  sizes="100vw"
+                  priority={i === 0}
+                />
+                <div
+                  className="absolute inset-0"
+                  style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 50%)' }}
+                />
+                <div className="absolute bottom-4 left-4 z-10">
+                  <p className="text-white font-black text-[11px] uppercase tracking-[0.1em] leading-tight">
+                    {card.label}
+                  </p>
+                  <p className="text-white/60 text-[10px] uppercase tracking-[0.08em] mt-0.5">
+                    {card.sublabel}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex items-center justify-center gap-2 mt-4">
             {CARDS.map((_, i) => (
               <button
                 key={i}

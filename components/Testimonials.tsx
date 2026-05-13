@@ -37,27 +37,35 @@ const Stars = () => (
 
 export default function Testimonials() {
   return (
-    <section className="px-6 lg:px-12 border-t border-white/[0.06]" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
+    <section
+      className="px-6 lg:px-12"
+      style={{ backgroundColor: '#E07BA3', paddingTop: '80px', paddingBottom: '80px' }}
+    >
       <div className="max-w-[1400px] mx-auto">
-        <p className="text-[#E07BA3] text-xs font-black uppercase tracking-[0.1em] mb-4">
+        <p className="text-black text-xs font-black uppercase tracking-[0.1em] mb-4">
           What Our Clients Say
         </p>
-        <h2 className="text-white font-black text-3xl uppercase tracking-tight mb-12">
+        <h2 className="text-black font-black text-3xl uppercase tracking-tight mb-12 reveal-headline">
           The Proof Is In The Pudding.
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          {testimonials.map(({ quote, name, role }) => (
+          {testimonials.map(({ quote, name, role }, i) => (
             <div
               key={name}
-              className="bg-[#111111] border border-[#222222] rounded-2xl p-8 flex flex-col hover:border-[#E07BA3] transition-colors duration-200"
+              className={`rounded-2xl flex flex-col reveal-on-scroll reveal-delay-${i + 1}`}
+              style={{
+                backgroundColor: '#FFFFFF',
+                borderRadius: '16px',
+                padding: '32px',
+              }}
             >
               <Stars />
-              <p className="text-white text-base leading-relaxed italic flex-1">
+              <p className="text-black text-base leading-relaxed italic flex-1">
                 &ldquo;{quote}&rdquo;
               </p>
-              <p className="text-[#BFBFBF] text-sm font-bold mt-4">
-                — {name}, {role}
+              <p className="text-[#555555] text-sm font-bold mt-4">
+                {name}, {role}
               </p>
             </div>
           ))}

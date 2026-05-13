@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import { DynamicFrameLayout, Frame } from '@/components/ui/dynamic-frame-layout'
 
 const workFrames: Frame[] = [
@@ -68,13 +68,30 @@ const workFrames: Frame[] = [
 
 export default function OurWork() {
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null)
+  const [activeScrollIndex, setActiveScrollIndex] = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
+  const scrollRef = useRef<HTMLDivElement>(null)
 
-  const handleArrow = (dir: number) => {
-    setFocusedIndex(prev => {
-      const current = prev ?? (dir > 0 ? -1 : 0)
-      return ((current + dir) + workFrames.length) % workFrames.length
-    })
-  }
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+
+  const handleArrow = useCallback((dir: number) => {
+    if (isMobile && scrollRef.current) {
+      const el = scrollRef.current
+      const cardWidth = el.clientWidth * 0.8 + 16
+      const newIndex = Math.max(0, Math.min(activeScrollIndex + dir, workFrames.length - 1))
+      el.scrollTo({ left: newIndex * cardWidth, behavior: 'smooth' })
+    } else {
+      setFocusedIndex(prev => {
+        const current = prev ?? (dir > 0 ? -1 : 0)
+        return ((current + dir) + workFrames.length) % workFrames.length
+      })
+    }
+  }, [isMobile, activeScrollIndex])
 
   return (
     <section
@@ -88,13 +105,13 @@ export default function OurWork() {
           <p className="text-[#E07BA3] text-xs font-black uppercase tracking-[0.2em] mb-4">
             Our Work
           </p>
-          <h2 className="text-white font-black text-3xl lg:text-4xl uppercase tracking-tight">
+          <h2 className="text-white font-black text-3xl lg:text-4xl uppercase tracking-tight reveal-headline">
             Shows We&apos;ve Built.
           </h2>
         </div>
 
-        {/* Arrow nav */}
-        <div className="flex gap-3">
+        {/* Arrow nav — hidden on mobile, dots shown instead */}
+        <div className="hidden md:flex gap-3">
           <button
             onClick={() => handleArrow(-1)}
             aria-label="Previous show"
@@ -129,8 +146,34 @@ export default function OurWork() {
           hoverSize={7}
           gapSize={12}
           focusedIndex={focusedIndex}
+          scrollRef={scrollRef}
+          onScrollIndexChange={setActiveScrollIndex}
         />
       </div>
+
+      {/* Dot indicators — mobile only */}
+      {isMobile && (
+        <div className="flex justify-center gap-2 mt-6 px-6">
+          {workFrames.map((_, i) => (
+            <button
+              key={i}
+              aria-label={`Go to show ${i + 1}`}
+              onClick={() => {
+                const el = scrollRef.current
+                if (!el) return
+                const cardWidth = el.clientWidth * 0.8 + 16
+                el.scrollTo({ left: i * cardWidth, behavior: 'smooth' })
+              }}
+              className="rounded-full transition-all duration-300"
+              style={{
+                width: i === activeScrollIndex ? '24px' : '8px',
+                height: '8px',
+                backgroundColor: i === activeScrollIndex ? '#E07BA3' : '#333',
+              }}
+            />
+          ))}
+        </div>
+      )}
     </section>
   )
 }
