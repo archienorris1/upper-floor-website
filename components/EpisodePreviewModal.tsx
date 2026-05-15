@@ -13,6 +13,7 @@ export default function EpisodePreviewModal() {
   const [form, setForm] = useState({
     firstName: '',
     email: '',
+    phone: '',
     brandName: '',
     podcastLink: '',
     industry: '',
@@ -48,7 +49,7 @@ export default function EpisodePreviewModal() {
     setOpen(false)
     setTimeout(() => {
       setSubmitted(false)
-      setForm({ firstName: '', email: '', brandName: '', podcastLink: '', industry: '', goal: '' })
+      setForm({ firstName: '', email: '', phone: '', brandName: '', podcastLink: '', industry: '', goal: '' })
     }, 300)
   }
 
@@ -140,6 +141,15 @@ export default function EpisodePreviewModal() {
                 required
                 value={form.email}
                 onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+                className={inputClass}
+                style={inputStyle}
+              />
+              <input
+                type="tel"
+                placeholder="Phone number (inc. country code, e.g. +44 7700 900000)"
+                required
+                value={form.phone}
+                onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
                 className={inputClass}
                 style={inputStyle}
               />

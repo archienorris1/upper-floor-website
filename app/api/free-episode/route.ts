@@ -3,9 +3,9 @@ import nodemailer from 'nodemailer'
 
 export async function POST(req: NextRequest) {
   const body = await req.json()
-  const { firstName, email, brandName, podcastLink, industry, goal } = body
+  const { firstName, email, phone, brandName, podcastLink, industry, goal } = body
 
-  if (!firstName || !email || !brandName || !podcastLink || !industry || !goal) {
+  if (!firstName || !email || !phone || !brandName || !podcastLink || !industry || !goal) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
   }
 
@@ -41,6 +41,10 @@ export async function POST(req: NextRequest) {
               <tr style="border-top: 1px solid #222;">
                 <td style="padding: 10px 0; font-weight: 700; color: #E07BA3; vertical-align: top;">Email</td>
                 <td style="padding: 10px 0; color: #fff;"><a href="mailto:${email}" style="color: #E07BA3;">${email}</a></td>
+              </tr>
+              <tr style="border-top: 1px solid #222;">
+                <td style="padding: 10px 0; font-weight: 700; color: #E07BA3; vertical-align: top;">Phone</td>
+                <td style="padding: 10px 0; color: #fff;">${phone}</td>
               </tr>
               <tr style="border-top: 1px solid #222;">
                 <td style="padding: 10px 0; font-weight: 700; color: #E07BA3; vertical-align: top;">Brand / Podcast</td>
