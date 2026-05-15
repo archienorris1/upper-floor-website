@@ -52,7 +52,6 @@ const STACK = [
 export default function Hero() {
   const [activeIndex, setActiveIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
-  const mobileScrollRef = useRef<HTMLDivElement>(null)
   const touchStartX = useRef(0)
   const touchDeltaX = useRef(0)
 
@@ -75,25 +74,136 @@ export default function Hero() {
   const handleTouchEnd = useCallback(() => {
     if (Math.abs(touchDeltaX.current) > 50) {
       if (touchDeltaX.current < 0) {
-        setActiveIndex(i => Math.min(i + 1, CARDS.length - 1))
+        setActiveIndex(i => (i + 1) % CARDS.length)
       } else {
-        setActiveIndex(i => Math.max(i - 1, 0))
+        setActiveIndex(i => (i - 1 + CARDS.length) % CARDS.length)
       }
     }
     setTimeout(() => setIsPaused(false), 3000)
   }, [])
 
   return (
-    <section className="min-h-screen pb-20 px-6 lg:px-12" style={{ paddingTop: '120px' }} id="work">
-      <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <section id="work">
 
+      {/* ── MOBILE LAYOUT (below lg) ── */}
+      <div className="lg:hidden flex flex-col" style={{ paddingTop: '100px' }}>
+
+        {/* 1. Headline */}
+        <h1
+          className="font-black tracking-tight uppercase text-white"
+          style={{ padding: '24px 20px 0', fontSize: 'clamp(36px, 9vw, 52px)', lineHeight: 1 }}
+        >
+          MORE THAN JUST<br />A PODCAST.
+        </h1>
+
+        {/* 2. Carousel */}
+        <div style={{ padding: '24px 16px 0' }}>
+          <div
+            style={{ height: '380px', borderRadius: '20px', overflow: 'hidden', position: 'relative' }}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            {CARDS.map((card, i) => (
+              <div
+                key={card.image}
+                className="absolute inset-0 transition-all duration-500 ease-out"
+                style={{
+                  opacity: i === activeIndex ? 1 : 0,
+                  transform:
+                    i === activeIndex
+                      ? 'translateX(0)'
+                      : i > activeIndex
+                      ? 'translateX(100%)'
+                      : 'translateX(-100%)',
+                }}
+              >
+                <Image
+                  src={card.image}
+                  alt={card.label}
+                  fill
+                  className="object-cover"
+                  style={{ objectPosition: 'center top' }}
+                  sizes="100vw"
+                  priority={i === 0}
+                />
+                <div
+                  className="absolute inset-0"
+                  style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 50%)' }}
+                />
+                <div className="absolute bottom-4 left-4 z-10">
+                  <p className="text-white font-black text-[11px] uppercase tracking-[0.1em] leading-tight">
+                    {card.label}
+                  </p>
+                  <p className="text-white/60 text-[10px] uppercase tracking-[0.08em] mt-0.5">
+                    {card.sublabel}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+          {/* Dots */}
+          <div className="flex justify-center gap-2 mt-4">
+            {CARDS.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActiveIndex(i)}
+                aria-label={`Go to card ${i + 1}`}
+                className="rounded-full transition-all duration-300"
+                style={{
+                  width: i === activeIndex ? '24px' : '8px',
+                  height: '8px',
+                  backgroundColor: i === activeIndex ? '#E07BA3' : '#333333',
+                }}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* 3. Pink subheadline */}
+        <p
+          className="font-black uppercase"
+          style={{
+            padding: '32px 20px 16px',
+            color: '#E07BA3',
+            fontSize: 'clamp(28px, 7vw, 40px)',
+            lineHeight: 1.05,
+          }}
+        >
+          BECOME THE MOST TRUSTED VOICE IN YOUR INDUSTRY.
+        </p>
+
+        {/* 4. Description */}
+        <p style={{ padding: '0 20px 24px', color: '#BFBFBF', fontSize: '14px', lineHeight: 1.6 }}>
+          We produce, position and grow podcasts that make your brand the go-to authority in your space.
+        </p>
+
+        {/* 5. CTA buttons */}
+        <div style={{ padding: '0 20px 48px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <EpisodePreviewButton className="bg-[#E07BA3] text-black font-black border-0 rounded-full text-sm hover:bg-[#cc6d95] transition-colors duration-200 flex items-center justify-center w-full h-[52px]">
+            Get a Free Episode Preview →
+          </EpisodePreviewButton>
+          <a
+            href="#work"
+            className="border border-white/20 text-white bg-transparent rounded-full font-medium text-sm hover:bg-white/5 transition-colors duration-200 flex items-center justify-center"
+            style={{ width: '100%', height: '52px' }}
+          >
+            View our work
+          </a>
+        </div>
+
+      </div>
+
+      {/* ── DESKTOP LAYOUT (lg and above) ── */}
+      <div
+        className="hidden lg:grid grid-cols-2 max-w-[1400px] mx-auto gap-16 items-center px-12 min-h-screen pb-20"
+        style={{ paddingTop: '120px' }}
+      >
+
+        {/* Left column */}
         <div className="flex flex-col gap-8">
-          <p className="text-[#E07BA3] text-xs font-black uppercase tracking-[0.2em]">
-            B2B Podcast Production Agency
-          </p>
-
           <h1
-            className="font-black tracking-tight leading-[1.0] uppercase hero-headline"
+            className="font-black tracking-tight leading-[1.0] uppercase"
             style={{ fontSize: 'clamp(2.8rem, 5.5vw, 5rem)' }}
           >
             <span className="text-white block">MORE THAN JUST</span>
@@ -109,18 +219,18 @@ export default function Hero() {
 
           <p
             className="text-[#BFBFBF] font-normal max-w-[420px]"
-            style={{ fontSize: '16px', lineHeight: '1.6', marginTop: '0' }}
+            style={{ fontSize: '16px', lineHeight: '1.6' }}
           >
             We produce, position and grow podcasts that make your brand the go-to authority in your space.
           </p>
 
           <div className="flex flex-wrap gap-4">
-            <EpisodePreviewButton className="bg-[#E07BA3] text-black font-black border-0 rounded-full px-6 py-3 text-sm hover:bg-[#cc6d95] transition-colors duration-200 inline-flex items-center gap-1.5 w-full sm:w-auto justify-center">
+            <EpisodePreviewButton className="bg-[#E07BA3] text-black font-black border-0 rounded-full px-6 py-3 text-sm hover:bg-[#cc6d95] transition-colors duration-200 inline-flex items-center gap-1.5">
               Get a Free Episode Preview →
             </EpisodePreviewButton>
             <a
               href="#work"
-              className="border border-white/20 text-white bg-transparent rounded-full px-6 py-3 font-medium text-sm hover:bg-white/5 transition-colors duration-200 w-full sm:w-auto text-center"
+              className="border border-white/20 text-white bg-transparent rounded-full px-6 py-3 font-medium text-sm hover:bg-white/5 transition-colors duration-200"
             >
               View our work
             </a>
@@ -131,9 +241,9 @@ export default function Hero() {
           </p>
         </div>
 
-        {/* Desktop stacked card deck */}
+        {/* Right column — stacked card deck */}
         <div
-          className="relative hidden lg:block"
+          className="relative"
           style={{ height: '520px' }}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
@@ -209,6 +319,7 @@ export default function Hero() {
             )
           })}
 
+          {/* Spinning badge */}
           <div className="absolute top-0 right-0 z-40 w-[88px] h-[88px] translate-x-2 -translate-y-2">
             <svg viewBox="0 0 88 88" className="spin-badge w-full h-full" aria-hidden="true">
               <defs>
@@ -229,6 +340,7 @@ export default function Hero() {
             </div>
           </div>
 
+          {/* Decorative slash marks */}
           <svg
             className="absolute bottom-16 right-2 opacity-50 z-10"
             width="34" height="60" viewBox="0 0 34 60" fill="none" aria-hidden="true"
@@ -237,69 +349,8 @@ export default function Hero() {
             <line x1="8" y1="60" x2="34" y2="0" stroke="#E07BA3" strokeWidth="2.5" strokeLinecap="round" />
           </svg>
 
+          {/* Dot navigation */}
           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex items-center gap-2 z-40">
-            {CARDS.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setActiveIndex(i)}
-                aria-label={`Go to card ${i + 1}`}
-                className="rounded-full transition-all duration-300"
-                style={{
-                  width: i === activeIndex ? '24px' : '8px',
-                  height: '8px',
-                  backgroundColor: i === activeIndex ? '#E07BA3' : '#333333',
-                }}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Mobile card carousel */}
-        <div
-          className="lg:hidden relative"
-          ref={mobileScrollRef}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
-        >
-          <div className="overflow-hidden rounded-[20px]" style={{ height: '380px' }}>
-            {CARDS.map((card, i) => (
-              <div
-                key={card.image}
-                className="absolute inset-0 transition-all duration-500 ease-out"
-                style={{
-                  opacity: i === activeIndex ? 1 : 0,
-                  transform: i === activeIndex ? 'translateX(0)' : i > activeIndex ? 'translateX(100%)' : 'translateX(-100%)',
-                  borderRadius: '20px',
-                  overflow: 'hidden',
-                }}
-              >
-                <Image
-                  src={card.image}
-                  alt={card.label}
-                  fill
-                  className="object-cover"
-                  style={{ objectPosition: 'center top' }}
-                  sizes="100vw"
-                  priority={i === 0}
-                />
-                <div
-                  className="absolute inset-0"
-                  style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 50%)' }}
-                />
-                <div className="absolute bottom-4 left-4 z-10">
-                  <p className="text-white font-black text-[11px] uppercase tracking-[0.1em] leading-tight">
-                    {card.label}
-                  </p>
-                  <p className="text-white/60 text-[10px] uppercase tracking-[0.08em] mt-0.5">
-                    {card.sublabel}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="flex items-center justify-center gap-2 mt-4">
             {CARDS.map((_, i) => (
               <button
                 key={i}
