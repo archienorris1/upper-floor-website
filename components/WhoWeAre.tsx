@@ -24,7 +24,7 @@ export default function WhoWeAre() {
             We&apos;d love to show you what we can do. For free.
           </p>
           <EpisodePreviewButton className="self-start bg-[#E07BA3] text-black font-black text-sm px-6 py-3 rounded-full hover:bg-[#cc6d95] transition-colors duration-200">
-            Get a Free Episode Preview →
+            Get Your Free Podcast Audit →
           </EpisodePreviewButton>
         </div>
 

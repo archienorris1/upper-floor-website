@@ -61,7 +61,7 @@ export default function Nav() {
               </a>
             ))}
             <EpisodePreviewButton className="bg-[#E07BA3] text-black font-black text-sm px-5 py-2.5 rounded-full hover:bg-[#cc6d95] transition-colors duration-200">
-              Get a Free Episode Preview →
+              Get Your Free Podcast Audit →
             </EpisodePreviewButton>
             <a
               href="/login"
@@ -118,7 +118,7 @@ export default function Nav() {
           ))}
           <div className="mt-6 flex flex-col gap-4">
             <EpisodePreviewButton className="w-full bg-[#E07BA3] text-black font-black text-sm px-5 py-4 rounded-full text-center hover:bg-[#cc6d95] transition-colors duration-200">
-              Get a Free Episode Preview →
+              Get Your Free Podcast Audit →
             </EpisodePreviewButton>
             <a
               href="/login"

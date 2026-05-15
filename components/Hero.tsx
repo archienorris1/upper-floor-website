@@ -181,7 +181,7 @@ export default function Hero() {
         {/* 5. CTA buttons */}
         <div style={{ padding: '0 20px 48px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
           <EpisodePreviewButton className="bg-[#E07BA3] text-black font-black border-0 rounded-full text-sm hover:bg-[#cc6d95] transition-colors duration-200 flex items-center justify-center w-full h-[52px]">
-            Get a Free Episode Preview →
+            Get Your Free Podcast Audit →
           </EpisodePreviewButton>
           <a
             href="#work"
@@ -226,7 +226,7 @@ export default function Hero() {
 
           <div className="flex flex-wrap gap-4">
             <EpisodePreviewButton className="bg-[#E07BA3] text-black font-black border-0 rounded-full px-6 py-3 text-sm hover:bg-[#cc6d95] transition-colors duration-200 inline-flex items-center gap-1.5">
-              Get a Free Episode Preview →
+              Get Your Free Podcast Audit →
             </EpisodePreviewButton>
             <a
               href="#work"

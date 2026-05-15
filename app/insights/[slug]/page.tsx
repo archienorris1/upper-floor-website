@@ -117,7 +117,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
             We&apos;ll produce a full episode preview at no cost so you can see exactly what Upper Floor delivers before committing to anything.
           </p>
           <EpisodePreviewButton className="mt-2 bg-[#E07BA3] text-black font-black text-sm px-6 py-3 rounded-full hover:bg-[#cc6d95] transition-colors duration-200">
-            Get a Free Episode Preview →
+            Get Your Free Podcast Audit →
           </EpisodePreviewButton>
         </div>
 

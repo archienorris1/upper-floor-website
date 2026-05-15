@@ -44,7 +44,7 @@ export default function CTA() {
         {/* Button */}
         <div className="flex-shrink-0">
           <EpisodePreviewButton className="inline-block bg-black text-white font-black text-sm px-8 py-4 rounded-full hover:bg-[#1a1a1a] transition-colors duration-200">
-            Get a Free Episode Preview →
+            Get Your Free Podcast Audit →
           </EpisodePreviewButton>
         </div>
 

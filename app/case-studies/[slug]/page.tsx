@@ -27,7 +27,7 @@ export default function CaseStudyPage() {
           We&apos;re building out our full case study library. Check back soon. Or get in touch to hear about our work directly.
         </p>
         <EpisodePreviewButton className="self-start bg-[#E07BA3] text-black font-black text-sm px-6 py-3 rounded-full hover:bg-[#cc6d95] transition-colors duration-200">
-          Get a Free Episode Preview →
+          Get Your Free Podcast Audit →
         </EpisodePreviewButton>
       </div>
     </main>
