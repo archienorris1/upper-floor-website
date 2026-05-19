@@ -1,3 +1,5 @@
+import EpisodePreviewButton from './EpisodePreviewButton'
+
 const features = [
   'Unlimited episodes per month',
   'Full audio + video production',
@@ -30,7 +32,7 @@ export default function Pricing() {
               <p className="text-[#BFBFBF] text-xs uppercase tracking-[0.2em] mb-4">Monthly Retainer</p>
               <div className="flex items-end gap-2">
                 <span className="text-[clamp(3rem,6vw,4.5rem)] font-black tracking-[-0.03em] leading-none text-white">
-                  £2,500
+                  £1,500
                 </span>
                 <span className="text-[#BFBFBF] text-lg mb-1">/month</span>
               </div>
@@ -57,12 +59,9 @@ export default function Pricing() {
             </ul>
 
             {/* CTA */}
-            <a
-              href="#contact"
-              className="block w-full bg-[#E07BA3] text-black text-center font-black uppercase tracking-wide py-4 text-sm hover:bg-[#cc6d95] transition-colors duration-200"
-            >
-              GET STARTED. FREE SAMPLE FIRST ↗
-            </a>
+            <EpisodePreviewButton className="block w-full bg-[#E07BA3] text-black text-center font-black uppercase tracking-wide py-4 text-sm hover:bg-[#cc6d95] transition-colors duration-200">
+              Get Your Free Podcast Audit →
+            </EpisodePreviewButton>
 
           </div>
         </div>
