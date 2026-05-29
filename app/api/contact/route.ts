@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
       subject: `New enquiry from ${firstName} ${lastName}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #E07BA3;">New Upper Floor Website Enquiry</h2>
+          <h2 style="color: #1B8A3F;">New Upper Floor Website Enquiry</h2>
           <table style="width: 100%; border-collapse: collapse;">
             <tr>
               <td style="padding: 8px; font-weight: bold; color: #666;">Name</td>

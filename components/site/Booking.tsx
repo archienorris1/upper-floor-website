@@ -7,8 +7,9 @@ export default function Booking() {
     <section id="book" className="scroll-mt-24 bg-brand-green px-4 py-16 md:px-8 md:py-24">
       <div className="mx-auto max-w-3xl text-center">
         <h2 className="font-serif text-4xl leading-tight text-white md:text-6xl">Let’s Talk</h2>
-        <p className="mx-auto mt-4 max-w-md text-base text-white/90 md:text-lg">
-          Good products deserve better content. Book a free 30-minute call and let’s get into it.
+        <p className="mx-auto mt-4 max-w-lg text-base text-white/90 md:text-lg">
+          We’re easy to talk to. Book a free 30-minute intro call and let’s figure out if we’re a
+          good fit.
         </p>
 
         {/* Calendly inline widget */}

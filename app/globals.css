@@ -44,7 +44,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: #E07BA3;
+  background-color: #1B8A3F;
   animation: loading-dot 1.4s ease-in-out infinite;
 }
 .loading-dot:nth-child(1) { animation-delay: 0s; }
