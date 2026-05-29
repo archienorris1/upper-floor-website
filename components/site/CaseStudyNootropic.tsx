@@ -16,13 +16,13 @@ export default function CaseStudyNootropic() {
           {/* Composite media */}
           <div className="relative mx-auto w-full max-w-md">
             <img
-              src="/media/nootropic-product.png"
+              src="/media/nootropic-product-v2.png"
               alt="Nootropict product creative"
               className="w-full rounded-2xl object-cover"
             />
             <img
-              src="/media/nootropic-data.png"
-              alt="Nootropict store performance dashboard"
+              src="/media/nootropic-roas.png"
+              alt="Nootropict return on ad spend report"
               className="absolute -right-2 top-1/2 w-1/2 max-w-[220px] -translate-y-1/2 rounded-xl shadow-2xl ring-1 ring-white/10"
             />
           </div>
