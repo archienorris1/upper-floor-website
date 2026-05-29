@@ -10,15 +10,18 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          pink: '#E07BA3',
-          grey: '#BFBFBF',
+          green: '#1B8A3F',
+          'green-dark': '#0F5E29',
+          cream: '#F3EEE1',
+          ink: '#0A0A0A',
         },
       },
       fontFamily: {
-        sans: ['Arial', 'Helvetica Neue', 'Helvetica', 'sans-serif'],
+        serif: ['Ovo', 'Georgia', 'serif'],
+        sans: ['"Open Sauce Sans"', 'system-ui', 'sans-serif'],
       },
       letterSpacing: {
-        headline: '-0.03em',
+        headline: '-0.02em',
       },
     },
   },

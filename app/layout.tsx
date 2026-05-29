@@ -1,30 +1,35 @@
 import type { Metadata } from 'next'
+import '@fontsource/ovo/400.css'
+import '@fontsource/open-sauce-sans/300.css'
+import '@fontsource/open-sauce-sans/400.css'
+import '@fontsource/open-sauce-sans/500.css'
+import '@fontsource/open-sauce-sans/600.css'
+import '@fontsource/open-sauce-sans/700.css'
 import './globals.css'
-import EpisodePreviewModal from '@/components/EpisodePreviewModal'
 import ScrollReveal from '@/components/ScrollReveal'
 
 export const metadata: Metadata = {
-  title: 'Upper Floor — Podcast Agency',
+  title: 'Upper Floor — Good products deserve better content',
   description:
-    'We build podcasts that grow brands. Upper Floor is a full-service podcast agency and growth engine turning audiences into pipeline.',
+    'Upper Floor builds content that performs. Scroll-stopping ads and organic content that grows brands — because the best ads don’t feel like ads.',
   keywords: [
-    'podcast agency',
-    'podcast production',
-    'brand growth',
-    'podcast marketing',
-    'b2b podcast',
-    'video podcast',
+    'content agency',
+    'UGC ads',
+    'performance content',
+    'organic social',
+    'brand content',
+    'paid social creative',
   ],
   openGraph: {
-    title: 'Upper Floor — Podcast Agency',
-    description: 'We build podcasts that grow brands.',
+    title: 'Upper Floor — Good products deserve better content',
+    description: 'Content that performs. Because the best ads don’t feel like ads.',
     type: 'website',
     siteName: 'Upper Floor',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Upper Floor — Podcast Agency',
-    description: 'We build podcasts that grow brands.',
+    title: 'Upper Floor — Good products deserve better content',
+    description: 'Content that performs. Because the best ads don’t feel like ads.',
   },
 }
 
@@ -37,7 +42,6 @@ export default function RootLayout({
     <html lang="en">
       <body>
         {children}
-        <EpisodePreviewModal />
         <ScrollReveal />
       </body>
     </html>

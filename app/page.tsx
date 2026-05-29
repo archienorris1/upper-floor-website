@@ -1,31 +1,23 @@
-import Nav from '@/components/Nav'
-import Hero from '@/components/Hero'
-import WhatWeDo from '@/components/WhatWeDo'
-import OurWork from '@/components/OurWork'
-import BigTextFeatures from '@/components/BigTextFeatures'
-import HowWeStandOut from '@/components/HowWeStandOut'
-import WhoWeAre from '@/components/WhoWeAre'
-import CaseStudyEpisode from '@/components/CaseStudyEpisode'
-import Testimonials from '@/components/Testimonials'
-import Pricing from '@/components/Pricing'
-import CTA from '@/components/CTA'
-import Footer from '@/components/Footer'
+import SiteNav from '@/components/site/SiteNav'
+import Hero from '@/components/site/Hero'
+import TrustedBy from '@/components/site/TrustedBy'
+import CaseStudyNootropic from '@/components/site/CaseStudyNootropic'
+import AdsShowcase from '@/components/site/AdsShowcase'
+import CaseStudySongArchitect from '@/components/site/CaseStudySongArchitect'
+import Booking from '@/components/site/Booking'
+import SiteFooter from '@/components/site/SiteFooter'
 
 export default function Home() {
   return (
     <main>
-      <Nav />
+      <SiteNav />
       <Hero />
-      <WhatWeDo />
-      <OurWork />
-      <BigTextFeatures />
-      <HowWeStandOut />
-      <WhoWeAre />
-      <CaseStudyEpisode />
-      <Testimonials />
-      <Pricing />
-      <CTA />
-      <Footer />
+      <TrustedBy />
+      <CaseStudyNootropic />
+      <AdsShowcase />
+      <CaseStudySongArchitect />
+      <Booking />
+      <SiteFooter />
     </main>
   )
 }

@@ -1,0 +1,48 @@
+/* eslint-disable @next/next/no-img-element */
+
+export default function Hero() {
+  return (
+    <section className="relative flex min-h-[100svh] items-end justify-center overflow-hidden bg-brand-ink">
+      {/* Background media — drop a hero clip at /public/media/hero.mp4 to replace the gradient.
+          If the file is missing the gradient + image layer below still render cleanly. */}
+      <video
+        className="absolute inset-0 h-full w-full object-cover opacity-70"
+        autoPlay
+        muted
+        loop
+        playsInline
+        poster=""
+      >
+        <source src="/media/hero.mp4" type="video/mp4" />
+      </video>
+
+      {/* Fallback / overlay gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/80" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(27,138,63,0.25),transparent_60%)]" />
+
+      <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center px-5 pb-16 pt-28 text-center md:pb-24">
+        {/* Wordmark */}
+        <img
+          src="/media/logo-white.png"
+          alt="Upper Floor"
+          className="mb-2 w-44 md:w-52"
+        />
+
+        <h1 className="hero-headline flex flex-col items-center text-white">
+          <span className="font-serif text-5xl leading-[0.95] md:text-8xl">good products</span>
+          <span className="mt-1 font-serif text-3xl text-white/90 md:text-5xl">
+            deserve better
+          </span>
+          <span className="font-serif text-3xl text-white/90 md:text-5xl">content</span>
+        </h1>
+
+        <a
+          href="/#book"
+          className="mt-7 inline-block rounded-full bg-brand-green px-7 py-2.5 text-sm font-semibold text-white shadow-lg transition-transform hover:scale-105"
+        >
+          Let’s Talk
+        </a>
+      </div>
+    </section>
+  )
+}
