@@ -33,15 +33,15 @@ export default function CaseStudyNootropic() {
 
           {/* Copy */}
           <div className="text-white">
-            <p className="font-serif text-3xl leading-snug md:text-4xl">
-              ads that stopped
-              <br />
-              the scroll
-            </p>
-            <p className="mt-6 text-2xl font-bold md:text-3xl">
-              30x return
-              <br />
-              on ad spend
+            <p className="font-serif text-3xl leading-tight md:text-4xl">30.86x ROAS</p>
+            <p className="mt-1 text-xl text-white/80 md:text-2xl">on a top performing ad set</p>
+            <p className="mt-6 text-base leading-relaxed text-white/80">
+              Nootropict is a wellness gummy for men, built to reduce stress and lift libido. A
+              trending product, launched at the right moment. The ads in the market were weak. Soft
+              hooks, flat CTAs, no real reason to stop scrolling. We saw the gap. We made the
+              creative ourselves, a mix of UGC and static, built around stronger hooks and sharper
+              CTAs. The result was a revenue spike of 2600% in seven days and a 195% increase in
+              conversions.
             </p>
           </div>
         </div>
