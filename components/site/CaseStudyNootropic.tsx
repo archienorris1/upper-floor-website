@@ -20,11 +20,15 @@ export default function CaseStudyNootropic() {
               alt="Nootropict product creative"
               className="w-full rounded-2xl object-cover"
             />
-            <img
-              src="/media/nootropic-roas.png"
-              alt="Nootropict return on ad spend report"
-              className="absolute -right-2 top-1/2 w-1/2 max-w-[220px] -translate-y-1/2 rounded-xl shadow-2xl ring-1 ring-white/10"
-            />
+            <div className="absolute bottom-0 right-0 w-1/2 max-w-[200px] overflow-hidden rounded-tl-2xl rounded-br-2xl shadow-2xl ring-1 ring-white/10">
+              <img
+                src="/media/nootropic-roas.png"
+                alt="Nootropict return on ad spend report"
+                className="w-full opacity-90"
+              />
+              {/* Subtle dark tint so the bright screenshot reads as part of the dark scene */}
+              <div className="pointer-events-none absolute inset-0 bg-black/20" />
+            </div>
           </div>
 
           {/* Copy */}
