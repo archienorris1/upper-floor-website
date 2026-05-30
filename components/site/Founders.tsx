@@ -15,6 +15,10 @@ export default function Founders() {
         <p className="mt-6 font-serif text-2xl text-brand-ink md:text-3xl">
           Archie Norris and Jack Buster-Weston
         </p>
+        <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-brand-ink/70">
+          We are experts in growing strong brands and communities, and in creating content that
+          provokes emotion and sells more.
+        </p>
       </div>
     </section>
   )

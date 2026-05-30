@@ -1,6 +1,5 @@
 import SiteNav from '@/components/site/SiteNav'
 import Hero from '@/components/site/Hero'
-import Subheadline from '@/components/site/Subheadline'
 import TrustedBy from '@/components/site/TrustedBy'
 import CaseStudyNootropic from '@/components/site/CaseStudyNootropic'
 import AdsShowcase from '@/components/site/AdsShowcase'
@@ -15,7 +14,6 @@ export default function Home() {
     <main>
       <SiteNav />
       <Hero />
-      <Subheadline />
       <TrustedBy />
       <CaseStudyNootropic />
       <AdsShowcase />
