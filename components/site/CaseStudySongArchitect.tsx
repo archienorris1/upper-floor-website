@@ -1,12 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
 
 import ReadMore from './ReadMore'
+import StatNumber from './StatNumber'
 
 export default function CaseStudySongArchitect() {
   return (
-    <section className="bg-white px-4 pb-24 md:px-8 md:pb-32">
+    <section className="bg-white px-4 py-24 md:px-8 md:py-32">
       <div className="reveal-on-scroll mx-auto max-w-6xl rounded-3xl bg-brand-ink p-6 md:p-10">
-        <p className="text-sm text-white/60">featured case study</p>
+        <div className="flex items-center justify-between">
+          <p className="text-sm text-white/60">featured case study</p>
+          <span className="rounded-full border border-white/20 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.15em] text-white/70">
+            organic
+          </span>
+        </div>
 
         <div className="mt-4 flex justify-center">
           <span className="flex flex-col items-center text-center font-sans text-xl font-bold leading-tight text-white md:text-2xl">
@@ -21,13 +27,15 @@ export default function CaseStudySongArchitect() {
             <img
               src="/media/sa-carousels.png"
               alt="Song Architect organic carousel creative"
-              className="w-full object-contain"
+              className="w-full object-contain" loading="lazy" decoding="async"
             />
           </div>
 
           {/* Copy */}
           <div className="text-white">
-            <p className="font-serif text-3xl leading-tight md:text-4xl">1,000,000+</p>
+            <p className="font-serif text-3xl leading-tight md:text-4xl">
+              <StatNumber value={1000000} suffix="+" />
+            </p>
             <p className="mt-1 text-xl text-white/80 md:text-2xl">organic views in 30 days</p>
             <ReadMore className="mt-6">
               <p className="text-base leading-relaxed text-white/80">

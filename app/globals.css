@@ -18,6 +18,11 @@
   * {
     box-sizing: border-box;
   }
+
+  ::selection {
+    background-color: #1B8A3F;
+    color: #ffffff;
+  }
 }
 
 /* Ticker animation */
@@ -30,6 +35,35 @@
   display: flex;
   width: max-content;
   animation: ticker 28s linear infinite;
+  will-change: transform;
+}
+
+/* ═══════════════════════════════════════
+   HERO LOAD-IN
+   ═══════════════════════════════════════ */
+
+@keyframes fade-up-load {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-load {
+  opacity: 0;
+  animation: fade-up-load 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.hero-load-1 { animation-delay: 0.1s; }
+.hero-load-2 { animation-delay: 0.25s; }
+.hero-load-3 { animation-delay: 0.4s; }
+.hero-load-4 { animation-delay: 0.55s; }
+
+/* Slow Ken Burns drift on the hero video */
+@keyframes hero-zoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.07); }
+}
+
+.hero-zoom {
+  animation: hero-zoom 22s ease-in-out infinite alternate;
   will-change: transform;
 }
 
@@ -150,7 +184,13 @@
   }
 
   .spin-badge,
-  .ticker-track {
+  .ticker-track,
+  .hero-zoom {
+    animation: none !important;
+  }
+
+  .hero-load {
+    opacity: 1 !important;
     animation: none !important;
   }
 

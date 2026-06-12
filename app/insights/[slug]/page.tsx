@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ARTICLES, getArticle } from '@/lib/articles'
+import { ARTICLES, getArticle, getRelatedArticles } from '@/lib/articles'
 import SiteNav from '@/components/site/SiteNav'
 import SiteFooter from '@/components/site/SiteFooter'
 
@@ -12,8 +12,25 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   const article = getArticle(params.slug)
   if (!article) return {}
   return {
-    title: `${article.title} — Upper Floor`,
+    title: article.title,
     description: article.excerpt,
+    alternates: {
+      canonical: `/insights/${article.slug}`,
+    },
+    openGraph: {
+      title: article.title,
+      description: article.excerpt,
+      type: 'article',
+      publishedTime: article.dateISO,
+      url: `/insights/${article.slug}`,
+      images: [{ url: article.image }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: article.title,
+      description: article.excerpt,
+      images: [article.image],
+    },
   }
 }
 
@@ -21,8 +38,56 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
   const article = getArticle(params.slug)
   if (!article) notFound()
 
+  const related = getRelatedArticles(article.slug, 3)
+
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: article.title,
+    description: article.excerpt,
+    datePublished: article.dateISO,
+    image: `https://upperfloor.co${article.image}`,
+    author: {
+      '@type': 'Organization',
+      name: 'Upper Floor',
+      url: 'https://upperfloor.co',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Upper Floor',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://upperfloor.co/media/logo-black.png',
+      },
+    },
+    mainEntityOfPage: `https://upperfloor.co/insights/${article.slug}`,
+  }
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://upperfloor.co' },
+      { '@type': 'ListItem', position: 2, name: 'Insights', item: 'https://upperfloor.co/insights' },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: article.title,
+        item: `https://upperfloor.co/insights/${article.slug}`,
+      },
+    ],
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <SiteNav />
       <main className="min-h-screen bg-brand-ink px-6 py-32 lg:px-12">
         <div className="mx-auto max-w-[720px]">
@@ -78,6 +143,31 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
               )
             })}
           </div>
+
+          {/* Keep reading — internal links between the SEO articles */}
+          {related.length > 0 && (
+            <section className="mt-16 border-t border-white/10 pt-10">
+              <h2 className="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-brand-green">
+                Keep reading
+              </h2>
+              <ul className="flex flex-col gap-5">
+                {related.map((r) => (
+                  <li key={r.slug}>
+                    <Link
+                      href={`/insights/${r.slug}`}
+                      className="group flex items-baseline justify-between gap-4"
+                    >
+                      <span className="font-serif text-xl leading-snug text-white transition-colors duration-200 group-hover:text-brand-green md:text-2xl">
+                        {r.title}
+                      </span>
+                      <span className="shrink-0 text-brand-green">↗</span>
+                    </Link>
+                    <p className="mt-1.5 text-sm leading-relaxed text-white/60">{r.excerpt}</p>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
 
           {/* CTA box */}
           <div className="mt-16 flex flex-col items-start gap-4 rounded-2xl border border-brand-green/30 bg-brand-green/[0.08] p-10">

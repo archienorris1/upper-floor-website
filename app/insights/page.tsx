@@ -5,8 +5,12 @@ import SiteNav from '@/components/site/SiteNav'
 import SiteFooter from '@/components/site/SiteFooter'
 
 export const metadata = {
-  title: 'Insights — Upper Floor',
-  description: 'Thinking on content, brand building, and what it takes to grow.',
+  title: 'Insights for Ecom Brands',
+  description:
+    'Thinking from an ecom content agency: UGC ads, organic social, creative strategy and how to turn an ecommerce store into a brand worth buying.',
+  alternates: {
+    canonical: '/insights',
+  },
 }
 
 export default function InsightsPage() {
@@ -24,7 +28,8 @@ export default function InsightsPage() {
               Insights
             </h1>
             <p className="max-w-[480px] text-base text-white/70">
-              Thinking on content, brand building, and what it takes to grow.
+              Thinking on ecom content, UGC ads, organic growth and what it takes to build a brand
+              worth buying.
             </p>
           </div>
 

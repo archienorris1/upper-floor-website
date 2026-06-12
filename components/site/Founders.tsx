@@ -9,7 +9,7 @@ export default function Founders() {
           <img
             src="/media/me-jack.png"
             alt="Archie Norris and Jack Buster-Weston"
-            className="w-full object-cover"
+            className="w-full object-cover" loading="lazy" decoding="async"
           />
         </div>
         <p className="mt-6 font-serif text-2xl text-brand-ink md:text-3xl">

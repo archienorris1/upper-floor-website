@@ -6,7 +6,7 @@ export default function Hero() {
       {/* Background media — drop a hero clip at /public/media/hero.mp4 to replace the gradient.
           If the file is missing the gradient + image layer below still render cleanly. */}
       <video
-        className="absolute inset-0 h-full w-full object-cover opacity-70"
+        className="hero-zoom absolute inset-0 h-full w-full object-cover opacity-70"
         autoPlay
         muted
         loop
@@ -26,22 +26,26 @@ export default function Hero() {
         <img
           src="/media/logo-white.png"
           alt="Upper Floor"
-          className="mb-2 w-44 md:w-52"
+          className="hero-load hero-load-1 mb-2 w-44 md:w-52"
         />
 
         <h1 className="hero-headline flex flex-col items-center text-white">
-          <span className="font-serif text-5xl leading-[0.95] md:text-8xl">good products</span>
-          <span className="mt-1 font-serif text-3xl text-white/90 md:text-5xl">
+          <span className="hero-load hero-load-2 font-serif text-5xl leading-[0.95] md:text-8xl">
+            good products
+          </span>
+          <span className="hero-load hero-load-3 mt-1 font-serif text-3xl text-white/90 md:text-5xl">
             deserve better
           </span>
-          <span className="font-serif text-3xl text-white/90 md:text-5xl">content</span>
+          <span className="hero-load hero-load-3 font-serif text-3xl text-white/90 md:text-5xl">
+            content
+          </span>
         </h1>
 
         <a
           href="/#book"
-          className="mt-7 inline-block rounded-full bg-brand-green px-7 py-2.5 text-sm font-semibold text-white shadow-lg transition-transform hover:scale-105"
+          className="hero-load hero-load-4 mt-7 inline-block rounded-full bg-brand-green px-7 py-2.5 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-green-dark hover:shadow-xl"
         >
-          Let’s Talk
+          Let&rsquo;s Talk
         </a>
       </div>
     </section>

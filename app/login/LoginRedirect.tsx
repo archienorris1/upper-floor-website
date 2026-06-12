@@ -17,7 +17,7 @@ export default function LoginRedirect() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-brand-ink px-6">
       {/* Logo */}
-      <a href="/" aria-label="Upper Floor — home" className="mb-12">
+      <a href="/" aria-label="Upper Floor home" className="mb-12">
         <img src="/media/logo-white.png" alt="Upper Floor" className="h-14 w-auto" />
       </a>
 

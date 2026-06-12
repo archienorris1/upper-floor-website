@@ -1,12 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
 
 import ReadMore from './ReadMore'
+import StatNumber from './StatNumber'
 
 export default function CaseStudyNootropic() {
   return (
     <section className="bg-brand-green px-4 pb-16 md:px-8 md:pb-20">
       <div className="reveal-on-scroll mx-auto max-w-6xl rounded-3xl bg-brand-ink p-6 md:p-10">
-        <p className="text-sm text-white/60">featured case study</p>
+        <div className="flex items-center justify-between">
+          <p className="text-sm text-white/60">featured case study</p>
+          <span className="rounded-full border border-white/20 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.15em] text-white/70">
+            paid ads
+          </span>
+        </div>
 
         <div className="mt-4 flex justify-center">
           <span className="font-sans text-2xl font-semibold tracking-wide text-white md:text-3xl">
@@ -20,7 +26,7 @@ export default function CaseStudyNootropic() {
             <img
               src="/media/nootropic-product-v2.png"
               alt="Nootropict product creative"
-              className="w-full rounded-2xl object-cover"
+              className="w-full rounded-2xl object-cover" loading="lazy" decoding="async"
             />
             <div className="absolute bottom-0 right-0 w-1/2 max-w-[200px] overflow-hidden rounded-tl-2xl rounded-br-2xl shadow-2xl ring-1 ring-white/10">
               <img
@@ -35,7 +41,9 @@ export default function CaseStudyNootropic() {
 
           {/* Copy */}
           <div className="text-white">
-            <p className="font-serif text-3xl leading-tight md:text-4xl">30.86x ROAS</p>
+            <p className="font-serif text-3xl leading-tight md:text-4xl">
+              <StatNumber value={30.86} decimals={2} suffix="x ROAS" />
+            </p>
             <p className="mt-1 text-xl text-white/80 md:text-2xl">on a top performing ad set</p>
             <ReadMore className="mt-6">
               <p className="text-base leading-relaxed text-white/80">
