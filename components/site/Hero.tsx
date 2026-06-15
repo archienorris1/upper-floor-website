@@ -29,17 +29,13 @@ export default function Hero() {
           className="hero-load hero-load-1 mb-2 w-44 md:w-52"
         />
 
-        <h1 className="hero-headline flex flex-col items-center text-white">
-          <span className="hero-load hero-load-2 font-serif text-5xl leading-[0.95] md:text-8xl">
-            good products
-          </span>
-          <span className="hero-load hero-load-3 mt-1 font-serif text-3xl text-white/90 md:text-5xl">
-            deserve better
-          </span>
-          <span className="hero-load hero-load-3 font-serif text-3xl text-white/90 md:text-5xl">
-            content
-          </span>
-        </h1>
+        <h1 className="hero-headline sr-only">good products deserve better content</h1>
+        <img
+          src="/media/hero-headline.png"
+          alt="good products deserve better content"
+          aria-hidden="true"
+          className="hero-load hero-load-2 w-full max-w-[340px] md:max-w-[640px]"
+        />
 
         <a
           href="/#book"
