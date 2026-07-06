@@ -3,13 +3,14 @@ const nextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
   },
-  // Multi-zone: proxy /signal/* to the Signal app (a separate Next.js deployment
-  // running under basePath '/signal'). Keeps the competitive-intel tool at
-  // upperfloor.co/signal without colliding with this site's routes or assets.
-  async rewrites() {
+  // The old "Signal" prototype (upper-floor-signal.vercel.app, abandoned) used to be
+  // proxied here at /signal. It's been replaced by the current Signal app, now live at
+  // its own subdomain (signal.upperfloor.co) — so old /signal links redirect there
+  // instead of being served from this site.
+  async redirects() {
     return [
-      { source: '/signal', destination: 'https://upper-floor-signal.vercel.app/signal' },
-      { source: '/signal/:path*', destination: 'https://upper-floor-signal.vercel.app/signal/:path*' },
+      { source: '/signal', destination: 'https://signal.upperfloor.co', permanent: true },
+      { source: '/signal/:path*', destination: 'https://signal.upperfloor.co', permanent: true },
     ]
   },
 }
