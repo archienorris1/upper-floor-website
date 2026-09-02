@@ -8,4 +8,7 @@
       stale links already shared stop taking bookings into a calendar nobody watches.
 - [ ] Sanity-check the Cal.com booking end to end on production (book a real slot, confirm the
       Google Meet invite arrives) — the embed is verified, an actual booking is not.
+- [ ] Optional (only if "instant" becomes a hard requirement): replace the Cal.com iframe with a
+      custom slot picker on Cal's API, handing off to Cal only at the confirm step. ~5s of the
+      current load is Cal's own app booting and cannot be optimised from our side.
 

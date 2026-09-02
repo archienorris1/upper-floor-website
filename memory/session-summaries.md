@@ -1,6 +1,47 @@
 # Session Summaries
 *Dated wrap-ups. Newest at top.*
 
+# 2026-09-02 (later) — Cal.com booking made to feel fast, and sized for desktop
+
+**TL;DR:** Archie: still slow, and "if all they see is a loading signal they won't book". Measured
+the load instead of guessing — only ~800ms of it was ours, ~5s is Cal's own app booting inside the
+iframe. Cut our part to ~100ms, and fixed the actual complaint with a calendar-shaped skeleton so
+the section never renders as a blank white box. Widening the card also turned out to fix the dead
+space in Archie's screenshot.
+
+**What we discussed / decided**
+- Archie's screenshot showed a big empty white area right of the calendar on desktop, plus slow load.
+- Decided against over-promising "instant": the honest ceiling for an iframe embed is Cal's own
+  boot time. Perceived speed (skeleton) is the lever that actually protects bookings.
+
+**What was built**
+- `app/layout.tsx` — `preconnect` + `dns-prefetch` + `preload as=script` for app.cal.com
+  (verified they land in `<head>`; Next 14 App Router does render a `<head>` in the root layout).
+- `CalEmbed.tsx` — calendar-shaped skeleton shown immediately, removed when Cal sets
+  `loading="done"` (MutationObserver), with a 12s timeout so a missed signal can't strand anyone.
+- Both booking cards `max-w-3xl` → `max-w-5xl`.
+
+**Numbers (measured on production)**
+| stage | before | after |
+|---|---|---|
+| embed.js starts | 603ms | 46–78ms |
+| Cal iframe starts | 811ms | 92–136ms |
+| Cal reports ready | ~7.2s | ~5–7s |
+- Desktop 1440px: card + iframe 1024px, height **720px** (was 1295px), stable across 24s of polling.
+- Mobile 375px: card 343px, no horizontal overflow, skeleton shows then hides.
+
+**Gotchas hit**
+- Nearly shipped a SECOND wrong fix: `/contact` measured 1295px once, and I hypothesised its 1px
+  card border pushed the iframe to 1022px, under a 1024px layout threshold. Tested it live before
+  changing anything — contact settles at 720px at 1022px wide, so the hypothesis was wrong and the
+  reading was a transient state. No change made. Same discipline that caught the earlier
+  theme-in-config mis-diagnosis: verify the hypothesis before coding the fix.
+- Single perf samples are noisy (one run read 9.1s, later runs 5.0–7.0s) — take several.
+
+**Next**
+- If truly instant is ever required, the only remaining path is to stop embedding Cal's app: build a
+  lightweight slot picker against Cal's API and hand off to Cal at the confirm step. Scoped, not started.
+
 # 2026-09-02 — Calendly retired, Cal.com booking live on both pages
 
 **TL;DR:** Swapped the site's booking from Calendly (too slow) to Cal.com, and gave `/contact`

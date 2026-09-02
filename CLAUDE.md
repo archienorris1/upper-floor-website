@@ -24,6 +24,9 @@ agency. Next.js 14. Part of the Upper Floor venture (the agency that houses Sign
 - `2026-08` — never run `next build` while the dev server is up (shared `.next` corrupts)
 - `2026-09` — booking is **Cal.com**, not Calendly (Calendly was too slow); one shared
   `CalEmbed` component + `CAL_LINK` in `lib/booking.ts`, embedded on `/` (`#book`) and `/contact` (`#book-call`)
+- `2026-09` — booking cards are `max-w-5xl`, never `max-w-3xl` (under ~1000px Cal collapses to a
+  tall stacked layout); keep the app.cal.com preconnect/preload in `layout.tsx` and the skeleton
+  in `CalEmbed` — ~5s of the load is Cal's own app and can't be optimised from here
 
 ## E · Memory Map
 `memory/` (B.L.A.S.T. scheme): `project-brief` · `task-plan` · `findings` · `progress` ·
