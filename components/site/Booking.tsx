@@ -1,6 +1,7 @@
 'use client'
 
-import Script from 'next/script'
+import CalEmbed from '@/components/site/CalEmbed'
+import { CAL_LINK } from '@/lib/booking'
 
 export default function Booking() {
   return (
@@ -12,20 +13,11 @@ export default function Booking() {
           good fit.
         </p>
 
-        {/* Calendly inline widget */}
+        {/* Cal.com inline embed */}
         <div className="mt-10 overflow-hidden rounded-2xl bg-white shadow-xl">
-          <div
-            className="calendly-inline-widget"
-            data-url="https://calendly.com/upperfloor-info/30min?hide_event_type_details=1&hide_gdpr_banner=1"
-            style={{ minWidth: '320px', height: '700px' }}
-          />
+          <CalEmbed calLink={CAL_LINK} id="cal-book-home" theme="light" minHeight={700} />
         </div>
       </div>
-
-      <Script
-        src="https://assets.calendly.com/assets/external/widget.js"
-        strategy="lazyOnload"
-      />
     </section>
   )
 }

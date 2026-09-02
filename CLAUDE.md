@@ -1,5 +1,5 @@
 # Upper Floor — Website — CLAUDE.md
-*Last updated: 2026-06-18 · Owner: Archie Norris · Stage: shipped (production)*
+*Last updated: 2026-09-02 · Owner: Archie Norris · Stage: shipped (production)*
 
 ## A · What this folder is
 The production marketing website for **Upper Floor** — a full-service podcast/content
@@ -22,6 +22,8 @@ agency. Next.js 14. Part of the Upper Floor venture (the agency that houses Sign
 - `2026` — Next.js 14 App Router + Tailwind, because it's the standard agency-site stack here
 - `2026-08` — `/portfolio` is a link-only client portfolio (no nav link, in sitemap); 15 videos self-hosted in `public/media/portfolio/`, autoplay-muted tap-for-sound
 - `2026-08` — never run `next build` while the dev server is up (shared `.next` corrupts)
+- `2026-09` — booking is **Cal.com**, not Calendly (Calendly was too slow); one shared
+  `CalEmbed` component + `CAL_LINK` in `lib/booking.ts`, embedded on `/` (`#book`) and `/contact` (`#book-call`)
 
 ## E · Memory Map
 `memory/` (B.L.A.S.T. scheme): `project-brief` · `task-plan` · `findings` · `progress` ·

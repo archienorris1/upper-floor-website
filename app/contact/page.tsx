@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import SiteNav from '@/components/site/SiteNav'
 import SiteFooter from '@/components/site/SiteFooter'
+import CalEmbed from '@/components/site/CalEmbed'
+import { CAL_LINK } from '@/lib/booking'
 
 type Status = 'idle' | 'loading' | 'success' | 'error'
 
@@ -57,7 +59,7 @@ export default function ContactPage() {
             </h1>
             <p className="max-w-[380px] text-base leading-relaxed text-white/80">
               Prefer email? Drop us a line below. Or if you’d rather just talk it through,{' '}
-              <a href="/#book" className="text-brand-green underline-offset-2 hover:underline">
+              <a href="#book-call" className="text-brand-green underline-offset-2 hover:underline">
                 book a free intro call
               </a>
               .
@@ -151,6 +153,28 @@ export default function ContactPage() {
             </form>
           </div>
         </div>
+
+        {/* Book a call — same Cal.com event as the home page */}
+        <section
+          id="book-call"
+          className="mx-auto mt-24 max-w-6xl scroll-mt-24 border-t border-white/10 pt-16 lg:mt-32 lg:pt-24"
+        >
+          <div className="text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-green">
+              Book a call
+            </p>
+            <h2 className="mt-4 font-serif text-4xl leading-tight text-white md:text-5xl">
+              Rather just talk it through?
+            </h2>
+            <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-white/80">
+              Grab a free 30-minute intro call and let’s figure out if we’re a good fit.
+            </p>
+          </div>
+
+          <div className="mx-auto mt-10 max-w-3xl overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
+            <CalEmbed calLink={CAL_LINK} id="cal-book-contact" theme="dark" minHeight={700} />
+          </div>
+        </section>
       </main>
       <SiteFooter />
     </>
