@@ -1,6 +1,45 @@
 # Session Summaries
 *Dated wrap-ups. Newest at top.*
 
+# 2026-09-02 (evening) — /workwithus Meta-ads landing page
+
+**TL;DR:** Archie wants to run Meta traffic to a dedicated page (`upperfloor.co/workwithus`)
+whose only job is booking the Cal.com call, framed as "see if you qualify for free content".
+Positioning: selective, no AI slop, creative direction + AI. Built it as a self-contained,
+case-study-heavy mix of the home page and `/portfolio`, with an env-gated Meta Pixel that fires
+on a confirmed booking. Type-check + production build pass; nothing committed until asked.
+
+**What we discussed / decided**
+- Volume of leads over pre-qualification: keep the page frictionless, one CTA, no forms, no
+  nav, no links out. "Who this is for" is a soft three-line list that ends with "book anyway".
+- Noindexed + out of the sitemap so it never competes with `/` for search or muddies attribution.
+- Offer copy: free 30-minute call; if the brand qualifies, Upper Floor makes a piece of content free.
+
+**What was built**
+- `app/workwithus/page.tsx` (server) + `WorkGrid.tsx`, `BookCall.tsx`, `StickyCta.tsx` (client).
+  Sections: hero (site hero video) → logo ticker → 4 animated stats → 6-clip tap-for-sound reel
+  wall → 4 compact case-study cards → green "AI isn't the shortcut. Taste is." pillars → who it's
+  for + what happens on the call → founders → `#book` Cal embed (dark) → FAQ → footer + mobile
+  sticky CTA that hides while `#book` is on screen.
+- `components/site/SoundVideo.tsx` — tap-for-sound card + `SoundProvider` extracted out of
+  `PortfolioClient.tsx` so both pages share one implementation (portfolio verified unchanged: 15 clips).
+- `CalEmbed.tsx` — new `onBookingSuccessful` prop wired to Cal's `bookingSuccessful` event.
+- `components/site/MetaPixel.tsx` + `lib/meta.ts` — pixel base code, only loads when
+  `NEXT_PUBLIC_META_PIXEL_ID` is set; page fires `Schedule` + `Lead` on booking.
+
+**Verified**
+- `tsc` clean; `next build` passes (19 pages, `/workwithus` static, 7.4 kB).
+- DOM checks at 1280px and 375px: Cal reaches `loading="done"`, 6 portfolio clips mount, no
+  broken images, only outbound link is `mailto:`, `robots` = noindex, no horizontal overflow on
+  mobile, hero CTA above the fold (614px of 812px).
+- Could NOT screenshot: the preview pane was hidden the whole session, and a hidden document
+  gets no rAF frames, so IntersectionObserver never fires — sticky-CTA hide and autoplay are
+  unverifiable there. Not a page bug.
+
+**Next**
+- Set `NEXT_PUBLIC_META_PIXEL_ID` in Vercel, redeploy, test-book, confirm events in Events Manager.
+- Optional: `/work-with-us` redirect; flip `robots` if indexing is ever wanted.
+
 # 2026-09-02 (later) — Cal.com booking made to feel fast, and sized for desktop
 
 **TL;DR:** Archie: still slow, and "if all they see is a loading signal they won't book". Measured

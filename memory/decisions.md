@@ -20,3 +20,21 @@
     preconnect/preload tags in `app/layout.tsx`; and keep the skeleton, because ~5s of the
     load is Cal's own app booting inside the iframe and cannot be optimised away from here.
 
+- **`/workwithus` is the paid-traffic landing page** (2026-09-02) — built for Meta ads, optimised
+  for booked calls, not pre-qualification.
+  - Self-contained on purpose: no `SiteNav`, no footer nav, no links out except `mailto:`. Every
+    CTA is an `#book` anchor into the same `CAL_LINK` event as the rest of the site.
+  - `robots: noindex, follow` and NOT in `app/sitemap.ts` — keeps it from competing with `/` in
+    search and keeps ad attribution clean. Flip both if organic indexing is ever wanted.
+  - Positioning copy: "We don't work with everyone" / "AI isn't the shortcut. Taste is." — selective
+    + anti-slop, but the fit list is soft (three ✓ lines + "book anyway") because Archie wants
+    lead volume and low ad costs over heavy qualification.
+  - Case-study heavy by design (Archie: "portfolio heavy is the move"): 6-clip reel wall from
+    `/media/portfolio/` + 4 compact case cards reusing the home-page stats and media.
+  - Tracking is env-gated: `components/site/MetaPixel.tsx` renders nothing unless
+    `NEXT_PUBLIC_META_PIXEL_ID` is set, so local/dev never fires. `Schedule` + `Lead` fire from
+    Cal's `bookingSuccessful` event (new `onBookingSuccessful` prop on `CalEmbed`) because the
+    confirmation never leaves the iframe — there's no thank-you URL to hang a pixel on.
+  - Tap-for-sound card extracted to `components/site/SoundVideo.tsx` rather than duplicated;
+    `/portfolio` now imports it.
+

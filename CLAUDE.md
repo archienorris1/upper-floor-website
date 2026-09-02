@@ -27,6 +27,11 @@ agency. Next.js 14. Part of the Upper Floor venture (the agency that houses Sign
 - `2026-09` — booking cards are `max-w-5xl`, never `max-w-3xl` (under ~1000px Cal collapses to a
   tall stacked layout); keep the app.cal.com preconnect/preload in `layout.tsx` and the skeleton
   in `CalEmbed` — ~5s of the load is Cal's own app and can't be optimised from here
+- `2026-09` — `/workwithus` is the Meta-ads landing page: self-contained (no nav, no links out),
+  noindexed + out of the sitemap, one CTA (`#book` Cal embed). Meta Pixel is env-gated by
+  `NEXT_PUBLIC_META_PIXEL_ID` (`components/site/MetaPixel.tsx`) and fires `Schedule` + `Lead`
+  on Cal's `bookingSuccessful` event; the tap-for-sound clips are shared with `/portfolio`
+  via `components/site/SoundVideo.tsx`
 
 ## E · Memory Map
 `memory/` (B.L.A.S.T. scheme): `project-brief` · `task-plan` · `findings` · `progress` ·

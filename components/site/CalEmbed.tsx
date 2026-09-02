@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const EMBED_JS = 'https://app.cal.com/embed/embed.js'
 const ORIGIN = 'https://app.cal.com'
@@ -81,6 +81,8 @@ type Props = {
   theme?: 'light' | 'dark'
   /** Reserved height, so the page doesn't jump while the calendar loads. */
   minHeight?: number
+  /** Fires once the visitor has confirmed a booking inside the embed. */
+  onBookingSuccessful?: () => void
   className?: string
 }
 
@@ -89,11 +91,15 @@ export default function CalEmbed({
   id,
   theme = 'light',
   minHeight = 700,
+  onBookingSuccessful,
   className,
 }: Props) {
   // Cal's own app takes several seconds to boot inside the iframe. Without this
   // the visitor stares at an empty white box and assumes the page is broken.
   const [ready, setReady] = useState(false)
+
+  const onBookedRef = useRef(onBookingSuccessful)
+  onBookedRef.current = onBookingSuccessful
 
   useEffect(() => {
     installCalStub()
@@ -120,6 +126,12 @@ export default function CalEmbed({
         light: { 'cal-brand': '#1B8A3F' },
         dark: { 'cal-brand': '#1B8A3F' },
       },
+    })
+    // Cal posts booking events out of the iframe; this is the hook ad tracking
+    // (Meta Pixel "Schedule") needs, since the confirmation never leaves the embed.
+    cal.ns[namespace]('on', {
+      action: 'bookingSuccessful',
+      callback: () => onBookedRef.current?.(),
     })
   }, [calLink, id, theme])
 

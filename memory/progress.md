@@ -41,3 +41,15 @@ and ~5.3s is Cal's own app booting inside the iframe, which we cannot speed up.
 - Verified desktop 1440px (card 1024, iframe 1024, height 720) and mobile 375px (card 343, no
   horizontal overflow, skeleton shows then hides).
 
+## 2026-09-02 (evening) — /workwithus landing page for Meta traffic
+- New route `app/workwithus/` — self-contained ad landing page, one CTA into the shared Cal.com
+  embed (`#book`), noindexed and excluded from `sitemap.ts`.
+- Refactor: portfolio's tap-for-sound video card → `components/site/SoundVideo.tsx`
+  (`SoundProvider`, `SoundVideoCard`); `PortfolioClient.tsx` now imports it. Behaviour identical.
+- `CalEmbed.tsx` gained `onBookingSuccessful`; `MetaPixel.tsx` + `lib/meta.ts` added, env-gated.
+- Verified: `tsc --noEmit` clean, `npm run build` 19/19 pages, `/workwithus` static 7.4 kB. DOM
+  verification at desktop + mobile (Cal `loading="done"`, no overflow, CTA above fold).
+- Errors hit: none in code. Browser preview pane hidden all session → blank screenshots and no
+  IntersectionObserver callbacks (hidden documents get no frames). No Chromium on the Mac for a
+  headless fallback. Relied on DOM measurements instead.
+
