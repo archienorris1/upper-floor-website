@@ -15,4 +15,8 @@
   - Theme is passed BOTH in the inline `config` (themes the container + loading skeleton)
     and in the `ui()` call (themes the calendar inside the iframe). Home = light on the white
     card, `/contact` = dark on the ink background. Brand green `#1B8A3F` set as `cal-brand`.
+  - **Perf posture (2026-09-02):** the booking card is `max-w-5xl`, NOT `max-w-3xl` — under
+    ~1000px Cal's month view collapses into a tall stacked layout with dead space. Keep the
+    preconnect/preload tags in `app/layout.tsx`; and keep the skeleton, because ~5s of the
+    load is Cal's own app booting inside the iframe and cannot be optimised away from here.
 

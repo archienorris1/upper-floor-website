@@ -171,8 +171,8 @@ export default function ContactPage() {
             </p>
           </div>
 
-          <div className="mx-auto mt-10 max-w-3xl overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
-            <CalEmbed calLink={CAL_LINK} id="cal-book-contact" theme="dark" minHeight={700} />
+          <div className="mx-auto mt-10 max-w-5xl overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
+            <CalEmbed calLink={CAL_LINK} id="cal-book-contact" theme="dark" minHeight={720} />
           </div>
         </section>
       </main>

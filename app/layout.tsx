@@ -105,6 +105,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        {/*
+          Booking is an iframe served from app.cal.com, and it sits on the critical
+          path to an enquiry. Warm the connection during HTML parse and start the
+          embed script downloading in parallel with hydration, so the calendar
+          isn't waiting on our own JS before it can even begin.
+        */}
+        <link rel="preconnect" href="https://app.cal.com" />
+        <link rel="dns-prefetch" href="https://app.cal.com" />
+        {/* No crossOrigin: embed.js is a classic script, so a CORS preload would refetch it. */}
+        <link rel="preload" as="script" href="https://app.cal.com/embed/embed.js" />
+      </head>
       <body>
         {children}
         <ScrollReveal />

@@ -23,3 +23,21 @@
   "fixed" it wrongly; once the viewport was set to 1280×900 everything worked, including with
   `theme` in the config. Lesson: check `innerWidth` before believing an embed is broken.
 
+## 2026-09-02 (later) — Cal.com perceived-speed + desktop sizing
+Archie: still slow to appear, and a blank white box loses the booking. Measured the real
+breakdown on production (`upperfloor.co`): DOMContentLoaded 471ms → embed.js starts 603ms
+(205ms) → iframe document 811ms (1053ms) → **Cal reports ready at 7191ms**. So ~800ms is ours
+and ~5.3s is Cal's own app booting inside the iframe, which we cannot speed up.
+- Cut our ~800ms: `preconnect` + `dns-prefetch` + `preload as=script` for app.cal.com in
+  `app/layout.tsx` (verified they land in `<head>`), so the connection is warm and embed.js
+  downloads in parallel with hydration instead of after it.
+- Fixed the real complaint with a **calendar-shaped skeleton** in `CalEmbed.tsx` — visible
+  immediately, swapped out when Cal sets `loading="done"` (MutationObserver), with a 12s
+  timeout so a missed signal can never strand a visitor on a skeleton.
+- **Desktop sizing was the sleeper win:** the card was `max-w-3xl` (768px), which forced Cal's
+  month view into its narrow stacked layout — the big empty white area on the right in Archie's
+  screenshot. Widened to `max-w-5xl` on both pages: the booker goes side-by-side and the
+  section height drops from 1295px to **720px**.
+- Verified desktop 1440px (card 1024, iframe 1024, height 720) and mobile 375px (card 343, no
+  horizontal overflow, skeleton shows then hides).
+
