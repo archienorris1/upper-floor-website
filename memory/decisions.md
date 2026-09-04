@@ -38,3 +38,33 @@
   - Tap-for-sound card extracted to `components/site/SoundVideo.tsx` rather than duplicated;
     `/portfolio` now imports it.
 
+
+- **Lazy video loading + immutable media cache** (2026-09-04) — Archie: "videos load pretty slowly …
+  everything should load instantly". Root cause was not bitrate (old clips were already ~0.9 Mbps)
+  but *how many* clips fetched at once: every `<video>` had a `poster` attribute (fetched eagerly)
+  and `preload="metadata"`, so /portfolio with 35 clips and the home carousel (10 clips × 3 copies)
+  opened dozens of media requests on load, competing with Cal.com.
+  - Fix in `components/site/SoundVideo.tsx` + `VideoCard.tsx`: poster is a lazy `<img>` overlay that
+    fades out on the `playing` event (so it also stays up when autoplay is blocked, e.g. iOS
+    low-power mode); `preload="none"` → `metadata` at rootMargin 100% → `auto` at 25% → `play()` at
+    35% visible. `eager` prop (high-priority poster + `auto`) only for the first two cards.
+  - `next.config.mjs` `headers()`: `/media/portfolio/*` = 1 year immutable, rest of `/media/*` = 7 days
+    + SWR. Consequence: replacing a portfolio clip means a new filename.
+  - Encode recipe (`scratchpad/encode.sh`, worth keeping): `scale=720:1280` pad to 9:16, `libx264
+    -preset slow -crf 27 -maxrate 1100k -bufsize 2200k -g 60`, `aac 80k`, `-movflags +faststart`,
+    poster = frame at 1s scaled 480×854 JPEG q4. 20 new clips (278 MB of sources, mostly 10-bit
+    HEVC) → 30 MB. Deliberately H.264-only (no HEVC/AV1 second source) to keep the component simple;
+    revisit if bandwidth ever matters more than simplicity.
+  - `me-jack.png` (2.0 MB, served raw on / and /workwithus) → `me-jack.jpg` 139 KB via next/image.
+
+- **/workwithus content expansion** (2026-09-04) — Meta traffic lands here, so it has to prove range
+  and quality, not just "we do UGC". Added: 9-logo ticker (ION8, KELV, Dissertation Collective new),
+  a 12-clip "Recent work" wall (desktop 6×2, tablet 4×3, mobile 2-col grid that opens with 6 + a
+  "Show 6 more clips" button so the page stays short), and a "Range" section with one labelled
+  clip per format (UGC, Talking head, Animated, Motion ad, ASMR, Organic). Still self-contained:
+  no link out to /portfolio, every CTA is `#book`. One page-level `SoundProvider` so only one clip
+  on the whole page has sound.
+  - New-brand logos: ION8 from their Shopify header PNG (inverted to white); Dissertation Collective
+    from their footer wordmark PNG (black → white, blue accents kept); KELV has no image logo — the
+    site renders the text "KELV" in Cinzel Bold, uppercase, 0.12em tracking, so that was rendered
+    to PNG with Pillow. No stats/claims were added for the three new brands (none known).

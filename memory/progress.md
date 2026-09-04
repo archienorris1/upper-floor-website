@@ -1,6 +1,19 @@
 # Progress
 *What was done, errors hit, tests run, results.*
 
+## 2026-09-04 — New client content (ION8, KELV, Dissertation Collective) + video perf
+- Encoded 20 new clips from `~/Downloads/portfolio UF content` → `public/media/portfolio/`
+  (aurora-7..10, fidgie-2..5, ion8-1..4, kelv-1..2, dc-1..6) + posters; 278 MB → 30 MB.
+- `/portfolio`: 7 brands / 35 clips, brand blurbs + clip counts, 4-up grid for sets divisible by 4.
+- `/workwithus`: 12-clip wall + "Range" format section + 9-logo ticker; founders photo via next/image.
+- `/`: marquee has all 9 logos; ads carousel 5 → 10 clips.
+- Perf: lazy poster overlay + staged preload in both video components; `/media` cache headers.
+- Verified in the browser pane (DOM audits + screenshots): only hero + 2 eager clips fetch on
+  load of /workwithus; 18 of 21 videos `preload=none`; wall 2-col on 375px, 6×2 at 1440px; Cal
+  card still 1022px wide; tap-for-sound toggles and mutes the previous card; no horizontal overflow.
+- Gotcha: the Browser pane goes `visibilityState=hidden` when not fronted — scrollTo snaps back to 0
+  and screenshots paint white; `getBoundingClientRect` audits via javascript_tool still work.
+
 ## 2026-08-01 — Portfolio page
 - Built `/portfolio` (client portfolio, link-only) — live at upperfloor.co/portfolio, commit `f31848f`.
 - Assets self-hosted in `public/media/portfolio/` (15 videos compressed 43→30 MB, posters, 6 logos).

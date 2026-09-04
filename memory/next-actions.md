@@ -4,7 +4,8 @@
 - [ ] **Fix contact form email** — add to Vercel env (Production): `SMTP_HOST=smtp.gmail.com`, `SMTP_PORT=587`, `SMTP_USER=<gmail>`, `SMTP_PASS=<gmail app password>`, `CONTACT_EMAIL=info@upperfloor.co`, then redeploy. Form currently errors and sends nothing (affects whole site, found 2026-08-01).
 - [ ] **/workwithus go-live:** add `NEXT_PUBLIC_META_PIXEL_ID=<pixel id>` to Vercel env (Production) and redeploy, then fire a test booking and confirm `Schedule`/`Lead` show in Meta Events Manager — without the var the pixel never loads and campaigns can't optimise for booked calls.
 - [ ] Share upperfloor.co/portfolio link with clients once happy.
-- [ ] Optional: add new client brands/videos to `BRANDS` in `app/portfolio/PortfolioClient.tsx` as work ships.
+- [ ] Add new client brands/videos to `BRANDS` in `app/portfolio/PortfolioClient.tsx` as work ships — use the encode recipe in `memory/decisions.md` and a NEW stem per clip (portfolio media is cached immutable).
+- [ ] Get real numbers for ION8 / KELV / Dissertation Collective so they can earn a stat or case card on `/workwithus` (currently shown as work only, no claims).
 - [ ] Delete / disable the old Calendly event (`calendly.com/upperfloor-info/30min`) so any
       stale links already shared stop taking bookings into a calendar nobody watches.
 - [ ] Sanity-check the Cal.com booking end to end on production (book a real slot, confirm the

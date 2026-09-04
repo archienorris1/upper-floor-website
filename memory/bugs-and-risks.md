@@ -3,7 +3,8 @@
 
 - **OPEN — Contact form can't send email in production** (found 2026-08-01). `/api/contact` needs SMTP_* + CONTACT_EMAIL env vars in Vercel; only NEXT_PUBLIC_PORTAL_URL exists. Submissions 500 and no enquiries arrive. Fix = add vars (Gmail app password) + redeploy.
 - Watch-out: don't run `next build` while `npm run dev` is running — both write `.next` and the dev server crashes with "Cannot find module './NNN.js'". Fix: stop server / `rm -rf .next`.
-- Portfolio videos ~30 MB total — lazy-loaded so fine on mobile, but keep an eye on Vercel bandwidth if the link gets heavy traffic.
+- Portfolio videos now ~68 MB total (35 clips) — genuinely lazy since 2026-09-04 (nothing fetches until a clip is a screen away), but keep an eye on Vercel bandwidth if `/workwithus` gets heavy Meta traffic.
+- `/media/portfolio/*` is served `immutable` for a year: overwriting a file in place will leave returning visitors on the old clip. Always add a new filename.
 - Watch-out: an embed that looks broken in the browser preview pane may be fine. A hidden pane
   collapses the viewport to 0×0, so iframes get zero width and third-party embeds (Cal.com)
   never report dimensions — they sit at placeholder height and screenshot blank. Check

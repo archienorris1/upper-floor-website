@@ -6,10 +6,14 @@ import { useEffect, useRef } from 'react'
 
 const LOGOS = [
   { src: '/media/logo-fastframe.png', alt: 'FastFrame' },
+  { src: '/media/portfolio/logo-ion8.png', alt: 'ION8' },
   { src: '/media/logo-songarchitect.png', alt: 'Song Architect' },
+  { src: '/media/portfolio/logo-dissertationcollective.png', alt: 'Dissertation Collective' },
   { src: '/media/logo-toastybody.png', alt: 'Toastybody' },
+  { src: '/media/portfolio/logo-kelv.png', alt: 'KELV' },
   { src: '/media/logo-nootropict.png', alt: 'Nootropict' },
   { src: '/media/aurora-logo-white.png', alt: 'Aurora' },
+  { src: '/media/portfolio/logo-fidgie.png', alt: 'Fidgie' },
 ]
 
 function LogoRow({ ariaHidden = false }: { ariaHidden?: boolean }) {

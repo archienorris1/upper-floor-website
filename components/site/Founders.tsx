@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image'
 
 export default function Founders() {
   return (
@@ -6,10 +6,13 @@ export default function Founders() {
       <div className="reveal-on-scroll mx-auto max-w-3xl text-center">
         <p className="text-sm text-brand-ink/60">Founders</p>
         <div className="mt-6 overflow-hidden rounded-3xl">
-          <img
-            src="/media/me-jack.png"
+          <Image
+            src="/media/me-jack.jpg"
             alt="Archie Norris and Jack Buster-Weston"
-            className="w-full object-cover" loading="lazy" decoding="async"
+            width={1536}
+            height={1024}
+            sizes="(min-width: 768px) 768px, 100vw"
+            className="w-full object-cover"
           />
         </div>
         <p className="mt-6 font-serif text-2xl text-brand-ink md:text-3xl">

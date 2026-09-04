@@ -1,5 +1,5 @@
 # Upper Floor — Website — CLAUDE.md
-*Last updated: 2026-09-02 · Owner: Archie Norris · Stage: shipped (production)*
+*Last updated: 2026-09-04 · Owner: Archie Norris · Stage: shipped (production)*
 
 ## A · What this folder is
 The production marketing website for **Upper Floor** — a full-service podcast/content
@@ -32,6 +32,15 @@ agency. Next.js 14. Part of the Upper Floor venture (the agency that houses Sign
   `NEXT_PUBLIC_META_PIXEL_ID` (`components/site/MetaPixel.tsx`) and fires `Schedule` + `Lead`
   on Cal's `bookingSuccessful` event; the tap-for-sound clips are shared with `/portfolio`
   via `components/site/SoundVideo.tsx`
+- `2026-09-04` — portfolio clips are **lazy by design**: `SoundVideoCard`/`VideoCard` render a lazy
+  `<img>` poster (never the `poster` attribute, which browsers fetch eagerly) and `preload="none"`,
+  stepping up to `metadata` one screen ahead and `auto` a quarter screen ahead; pass `eager` only
+  to the first ~2 above-the-fold cards. `/media/portfolio/*` is cached immutable for a year, so
+  **never overwrite a clip in place — add a new stem** (`brand-N`). Encode recipe in
+  `memory/decisions.md` (720×1280 H.264 CRF 27, maxrate 1.1 Mbps, AAC 80k, faststart, JPEG poster at 1s)
+- `2026-09-04` — new brands ION8, KELV, Dissertation Collective: logos live in `public/media/portfolio/`
+  as white-on-transparent PNGs (KELV is a rendered Cinzel-Bold wordmark, the brand has no image logo);
+  `/workwithus` gained a 12-clip wall (2-col mobile grid, 6 shown + expand) and a 6-format "Range" row
 
 ## E · Memory Map
 `memory/` (B.L.A.S.T. scheme): `project-brief` · `task-plan` · `findings` · `progress` ·

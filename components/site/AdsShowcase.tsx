@@ -1,10 +1,15 @@
 import AdsCarousel from './AdsCarousel'
 
 const CLIPS = [
+  { src: '/media/portfolio/ion8-2.mp4', poster: '/media/portfolio/ion8-2-poster.jpg' },
   { src: '/media/card-collander.mp4', poster: '/media/poster-card-collander.jpg' },
+  { src: '/media/portfolio/kelv-1.mp4', poster: '/media/portfolio/kelv-1-poster.jpg' },
   { src: '/media/card-views.mp4', poster: '/media/poster-card-views.jpg' },
+  { src: '/media/portfolio/aurora-7.mp4', poster: '/media/portfolio/aurora-7-poster.jpg' },
   { src: '/media/aurora-gaming.mp4', poster: '/media/poster-aurora-gaming.jpg' },
+  { src: '/media/portfolio/dc-2.mp4', poster: '/media/portfolio/dc-2-poster.jpg' },
   { src: '/media/card-jersey.mp4', poster: '/media/poster-card-jersey.jpg' },
+  { src: '/media/portfolio/fidgie-3.mp4', poster: '/media/portfolio/fidgie-3-poster.jpg' },
   { src: '/media/card-travel.mp4', poster: '/media/poster-card-travel.jpg' },
 ]
 
