@@ -21,13 +21,13 @@ import StickyCta from './StickyCta'
 export const metadata: Metadata = {
   title: 'Work With Us',
   description:
-    'Upper Floor is a content agency for ecom brands. UGC ads, talking heads, animated explainers and product motion ads, with human creative direction and no slop. Book a free call and see if your brand qualifies for free content.',
+    'Upper Floor runs Meta ads and makes the creative for ecom brands: UGC, talking heads, animated explainers and product motion ads, with human creative direction and no slop. Book a free call.',
   alternates: { canonical: '/workwithus' },
   robots: { index: false, follow: true },
   openGraph: {
     title: 'Work With Upper Floor',
     description:
-      'UGC ads, animation, motion ads and organic content for ecom brands doing real numbers. Book a free call and see if you qualify for free content.',
+      'Meta ads and the creative behind them for ecom brands doing real numbers. Book a free call.',
     type: 'website',
     url: 'https://upperfloor.co/workwithus',
     siteName: 'Upper Floor',
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   },
 }
 
-const CTA_LABEL = 'Book a call · see if you qualify'
+const CTA_LABEL = 'Book a call'
 
 const ctaClass =
   'inline-flex items-center justify-center rounded-full bg-brand-green px-8 py-4 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-green-dark hover:shadow-xl'
@@ -79,7 +79,7 @@ const PILLARS = [
 
 const FIT = [
   'You sell a physical product that people can see on camera.',
-  'You are already getting sales and want creative that scales.',
+  'You are running Meta ads, or ready to, and want creative that scales them.',
   'You care how the brand looks, not just what the CPM is.',
 ]
 
@@ -92,12 +92,12 @@ const CALL_STEPS = [
   {
     num: '2',
     title: 'We look at your brand',
-    body: 'Your product, the content you are running now, and where the gaps are.',
+    body: 'Your product, your Meta account, the creative you are running now, and where the gaps are.',
   },
   {
     num: '3',
-    title: 'If you qualify, we make you something',
-    body: 'A piece of content for your brand, free, so you can judge the work before you spend a penny.',
+    title: 'If it is a fit, we make you something',
+    body: 'A piece of creative for your brand, free, so you can judge the work before you spend a penny.',
   },
 ]
 
@@ -267,8 +267,8 @@ export default function WorkWithUsPage() {
               content people stop scrolling for
             </h2>
             <p className="mx-auto mt-4 max-w-lg text-base text-white/70 md:text-lg">
-              Paid and organic for nine brands, from night-sky projectors to electrolyte lollipops. Tap a
-              clip for sound.
+              Meta ads and the creative that feeds them, for nine brands from night-sky projectors to
+              electrolyte lollipops. Tap a clip for sound.
             </p>
           </div>
           <WorkGrid />
@@ -280,8 +280,8 @@ export default function WorkWithUsPage() {
             <Eyebrow>Range</Eyebrow>
             <h2 className="mt-4 font-serif text-4xl leading-tight md:text-6xl">every format your brand will need</h2>
             <p className="mx-auto mt-4 max-w-lg text-base text-white/70 md:text-lg">
-              One team briefs, shoots, animates and edits. No hand-offs between three agencies, no
-              drop in quality between formats.
+              One team runs the Meta account and makes the creative for it. No hand-off between an
+              ads agency and a content agency, no drop in quality between formats.
             </p>
           </div>
           <FormatGrid />
@@ -465,8 +465,8 @@ export default function WorkWithUsPage() {
             <Eyebrow>Book your call</Eyebrow>
             <h2 className="mt-4 font-serif text-4xl leading-tight md:text-6xl">see if you qualify</h2>
             <p className="mx-auto mt-4 max-w-lg text-base text-white/75 md:text-lg">
-              Pick a slot below. Thirty minutes, free, and if your brand qualifies we make you a
-              piece of content on us.
+              Pick a slot below. Thirty minutes, free, and if it is a fit we make you a piece of
+              creative on us.
             </p>
           </div>
           <BookCall />

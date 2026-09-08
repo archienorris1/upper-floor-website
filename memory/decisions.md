@@ -30,7 +30,9 @@
     not protective; the old "We don't work with everyone / should we work with you" read as
     gatekeeping. Section titles must stay positive and never knock other agencies (the work wall is
     "content people stop scrolling for", not "…doesn't look like an agency made it"). The
-    "AI isn't the shortcut. Taste is." block and the soft fit list stay.
+    "AI isn't the shortcut. Taste is." block and the soft fit list stay. CTAs are plain "Book a call"
+    (no "see if you qualify"). **Core offer is Meta ads + creative** (Archie, 2026-09-08): copy
+    should present both, creative-only is available but not the lead.
   - Case-study heavy by design (Archie: "portfolio heavy is the move"): 6-clip reel wall from
     `/media/portfolio/` + 4 compact case cards reusing the home-page stats and media.
   - Tracking is env-gated: `components/site/MetaPixel.tsx` renders nothing unless

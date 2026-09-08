@@ -31,7 +31,7 @@ export default function StickyCta() {
         href="#book"
         className="flex w-full items-center justify-center rounded-full bg-brand-green px-6 py-3.5 text-sm font-semibold text-white"
       >
-        Book a call · see if you qualify
+        Book a call
       </a>
     </div>
   )
