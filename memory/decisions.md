@@ -26,9 +26,11 @@
     CTA is an `#book` anchor into the same `CAL_LINK` event as the rest of the site.
   - `robots: noindex, follow` and NOT in `app/sitemap.ts` — keeps it from competing with `/` in
     search and keeps ad attribution clean. Flip both if organic indexing is ever wanted.
-  - Positioning copy: "We don't work with everyone" / "AI isn't the shortcut. Taste is." — selective
-    + anti-slop, but the fit list is soft (three ✓ lines + "book anyway") because Archie wants
-    lead volume and low ad costs over heavy qualification.
+  - Positioning copy (revised 2026-09-08, Archie): hero is now "Let's see if we can help." — friendly,
+    not protective; the old "We don't work with everyone / should we work with you" read as
+    gatekeeping. Section titles must stay positive and never knock other agencies (the work wall is
+    "content people stop scrolling for", not "…doesn't look like an agency made it"). The
+    "AI isn't the shortcut. Taste is." block and the soft fit list stay.
   - Case-study heavy by design (Archie: "portfolio heavy is the move"): 6-clip reel wall from
     `/media/portfolio/` + 4 compact case cards reusing the home-page stats and media.
   - Tracking is env-gated: `components/site/MetaPixel.tsx` renders nothing unless

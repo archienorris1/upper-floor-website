@@ -203,8 +203,8 @@ export default function WorkWithUsPage() {
               Work with Upper Floor
             </p>
             <h1 className="hero-load hero-load-2 mt-6 font-serif text-[2.6rem] leading-[1.05] tracking-headline md:text-7xl">
-              We don&rsquo;t work with everyone.
-              <span className="mt-2 block text-white/70">Let&rsquo;s find out if we should work with you.</span>
+              Let&rsquo;s see if we can help.
+              <span className="mt-2 block text-white/70">Better content for your brand, starting with a free piece on us.</span>
             </h1>
             <p className="hero-load hero-load-3 mx-auto mt-7 max-w-xl text-base leading-relaxed text-white/80 md:text-lg">
               Upper Floor is the content agency behind $700k months for ecom brands. UGC, talking
@@ -266,7 +266,7 @@ export default function WorkWithUsPage() {
           <div className="reveal-on-scroll mx-auto mb-8 max-w-6xl px-5 text-center md:mb-12 md:px-8">
             <Eyebrow>Recent work</Eyebrow>
             <h2 className="mt-4 font-serif text-4xl leading-tight md:text-6xl">
-              content that doesn&rsquo;t look like an agency made it
+              content people stop scrolling for
             </h2>
             <p className="mx-auto mt-4 max-w-lg text-base text-white/70 md:text-lg">
               Paid and organic for nine brands, from night-sky projectors to electrolyte lollipops. Tap a
