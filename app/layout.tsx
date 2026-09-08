@@ -13,16 +13,18 @@ const SITE_URL = 'https://upperfloor.co'
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Upper Floor | Ecom Content Agency',
+    default: 'Upper Floor | Ecom Marketing Agency',
     template: '%s | Upper Floor',
   },
   description:
-    'Upper Floor is the ecom content agency behind brands doing $700k months. UGC ads, organic social and creative strategy that turn ecommerce products into brands people buy.',
+    'Upper Floor is the ecom marketing agency behind brands doing $700k months. Meta ads management and the creative that feeds it: UGC ads, organic social and creative strategy that turn ecommerce products into brands people buy.',
   keywords: [
-    'ecom content agency',
-    'ecommerce content agency',
+    'ecom marketing agency',
+    'ecommerce marketing agency',
+    'Meta ads agency',
+    'Meta ads management for ecommerce',
     'UGC ads agency',
-    'content agency for ecommerce brands',
+    'marketing agency for ecommerce brands',
     'ecommerce creative agency',
     'UGC ads',
     'organic social for ecommerce',
@@ -44,9 +46,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Upper Floor | Ecom Content Agency',
+    title: 'Upper Floor | Ecom Marketing Agency',
     description:
-      'UGC ads, organic social and creative strategy that turn ecommerce products into brands people buy. Good products deserve better content.',
+      'Meta ads management and the creative that feeds it. UGC ads, organic social and creative strategy that turn ecommerce products into brands people buy.',
     type: 'website',
     url: SITE_URL,
     siteName: 'Upper Floor',
@@ -56,15 +58,15 @@ export const metadata: Metadata = {
         url: '/media/hero-poster.jpg',
         width: 1280,
         height: 720,
-        alt: 'Upper Floor, the ecom content agency',
+        alt: 'Upper Floor, the ecom marketing agency',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Upper Floor | Ecom Content Agency',
+    title: 'Upper Floor | Ecom Marketing Agency',
     description:
-      'UGC ads, organic social and creative strategy that turn ecommerce products into brands people buy.',
+      'Meta ads management and the creative that feeds it, for ecommerce brands that want to become brands people buy.',
     images: ['/media/hero-poster.jpg'],
   },
 }
@@ -76,13 +78,14 @@ const organizationJsonLd = {
   url: SITE_URL,
   logo: `${SITE_URL}/media/logo-black.png`,
   description:
-    'Upper Floor is an ecom content agency. UGC ads, organic social and creative strategy for ecommerce brands.',
+    'Upper Floor is an ecom marketing agency. Meta ads management, UGC ads, organic social and creative strategy for ecommerce brands.',
   email: 'info@upperfloor.co',
   founder: [
     { '@type': 'Person', name: 'Archie Norris' },
     { '@type': 'Person', name: 'Jack Buster-Weston' },
   ],
   knowsAbout: [
+    'Meta ads management',
     'ecommerce content',
     'UGC ads',
     'organic social media',

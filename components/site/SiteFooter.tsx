@@ -9,8 +9,8 @@ export default function SiteFooter() {
           <div className="flex flex-col items-center gap-3 md:items-start">
             <img src="/media/logo-white.png" alt="Upper Floor" className="h-14 w-auto" />
             <p className="max-w-xs text-center text-xs leading-relaxed text-white/50 md:text-left">
-              Upper Floor is an ecom content agency. UGC ads, organic social and creative strategy
-              for ecommerce brands.
+              Upper Floor is an ecom marketing agency. Meta ads management, UGC ads, organic social
+              and creative strategy for ecommerce brands.
             </p>
           </div>
           <nav className="flex gap-6 text-sm text-white/70">

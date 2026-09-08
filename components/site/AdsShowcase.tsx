@@ -27,7 +27,8 @@ export default function AdsShowcase() {
         </h2>
 
         <p className="reveal-on-scroll mx-auto mt-6 max-w-xl text-center text-base leading-relaxed text-brand-ink/60 md:text-lg">
-          We are a content agency for ecom brands. Paid ads carry the CTA. Organic blends into the
+          We are a marketing agency for ecom brands: we run the Meta ads and make the creative that
+          feeds them. Paid ads carry the CTA. Organic blends into the
           feed and builds the brand. Two different crafts. We make both.
         </p>
 

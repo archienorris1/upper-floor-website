@@ -72,3 +72,11 @@
     from their footer wordmark PNG (black → white, blue accents kept); KELV has no image logo — the
     site renders the text "KELV" in Cinzel Bold, uppercase, 0.12em tracking, so that was rendered
     to PNG with Pillow. No stats/claims were added for the three new brands (none known).
+
+- **Company line: ecom marketing agency** (2026-09-08, Archie) — core offer is Meta ads management +
+  the creative that feeds it; creative-only is available but never the lead. Swapped every
+  "content agency" string site-wide (root metadata title/description/keywords/OG/Twitter, Organization
+  JSON-LD, footer, home AdsShowcase intro, /insights intro). Left the insights article
+  "What an Ecom Content Agency Actually Does" untouched — its slug is a live URL and the piece is
+  about the topic, not our positioning. Keyword targets now lead with "ecom marketing agency" and
+  "Meta ads agency"; watch Search Console for the old "content agency" queries.

@@ -7,7 +7,7 @@ import SiteFooter from '@/components/site/SiteFooter'
 export const metadata = {
   title: 'Insights for Ecom Brands',
   description:
-    'Thinking from an ecom content agency: UGC ads, organic social, creative strategy and how to turn an ecommerce store into a brand worth buying.',
+    'Thinking from an ecom marketing agency: Meta ads, UGC ads, organic social, creative strategy and how to turn an ecommerce store into a brand worth buying.',
   alternates: {
     canonical: '/insights',
   },
@@ -28,7 +28,7 @@ export default function InsightsPage() {
               Insights
             </h1>
             <p className="max-w-[480px] text-base text-white/70">
-              Thinking on ecom content, UGC ads, organic growth and what it takes to build a brand
+              Thinking on Meta ads, ecom content, UGC ads, organic growth and what it takes to build a brand
               worth buying.
             </p>
           </div>
