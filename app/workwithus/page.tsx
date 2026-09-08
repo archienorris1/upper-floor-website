@@ -21,7 +21,7 @@ import StickyCta from './StickyCta'
 export const metadata: Metadata = {
   title: 'Work With Us',
   description:
-    'Upper Floor runs Meta ads and makes the creative for ecom brands: UGC, talking heads, animated explainers and product motion ads, with human creative direction and no slop. Book a free call.',
+    'Upper Floor is a marketing agency for ecom brands: Meta ads management plus the creative that feeds it, from UGC and talking heads to animated explainers and product motion ads. Real creative direction, no slop. Book a free call.',
   alternates: { canonical: '/workwithus' },
   robots: { index: false, follow: true },
   openGraph: {
@@ -62,8 +62,8 @@ const STATS = [
 const PILLARS = [
   {
     num: '01',
-    title: 'Creative direction first',
-    body: 'Every piece starts with a real idea: the hook, the angle, the reason to stop scrolling. Strategy from people who have built brands, not from a prompt.',
+    title: 'Creative and media, one team',
+    body: 'Every piece starts with a real idea: the hook, the angle, the reason to stop scrolling. The same people run the Meta account, so what the ad manager tells us goes straight back into the next brief.',
   },
   {
     num: '02',
@@ -73,7 +73,7 @@ const PILLARS = [
   {
     num: '03',
     title: 'A quality bar we actually hold',
-    body: 'If we would not run it for our own brand, it does not ship. That is why we keep the client list short and do not take on everyone who asks.',
+    body: 'If we would not run it for our own brand, it does not ship, and that goes for the ad account as much as the creative. That is why we keep the client list short.',
   },
 ]
 
@@ -105,6 +105,10 @@ const FAQ = [
   {
     q: 'What is the free content?',
     a: 'A piece of content made for your brand, usually a UGC-style ad or an organic clip, that you can run straight away. If you qualify on the call, we make it. No strings.',
+  },
+  {
+    q: 'Do you run the ads as well as make the creative?',
+    a: 'Yes. Most clients hand us the Meta account and the creative together, because the two feed each other: what we see in the ad manager shapes the next brief. If you only need creative, we can do that too.',
   },
   {
     q: 'What does the call cost?',
@@ -206,8 +210,8 @@ export default function WorkWithUsPage() {
               Let&rsquo;s see if we can help.
             </h1>
             <p className="hero-load hero-load-3 mx-auto mt-7 max-w-xl text-base leading-relaxed text-white/80 md:text-lg">
-              Upper Floor is the content agency behind $700k months for ecom brands with real
-              creative direction and zero slop.
+              Upper Floor is the marketing agency behind $700k months for ecom brands, with real
+              creative direction, hands-on Meta ads management and zero slop.
             </p>
             <a href="#book" className={`hero-load hero-load-4 mt-9 ${ctaClass}`}>
               {CTA_LABEL}
@@ -454,7 +458,7 @@ export default function WorkWithUsPage() {
             <p className="mt-6 font-serif text-2xl md:text-3xl">Archie Norris and Jack Buster-Weston</p>
             <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-brand-ink/70">
               The founders, not a sales rep. We have grown our own brands and communities, and we
-              make content that provokes emotion and sells more.
+              make the creative and run the Meta ads that sell more.
             </p>
           </div>
         </section>
