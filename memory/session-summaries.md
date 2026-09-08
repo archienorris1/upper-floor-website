@@ -1,6 +1,42 @@
 # Session Summaries
 *Dated wrap-ups. Newest at top.*
 
+# 2026-09-04 → 2026-09-08 — New client content, video perf, "marketing agency" repositioning
+
+**TL;DR:** Shipped 20 new clips (ION8, KELV, Dissertation Collective, more Aurora + Fidgie) to
+`/portfolio`, `/workwithus` and `/`, made every video lazy so pages load instantly, then over four
+copy rounds reworked `/workwithus` to be friendly rather than gatekeeping and repositioned the whole
+site from "ecom content agency" to **"ecom marketing agency" (Meta ads + creative)**.
+
+## What we discussed
+- Content drop in `~/Downloads/portfolio UF content` (5 brand folders, 278 MB, mostly 10-bit HEVC).
+- Videos felt slow; the calendar must stay fast; `/workwithus` is where Meta traffic lands so it must
+  prove range and quality, and be clean and easy to scroll on mobile.
+- Positioning: Archie pushed back on protective copy ("We don't work with everyone", "see if you
+  qualify") and on lines that knock other agencies. Core offer is now Meta ads management + creative.
+
+## What we decided / shipped
+- Encode recipe: 720×1280 H.264 CRF 27 / maxrate 1.1 Mbps / AAC 80k / faststart, JPEG poster at 1s
+  → 30 MB for 20 clips. Stems `brand-N`; `/media/portfolio/*` cached immutable 1y (new stem per replacement).
+- Lazy video: `SoundVideoCard` + `VideoCard` use a lazy `<img>` poster overlay (not the `poster`
+  attr), `preload="none"` → `metadata` one screen ahead → `auto` a quarter screen ahead; `eager`
+  only for the first two cards. Verified: /workwithus fetches hero + 2 clips on load, 18/21 videos idle.
+- `/portfolio`: 7 brands / 35 clips with blurbs. `/workwithus`: 12-clip wall (mobile 2-col, 6 + expand),
+  "Range" section (UGC / Talking head / Animated / Motion ad / ASMR / Organic), 9-logo ticker.
+  `/`: 10-clip carousel, 9-logo marquee, founders photo 2 MB → 139 KB.
+- Logos: ION8 + DC pulled from their sites and whitened; KELV rendered from Cinzel Bold (no image logo exists).
+- Copy (Archie's calls): hero "Let's see if we can help." + "Upper Floor is the marketing agency behind
+  $700k months for ecom brands, with real creative direction, hands-on Meta ads management and zero
+  slop."; work title "content people stop scrolling for"; all CTAs "Book a call"; no "qualify" anywhere;
+  Meta woven into pillars, fit list, call steps, FAQ ("Do you run the ads as well?"), founders blurb.
+- Site-wide: titles/metadata/keywords/OG/JSON-LD/footer/home intro/insights intro → "ecom marketing
+  agency". Article "What an Ecom Content Agency Actually Does" left as-is (live slug, topical).
+
+## Next
+- Get real numbers for ION8 / KELV / DC so they can earn a stat or case card.
+- Watch Search Console for the old "content agency" queries after the keyword change.
+- Still open from before: contact-form SMTP env vars; `NEXT_PUBLIC_META_PIXEL_ID` in Vercel.
+
 # 2026-09-02 (evening) — /workwithus Meta-ads landing page
 
 **TL;DR:** Archie wants to run Meta traffic to a dedicated page (`upperfloor.co/workwithus`)

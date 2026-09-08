@@ -1,6 +1,13 @@
 # Progress
 *What was done, errors hit, tests run, results.*
 
+## 2026-09-08 — /workwithus copy rounds + site-wide "marketing agency" line
+- Four copy passes with Archie: friendly one-line hero, positive work-section title, plain "Book a call"
+  CTAs (incl. sticky bar), every "qualify" phrasing removed, Meta ads + creative woven through the page.
+- Then swapped "content agency" → "ecom marketing agency" in root metadata, keywords, OG/Twitter,
+  Organization JSON-LD, footer, home AdsShowcase intro, /insights intro. Verified live on all pages.
+- Commits 1cf99b0 → 4c7fb3c, each verified on production within ~50s of push.
+
 ## 2026-09-04 — New client content (ION8, KELV, Dissertation Collective) + video perf
 - Encoded 20 new clips from `~/Downloads/portfolio UF content` → `public/media/portfolio/`
   (aurora-7..10, fidgie-2..5, ion8-1..4, kelv-1..2, dc-1..6) + posters; 278 MB → 30 MB.
