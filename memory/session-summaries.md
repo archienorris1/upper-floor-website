@@ -31,6 +31,13 @@ site from "ecom content agency" to **"ecom marketing agency" (Meta ads + creativ
   Meta woven into pillars, fit list, call steps, FAQ ("Do you run the ads as well?"), founders blurb.
 - Site-wide: titles/metadata/keywords/OG/JSON-LD/footer/home intro/insights intro → "ecom marketing
   agency". Article "What an Ecom Content Agency Actually Does" left as-is (live slug, topical).
+- **Jack's copy pass (2026-09-08, commit `96eb1cb`)** — verbatim onto `/workwithus`: hero intro "We make
+  the creative, run the Meta ads and have helped ecom brands hit $700k months along the way. Good
+  taste, good advertising and absolutely no slop."; Recent-work header "Creative and Meta. We're into
+  it." + "Believers in good creative, obsessive about Meta…We do both."; Range header "Content in all
+  shapes and sizes" + "UGC, statics, reels, product shots, AI, motion and the odd thing…"; green
+  section body "Anyone can make a hundred AI ads before lunch…never let the tool become the idea."
+  (eyebrow "Why we're selective" → "How we work"). "Tap a clip for sound" kept as a small hint line.
 
 ## Next
 - Get real numbers for ION8 / KELV / DC so they can earn a stat or case card.

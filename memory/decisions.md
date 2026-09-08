@@ -80,3 +80,9 @@
   "What an Ecom Content Agency Actually Does" untouched — its slug is a live URL and the piece is
   about the topic, not our positioning. Keyword targets now lead with "ecom marketing agency" and
   "Meta ads agency"; watch Search Console for the old "content agency" queries.
+
+- **Jack owns the /workwithus voice** (2026-09-08) — his copy went in verbatim (only "meta" → "Meta"
+  in a title). Tone to match in future: short, warm, a little wry ("the odd thing that doesn't quite
+  fit into a category", "a hundred AI ads before lunch"). The page's four headline blocks are now:
+  hero "Let's see if we can help." · "Creative and Meta. We're into it." · "Content in all shapes and
+  sizes" · "AI isn't the shortcut. Taste is."

@@ -7,6 +7,8 @@
 - Then swapped "content agency" → "ecom marketing agency" in root metadata, keywords, OG/Twitter,
   Organization JSON-LD, footer, home AdsShowcase intro, /insights intro. Verified live on all pages.
 - Commits 1cf99b0 → 4c7fb3c, each verified on production within ~50s of push.
+- Later: Jack's four copy blocks applied verbatim (hero intro, "Creative and Meta. We're into it.",
+  "Content in all shapes and sizes", AI/taste body) — commit `96eb1cb`, live and verified.
 
 ## 2026-09-04 — New client content (ION8, KELV, Dissertation Collective) + video perf
 - Encoded 20 new clips from `~/Downloads/portfolio UF content` → `public/media/portfolio/`
