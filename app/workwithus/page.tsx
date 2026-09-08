@@ -210,8 +210,8 @@ export default function WorkWithUsPage() {
               Let&rsquo;s see if we can help.
             </h1>
             <p className="hero-load hero-load-3 mx-auto mt-7 max-w-xl text-base leading-relaxed text-white/80 md:text-lg">
-              Upper Floor is the marketing agency behind $700k months for ecom brands, with real
-              creative direction, hands-on Meta ads management and zero slop.
+              We make the creative, run the Meta ads and have helped ecom brands hit $700k months
+              along the way. Good taste, good advertising and absolutely no slop.
             </p>
             <a href="#book" className={`hero-load hero-load-4 mt-9 ${ctaClass}`}>
               {CTA_LABEL}
@@ -268,12 +268,14 @@ export default function WorkWithUsPage() {
           <div className="reveal-on-scroll mx-auto mb-8 max-w-6xl px-5 text-center md:mb-12 md:px-8">
             <Eyebrow>Recent work</Eyebrow>
             <h2 className="mt-4 font-serif text-4xl leading-tight md:text-6xl">
-              content people stop scrolling for
+              Creative and Meta. We&rsquo;re into it.
             </h2>
-            <p className="mx-auto mt-4 max-w-lg text-base text-white/70 md:text-lg">
-              Meta ads and the creative that feeds them, for nine brands from night-sky projectors to
-              electrolyte lollipops. Tap a clip for sound.
+            <p className="mx-auto mt-4 max-w-xl text-base text-white/70 md:text-lg">
+              Believers in good creative, obsessive about Meta and firm believers that ads
+              shouldn&rsquo;t feel like ads. Good creative gets attention. Good advertising turns it
+              into something useful. We do both.
             </p>
+            <p className="mt-3 text-xs uppercase tracking-[0.15em] text-white/40">Tap a clip for sound</p>
           </div>
           <WorkGrid />
         </section>
@@ -282,10 +284,10 @@ export default function WorkWithUsPage() {
         <section className="py-16 md:py-24">
           <div className="reveal-on-scroll mx-auto mb-8 max-w-6xl px-5 text-center md:mb-12 md:px-8">
             <Eyebrow>Range</Eyebrow>
-            <h2 className="mt-4 font-serif text-4xl leading-tight md:text-6xl">every format your brand will need</h2>
+            <h2 className="mt-4 font-serif text-4xl leading-tight md:text-6xl">Content in all shapes and sizes</h2>
             <p className="mx-auto mt-4 max-w-lg text-base text-white/70 md:text-lg">
-              One team runs the Meta account and makes the creative for it. No hand-off between an
-              ads agency and a content agency, no drop in quality between formats.
+              UGC, statics, reels, product shots, AI, motion and the odd thing that doesn&rsquo;t
+              quite fit into a category. If your brand needs it, we make it.
             </p>
           </div>
           <FormatGrid />
@@ -380,12 +382,12 @@ export default function WorkWithUsPage() {
         <section className="bg-brand-green px-5 py-20 text-white md:px-8 md:py-28">
           <div className="mx-auto max-w-6xl">
             <div className="reveal-on-scroll mx-auto max-w-3xl text-center">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/70">Why we&rsquo;re selective</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/70">How we work</p>
               <h2 className="mt-4 font-serif text-4xl leading-tight md:text-6xl">AI isn&rsquo;t the shortcut. Taste is.</h2>
               <p className="mt-6 text-base leading-relaxed text-white/90 md:text-lg">
-                Anyone can generate two hundred videos a day now. Most of it is slop, and your
-                customers can smell it. We use AI to move faster where it helps, but every piece
-                still starts with a brief, a hook and a human who cares how it looks.
+                Anyone can make a hundred AI ads before lunch. Making one people actually want to
+                watch is the harder bit. We use AI where it makes sense, good taste everywhere else,
+                and never let the tool become the idea.
               </p>
             </div>
 
