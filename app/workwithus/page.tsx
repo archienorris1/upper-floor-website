@@ -204,12 +204,10 @@ export default function WorkWithUsPage() {
             </p>
             <h1 className="hero-load hero-load-2 mt-6 font-serif text-[2.6rem] leading-[1.05] tracking-headline md:text-7xl">
               Let&rsquo;s see if we can help.
-              <span className="mt-2 block text-white/70">Better content for your brand, starting with a free piece on us.</span>
             </h1>
             <p className="hero-load hero-load-3 mx-auto mt-7 max-w-xl text-base leading-relaxed text-white/80 md:text-lg">
-              Upper Floor is the content agency behind $700k months for ecom brands. UGC, talking
-              heads, animation and motion ads, all with real creative direction and zero slop. Book
-              a free call and see if your brand qualifies for a piece of content on us.
+              Upper Floor is the content agency behind $700k months for ecom brands with real
+              creative direction and zero slop.
             </p>
             <a href="#book" className={`hero-load hero-load-4 mt-9 ${ctaClass}`}>
               {CTA_LABEL}
