@@ -111,7 +111,7 @@ const FAQ = [
     a: 'Nothing. The call and the free content are on us. If we go on to work together, we quote based on what you actually need.',
   },
   {
-    q: 'Why do I need to qualify?',
+    q: 'Why isn&rsquo;t this for everyone?',
     a: 'Because we keep our client list small enough to do the work properly. We need to know the product can carry great content and that there is a real business behind it.',
   },
   {
@@ -463,7 +463,7 @@ export default function WorkWithUsPage() {
         <section id="book" className="scroll-mt-20 px-4 py-20 md:px-8 md:py-28">
           <div className="reveal-on-scroll mx-auto max-w-2xl text-center">
             <Eyebrow>Book your call</Eyebrow>
-            <h2 className="mt-4 font-serif text-4xl leading-tight md:text-6xl">see if you qualify</h2>
+            <h2 className="mt-4 font-serif text-4xl leading-tight md:text-6xl">pick a time that suits you</h2>
             <p className="mx-auto mt-4 max-w-lg text-base text-white/75 md:text-lg">
               Pick a slot below. Thirty minutes, free, and if it is a fit we make you a piece of
               creative on us.
