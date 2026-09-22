@@ -1,6 +1,16 @@
 # Progress
 *What was done, errors hit, tests run, results.*
 
+## 2026-09-22 — Meta Pixel go-live, site-wide, domain verification
+- Set `NEXT_PUBLIC_META_PIXEL_ID` in Vercel (prod + preview) and redeployed; verified `fbq` loaded,
+  `fbevents.js` + `signals/config/2617859228647373` fetched on `/workwithus`.
+- Moved pixel to root layout + route-change PageView + booking events centralised in `CalEmbed`
+  (`08ffa11`). Build + tsc clean; pixel ID present on `/`, `/contact`, `/portfolio`, `/workwithus`;
+  `router.push('/portfolio')` produced exactly one `track:PageView`.
+- Domain verification meta tag (`4d9e2d1`), live within ~40s, inside `<head>` on apex + www.
+- Gotcha: a `next dev` on :8770 was running during the build — it belonged to a temp project
+  (checked with `lsof -d cwd`), so building here was safe.
+
 ## 2026-09-08 — /workwithus copy rounds + site-wide "marketing agency" line
 - Four copy passes with Archie: friendly one-line hero, positive work-section title, plain "Book a call"
   CTAs (incl. sticky bar), every "qualify" phrasing removed, Meta ads + creative woven through the page.

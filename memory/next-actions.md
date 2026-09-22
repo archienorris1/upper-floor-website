@@ -2,7 +2,9 @@
 *The punch list.*
 
 - [ ] **Fix contact form email** — add to Vercel env (Production): `SMTP_HOST=smtp.gmail.com`, `SMTP_PORT=587`, `SMTP_USER=<gmail>`, `SMTP_PASS=<gmail app password>`, `CONTACT_EMAIL=info@upperfloor.co`, then redeploy. Form currently errors and sends nothing (affects whole site, found 2026-08-01).
-- [ ] **/workwithus go-live:** add `NEXT_PUBLIC_META_PIXEL_ID=<pixel id>` to Vercel env (Production) and redeploy, then fire a test booking and confirm `Schedule`/`Lead` show in Meta Events Manager — without the var the pixel never loads and campaigns can't optimise for booked calls.
+- [x] ~~Add `NEXT_PUBLIC_META_PIXEL_ID` to Vercel~~ — done 2026-09-22, pixel live site-wide.
+- [ ] **Click Verify domain** in Meta Business Settings (tag live since 2026-09-22; up to 72h — if it fails, Sharing Debugger → Scrape Again on `https://upperfloor.co/`).
+- [ ] Fire a test booking (e.g. from `/`) and confirm `Schedule`/`Lead` in Events Manager → Test events, then cancel it in Cal. Then rank `Schedule`/`Lead` top in Aggregated Event Measurement.
 - [ ] Share upperfloor.co/portfolio link with clients once happy.
 - [ ] Add new client brands/videos to `BRANDS` in `app/portfolio/PortfolioClient.tsx` as work ships — use the encode recipe in `memory/decisions.md` and a NEW stem per clip (portfolio media is cached immutable).
 - [ ] Get real numbers for ION8 / KELV / Dissertation Collective so they can earn a stat or case card on `/workwithus` (currently shown as work only, no claims).

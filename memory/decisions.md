@@ -37,8 +37,15 @@
     `/media/portfolio/` + 4 compact case cards reusing the home-page stats and media.
   - Tracking is env-gated: `components/site/MetaPixel.tsx` renders nothing unless
     `NEXT_PUBLIC_META_PIXEL_ID` is set, so local/dev never fires. `Schedule` + `Lead` fire from
-    Cal's `bookingSuccessful` event (new `onBookingSuccessful` prop on `CalEmbed`) because the
-    confirmation never leaves the iframe — there's no thank-you URL to hang a pixel on.
+    Cal's `bookingSuccessful` event because the confirmation never leaves the iframe — there's
+    no thank-you URL to hang a pixel on.
+  - **2026-09-22 — pixel is site-wide** (Jack: "add it to every page"). Mounted once in
+    `app/layout.tsx`; a `usePathname` effect fires PageView on client-side navigations (the base
+    code only fires once per hard load). `Schedule` + `Lead` now fire inside `CalEmbed` itself, so
+    every embed reports bookings; `onBookingSuccessful` stays for extra page-specific hooks.
+    Pixel `2617859228647373`, env var in Vercel prod + preview only (not `.env.local`).
+  - **2026-09-22 — Meta domain verification** via `metadata.verification.other` in the root layout,
+    so the tag is server-rendered in `<head>` (Meta rejects tags injected by JS).
   - Tap-for-sound card extracted to `components/site/SoundVideo.tsx` rather than duplicated;
     `/portfolio` now imports it.
 

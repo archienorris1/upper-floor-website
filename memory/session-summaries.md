@@ -1,6 +1,30 @@
 # Session Summaries
 *Dated wrap-ups. Newest at top.*
 
+# 2026-09-22 — Meta Pixel live site-wide + domain verification
+
+**TL;DR:** Meta Pixel `2617859228647373` is live on every page of upperfloor.co, bookings from all
+three Cal embeds fire `Schedule` + `Lead`, and the Meta domain-verification tag is in `<head>`.
+
+## What we discussed
+- Archie pasted Meta's pixel snippet — no paste needed, the env-gated `MetaPixel` component already existed.
+- Jack: "add it to every page… the domain is the same so we should be okay" → pixel moved site-wide.
+- Meta domain verification needs the tag server-rendered in `<head>` of the home page.
+
+## What we decided / shipped
+- `NEXT_PUBLIC_META_PIXEL_ID=2617859228647373` added in Vercel (Production + Preview), deliberately
+  NOT in `.env.local` so dev never pollutes Meta data; prod redeployed (NEXT_PUBLIC_ is build-time).
+- `08ffa11`: `<MetaPixel />` moved from `/workwithus` to `app/layout.tsx`; fires PageView on
+  client-side route changes (App Router doesn't reload); `Schedule` + `Lead` moved into `CalEmbed`
+  so `/`, `/contact`, `/workwithus` bookings all count. Verified live: one PageView per navigation.
+- `4d9e2d1`: `facebook-domain-verification` meta tag via `metadata.verification.other`; confirmed in
+  `<head>` on `http://upperfloor.co/` and `https://www.upperfloor.co/`.
+
+## Next
+- Archie clicks **Verify domain** in Meta Business Settings (can take up to 72h; Sharing Debugger → Scrape Again).
+- Test booking → confirm `Schedule`/`Lead` in Events Manager → Test events; then prioritise them in
+  Aggregated Event Measurement.
+
 # 2026-09-04 → 2026-09-08 — New client content, video perf, "marketing agency" repositioning
 
 **TL;DR:** Shipped 20 new clips (ION8, KELV, Dissertation Collective, more Aurora + Fidgie) to

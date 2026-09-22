@@ -16,6 +16,6 @@
   `IntersectionObserver` callbacks never fire and screenshots paint white even after `scrollTo`.
   Scroll-reveal, sticky-CTA hide and autoplay can't be verified there — front the pane or check
   the DOM instead. There is no Chrome/Chromium on this Mac for a headless fallback (2026-09-02).
-- `/workwithus` Meta Pixel is dormant until `NEXT_PUBLIC_META_PIXEL_ID` is set in Vercel — ads
-  pointed at the page before that will get no conversion signal.
+- ~~Meta Pixel dormant until `NEXT_PUBLIC_META_PIXEL_ID` set~~ — RESOLVED 2026-09-22 (set in Vercel,
+  live site-wide). Watch-out: it's a `NEXT_PUBLIC_` var, baked in at build — changing it needs a redeploy.
 
