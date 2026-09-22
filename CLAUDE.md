@@ -45,7 +45,7 @@ management + the creative that feeds it; creative-only available). Next.js 14. P
 - `2026-09-22` — Meta Pixel `2617859228647373` is **site-wide**: `<MetaPixel />` in the root layout,
   env-gated by `NEXT_PUBLIC_META_PIXEL_ID` (set in Vercel prod + preview, not `.env.local`), fires
   PageView on load and on client-side route changes; `CalEmbed` fires `Schedule` + `Lead` on
-  `bookingSuccessful` for every embed (`/`, `/contact`, `/workwithus`)
+  `bookingSuccessfulV2` (Cal deprecated v1) for every embed (`/`, `/contact`, `/workwithus`)
 - `2026-09-22` — Meta domain verification tag (`facebook-domain-verification`) lives in root
   `metadata.verification.other` in `app/layout.tsx` — server-rendered into `<head>`; never move it client-side
 

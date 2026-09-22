@@ -130,9 +130,10 @@ export default function CalEmbed({
     })
     // Cal posts booking events out of the iframe; this is the hook ad tracking
     // needs, since the confirmation never leaves the embed. Every embed reports
-    // the booking to Meta, wherever on the site it sits.
+    // the booking to Meta, wherever on the site it sits. bookingSuccessfulV2
+    // replaces Cal's deprecated bookingSuccessful and fires for new bookings only.
     cal.ns[namespace]('on', {
-      action: 'bookingSuccessful',
+      action: 'bookingSuccessfulV2',
       callback: () => {
         trackMeta('Schedule')
         trackMeta('Lead')

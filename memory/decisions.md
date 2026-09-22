@@ -46,6 +46,11 @@
     Pixel `2617859228647373`, env var in Vercel prod + preview only (not `.env.local`).
   - **2026-09-22 — Meta domain verification** via `metadata.verification.other` in the root layout,
     so the tag is server-rendered in `<head>` (Meta rejects tags injected by JS).
+  - **2026-09-22 — listen for `bookingSuccessfulV2`** (Cal deprecated `bookingSuccessful`; V2 fires
+    for new bookings only, not reschedules). **Don't enable Cal.com's own Meta Pixel app** for the
+    embedded event type: it fires inside the cal.com iframe (third-party context, weaker matching
+    in Safari etc.) and would double-count against our own-domain `Schedule`/`Lead`. Only worth it
+    on a separate event type used for raw cal.com links (DMs, bio). Jack asked; decided to keep ours.
   - Tap-for-sound card extracted to `components/site/SoundVideo.tsx` rather than duplicated;
     `/portfolio` now imports it.
 
