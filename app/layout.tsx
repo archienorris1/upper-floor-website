@@ -35,6 +35,11 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
   },
+  // Meta Business domain verification for upperfloor.co. Rendered server-side
+  // into <head>, which is where Meta's crawler looks for it.
+  verification: {
+    other: { 'facebook-domain-verification': 'ncwn0h0g48rbfs2ncjl4p5g4ehlo5d' },
+  },
   robots: {
     index: true,
     follow: true,
