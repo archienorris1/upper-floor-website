@@ -1,14 +1,25 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
+import { usePathname } from 'next/navigation'
 import Script from 'next/script'
-import { META_PIXEL_ID } from '@/lib/meta'
+import { META_PIXEL_ID, trackMeta } from '@/lib/meta'
 
 /**
- * Meta Pixel base code. Renders nothing unless NEXT_PUBLIC_META_PIXEL_ID is set,
- * so it's safe to leave mounted on ad landing pages. Fires PageView on load;
- * conversion events are sent with trackMeta() from lib/meta.ts.
+ * Meta Pixel base code, mounted once in the root layout so every page is tracked.
+ * Renders nothing unless NEXT_PUBLIC_META_PIXEL_ID is set. The base code fires the
+ * first PageView; client-side navigations don't reload the page, so each later
+ * route change fires its own. Conversion events go through trackMeta() in lib/meta.ts.
  */
 export default function MetaPixel() {
+  const pathname = usePathname()
+  const lastPath = useRef<string | null>(null)
+
+  useEffect(() => {
+    if (lastPath.current !== null && lastPath.current !== pathname) trackMeta('PageView')
+    lastPath.current = pathname
+  }, [pathname])
+
   if (!META_PIXEL_ID) return null
 
   return (

@@ -2,11 +2,10 @@
 
 import CalEmbed from '@/components/site/CalEmbed'
 import { CAL_LINK } from '@/lib/booking'
-import { trackMeta } from '@/lib/meta'
 
 /**
- * The conversion. Same Cal.com event as the rest of the site; on a confirmed
- * booking we tell Meta so campaigns can optimise for calls actually booked.
+ * The conversion. Same Cal.com event as the rest of the site; CalEmbed tells Meta
+ * about confirmed bookings so campaigns can optimise for calls actually booked.
  */
 export default function BookCall() {
   return (
@@ -16,10 +15,6 @@ export default function BookCall() {
         id="cal-book-workwithus"
         theme="dark"
         minHeight={720}
-        onBookingSuccessful={() => {
-          trackMeta('Schedule')
-          trackMeta('Lead')
-        }}
       />
     </div>
   )

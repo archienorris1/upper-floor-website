@@ -7,6 +7,7 @@ import '@fontsource/open-sauce-sans/600.css'
 import '@fontsource/open-sauce-sans/700.css'
 import './globals.css'
 import ScrollReveal from '@/components/ScrollReveal'
+import MetaPixel from '@/components/site/MetaPixel'
 
 const SITE_URL = 'https://upperfloor.co'
 
@@ -123,6 +124,7 @@ export default function RootLayout({
       <body>
         {children}
         <ScrollReveal />
+        <MetaPixel />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}

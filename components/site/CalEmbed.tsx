@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { trackMeta } from '@/lib/meta'
 
 const EMBED_JS = 'https://app.cal.com/embed/embed.js'
 const ORIGIN = 'https://app.cal.com'
@@ -128,10 +129,15 @@ export default function CalEmbed({
       },
     })
     // Cal posts booking events out of the iframe; this is the hook ad tracking
-    // (Meta Pixel "Schedule") needs, since the confirmation never leaves the embed.
+    // needs, since the confirmation never leaves the embed. Every embed reports
+    // the booking to Meta, wherever on the site it sits.
     cal.ns[namespace]('on', {
       action: 'bookingSuccessful',
-      callback: () => onBookedRef.current?.(),
+      callback: () => {
+        trackMeta('Schedule')
+        trackMeta('Lead')
+        onBookedRef.current?.()
+      },
     })
   }, [calLink, id, theme])
 

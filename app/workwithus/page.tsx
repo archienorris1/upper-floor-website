@@ -4,7 +4,6 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import StatNumber from '@/components/site/StatNumber'
 import VideoCard from '@/components/site/VideoCard'
-import MetaPixel from '@/components/site/MetaPixel'
 import { SoundProvider } from '@/components/site/SoundVideo'
 import WorkGrid from './WorkGrid'
 import FormatGrid from './FormatGrid'
@@ -171,8 +170,6 @@ export default function WorkWithUsPage() {
   return (
     <SoundProvider>
       <main className="min-h-screen bg-brand-ink text-white">
-        <MetaPixel />
-
         {/* ── Header — logo + one button, nowhere else to go ── */}
         <header className="fixed inset-x-0 top-0 z-50 bg-brand-ink/80 backdrop-blur-md">
           <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3 md:px-8 md:py-4">

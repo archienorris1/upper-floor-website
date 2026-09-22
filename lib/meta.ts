@@ -1,7 +1,7 @@
 /**
- * Meta (Facebook) Pixel helpers. The pixel only loads on pages that render
- * <MetaPixel />, and only when NEXT_PUBLIC_META_PIXEL_ID is set — so nothing
- * fires in local dev or on the rest of the site.
+ * Meta (Facebook) Pixel helpers. <MetaPixel /> is mounted site-wide in the root
+ * layout but only loads when NEXT_PUBLIC_META_PIXEL_ID is set, so nothing fires
+ * in local dev.
  */
 export const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID ?? ''
 
