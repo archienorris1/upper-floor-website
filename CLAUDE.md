@@ -28,9 +28,7 @@ management + the creative that feeds it; creative-only available). Next.js 14. P
   tall stacked layout); keep the app.cal.com preconnect/preload in `layout.tsx` and the skeleton
   in `CalEmbed` — ~5s of the load is Cal's own app and can't be optimised from here
 - `2026-09` — `/workwithus` is the Meta-ads landing page: self-contained (no nav, no links out),
-  noindexed + out of the sitemap, one CTA (`#book` Cal embed). Meta Pixel is env-gated by
-  `NEXT_PUBLIC_META_PIXEL_ID` (`components/site/MetaPixel.tsx`) and fires `Schedule` + `Lead`
-  on Cal's `bookingSuccessful` event; the tap-for-sound clips are shared with `/portfolio`
+  noindexed + out of the sitemap, one CTA (`#book` Cal embed). The tap-for-sound clips are shared with `/portfolio`
   via `components/site/SoundVideo.tsx`
 - `2026-09-04` — portfolio clips are **lazy by design**: `SoundVideoCard`/`VideoCard` render a lazy
   `<img>` poster (never the `poster` attribute, which browsers fetch eagerly) and `preload="none"`,
@@ -44,6 +42,10 @@ management + the creative that feeds it; creative-only available). Next.js 14. P
 - `2026-09-08` — company line is **"ecom marketing agency"** (Meta ads + creative), not "content agency":
   titles, metadata, JSON-LD, footer, home copy and `/workwithus` all say so. CTAs are plain "Book a call";
   copy stays friendly (no "qualify"/gatekeeping) and never knocks other agencies
+- `2026-09-22` — Meta Pixel `2617859228647373` is **site-wide**: `<MetaPixel />` in the root layout,
+  env-gated by `NEXT_PUBLIC_META_PIXEL_ID` (set in Vercel prod + preview, not `.env.local`), fires
+  PageView on load and on client-side route changes; `CalEmbed` fires `Schedule` + `Lead` on
+  `bookingSuccessful` for every embed (`/`, `/contact`, `/workwithus`)
 
 ## E · Memory Map
 `memory/` (B.L.A.S.T. scheme): `project-brief` · `task-plan` · `findings` · `progress` ·
