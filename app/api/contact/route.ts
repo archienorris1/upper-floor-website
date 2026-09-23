@@ -1,8 +1,15 @@
 /*
-  IMPORTANT — Before deploying to Vercel:
-  Go to Vercel Dashboard → Your Project →
-  Settings → Environment Variables
-  Add these variables:
+  Enquiries go to Slack (#leads) first and email second.
+
+  SLACK_WEBHOOK_URL is the one that matters: it's a single env var and it alerts
+  both of us instantly. The SMTP block below is optional — if those vars are unset
+  the route still succeeds, so a missing Gmail app password can no longer swallow
+  an enquiry (it did exactly that from 2026-08-01 until Slack was added).
+
+  Vercel Dashboard → Project → Settings → Environment Variables:
+  SLACK_WEBHOOK_URL = https://hooks.slack.com/services/...  (Slack app → Incoming Webhooks)
+
+  Optional email copy:
   SMTP_HOST = smtp.gmail.com
   SMTP_PORT = 587
   SMTP_USER = your-gmail@gmail.com
@@ -18,6 +25,7 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import nodemailer from 'nodemailer'
+import { notifySlack } from '@/lib/slack'
 
 export async function POST(req: NextRequest) {
   const body = await req.json()
@@ -28,6 +36,25 @@ export async function POST(req: NextRequest) {
       { error: 'Missing required fields' },
       { status: 400 }
     )
+  }
+
+  // Slack first: it's the alert we actually watch, and it must not depend on SMTP.
+  const slacked = await notifySlack(
+    '📥 New website enquiry',
+    [
+      { label: 'Name', value: `${firstName} ${lastName ?? ''}`.trim() },
+      { label: 'Email', value: email },
+      { label: 'Company', value: company || 'Not provided' },
+      { label: 'Message', value: message },
+    ],
+    'upperfloor.co contact form',
+  )
+
+  // No SMTP configured? Slack already has the enquiry — don't fail the visitor.
+  if (!process.env.SMTP_HOST || !process.env.SMTP_USER) {
+    if (slacked) return NextResponse.json({ success: true }, { status: 200 })
+    console.error('Contact form: neither Slack nor SMTP configured')
+    return NextResponse.json({ error: 'Failed to send message' }, { status: 500 })
   }
 
   const transporter = nodemailer.createTransport({
@@ -77,6 +104,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: true }, { status: 200 })
   } catch (error) {
     console.error('Email send error:', error)
+    // The lead is safe in Slack, so only report failure if that missed too.
+    if (slacked) return NextResponse.json({ success: true }, { status: 200 })
     return NextResponse.json({ error: 'Failed to send message' }, { status: 500 })
   }
 }
