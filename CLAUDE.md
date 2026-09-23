@@ -1,5 +1,5 @@
 # Upper Floor — Website — CLAUDE.md
-*Last updated: 2026-09-22 · Owner: Archie Norris · Stage: shipped (production)*
+*Last updated: 2026-09-23 · Owner: Archie Norris · Stage: shipped (production)*
 
 ## A · What this folder is
 The production marketing website for **Upper Floor** — an ecom **marketing agency** (Meta ads
@@ -48,6 +48,10 @@ management + the creative that feeds it; creative-only available). Next.js 14. P
   `bookingSuccessfulV2` (Cal deprecated v1) for every embed (`/`, `/contact`, `/workwithus`)
 - `2026-09-22` — Meta domain verification tag (`facebook-domain-verification`) lives in root
   `metadata.verification.other` in `app/layout.tsx` — server-rendered into `<head>`; never move it client-side
+- `2026-09-23` — **leads belong to Signal, not this repo.** `/api/contact` posts enquiries to
+  `signal.upperfloor.co/api/leads` (`lib/leads.ts`, `SIGNAL_LEADS_SECRET`), which stores them and pings
+  `#leads` in Slack; Cal.com's webhook points at Signal directly, so there's no Cal route here. Email is
+  now OPTIONAL in `/api/contact` — a missing SMTP config can no longer swallow an enquiry
 
 ## E · Memory Map
 `memory/` (B.L.A.S.T. scheme): `project-brief` · `task-plan` · `findings` · `progress` ·

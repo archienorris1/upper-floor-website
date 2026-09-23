@@ -1,6 +1,27 @@
 # Session Summaries
 *Dated wrap-ups. Newest at top.*
 
+# 2026-09-23 — Lead alerts: the site hands leads to Signal
+
+**TL;DR:** Archie launched the Meta ads and wanted to be told the moment a lead lands. Leads now live in
+Signal (`inbound_leads` + `/leads` + `#leads` in Slack); this repo just forwards contact-form enquiries.
+
+## What we discussed
+- First pass put a Slack Incoming Webhook in this repo; Archie pointed out Signal already exists and
+  should own it — correct, it has the Slack bot, the CRM and the staff UI.
+- Meta **lead-form ads** are the main source going forward; those never touch this site.
+
+## What we decided / shipped
+- `lib/leads.ts` → POSTs `{source:'contact_form', …}` to `signal.upperfloor.co/api/leads` with
+  `SIGNAL_LEADS_SECRET` (Vercel prod). Deleted `lib/slack.ts` and `app/api/webhooks/cal/route.ts` —
+  Cal now posts to Signal directly, so there's one handler, not two.
+- `/api/contact`: Signal first, email optional. **Fixes the form silently losing enquiries since
+  2026-08-01** (SMTP vars were never added).
+- Verified on production: a real form submission reached Signal and posted to #leads.
+
+## Next
+- Meta lead ads land in Signal, not here — see Signal-App's `HANDOVER.md` (needs `META_LEADS_TOKEN`).
+
 # 2026-09-22 — Meta Pixel live site-wide + domain verification
 
 **TL;DR:** Meta Pixel `2617859228647373` is live on every page of upperfloor.co, bookings from all

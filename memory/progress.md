@@ -1,6 +1,13 @@
 # Progress
 *What was done, errors hit, tests run, results.*
 
+## 2026-09-23 — Contact form → Signal (lead alerts)
+- Added `lib/leads.ts`; `/api/contact` now posts to Signal and treats email as optional; removed
+  `lib/slack.ts` + the short-lived `/api/webhooks/cal` route (Cal points at Signal instead).
+- `SIGNAL_LEADS_SECRET` set in Vercel (Production). Build + tsc clean; commit `b49ec84`.
+- Verified live: `POST https://www.upperfloor.co/api/contact` → 200, row in Signal, message in #leads.
+- Gotcha: deleting a route leaves stale types in `.next` — `tsc` failed until `rm -rf .next`.
+
 ## 2026-09-22 — Meta Pixel go-live, site-wide, domain verification
 - Set `NEXT_PUBLIC_META_PIXEL_ID` in Vercel (prod + preview) and redeployed; verified `fbq` loaded,
   `fbevents.js` + `signals/config/2617859228647373` fetched on `/workwithus`.

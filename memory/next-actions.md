@@ -1,7 +1,7 @@
 # Next Actions — Upper Floor Website
 *The punch list.*
 
-- [ ] **Fix contact form email** — add to Vercel env (Production): `SMTP_HOST=smtp.gmail.com`, `SMTP_PORT=587`, `SMTP_USER=<gmail>`, `SMTP_PASS=<gmail app password>`, `CONTACT_EMAIL=info@upperfloor.co`, then redeploy. Form currently errors and sends nothing (affects whole site, found 2026-08-01).
+- [ ] **Optional now — contact form email copy** (enquiries already reach Signal + #leads since 2026-09-23) — add to Vercel env (Production): `SMTP_HOST=smtp.gmail.com`, `SMTP_PORT=587`, `SMTP_USER=<gmail>`, `SMTP_PASS=<gmail app password>`, `CONTACT_EMAIL=info@upperfloor.co`, then redeploy. Form currently errors and sends nothing (affects whole site, found 2026-08-01).
 - [x] ~~Add `NEXT_PUBLIC_META_PIXEL_ID` to Vercel~~ — done 2026-09-22, pixel live site-wide.
 - [ ] **Click Verify domain** in Meta Business Settings (tag live since 2026-09-22; up to 72h — if it fails, Sharing Debugger → Scrape Again on `https://upperfloor.co/`).
 - [ ] Fire a test booking (e.g. from `/`) and confirm `Schedule`/`Lead` in Events Manager → Test events, then cancel it in Cal. Then rank `Schedule`/`Lead` top in Aggregated Event Measurement.
