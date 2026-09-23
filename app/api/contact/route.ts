@@ -1,13 +1,13 @@
 /*
-  Enquiries go to Slack (#leads) first and email second.
+  Enquiries go to Signal first (which stores them and pings #leads in Slack),
+  email second.
 
-  SLACK_WEBHOOK_URL is the one that matters: it's a single env var and it alerts
-  both of us instantly. The SMTP block below is optional — if those vars are unset
-  the route still succeeds, so a missing Gmail app password can no longer swallow
-  an enquiry (it did exactly that from 2026-08-01 until Slack was added).
+  SIGNAL_LEADS_SECRET is the one that matters — the SMTP block below is optional.
+  If those vars are unset the route still succeeds, so a missing Gmail app password
+  can no longer swallow an enquiry (it did exactly that from 2026-08-01).
 
   Vercel Dashboard → Project → Settings → Environment Variables:
-  SLACK_WEBHOOK_URL = https://hooks.slack.com/services/...  (Slack app → Incoming Webhooks)
+  SIGNAL_LEADS_SECRET = same value as LEADS_SECRET in the Signal-App project
 
   Optional email copy:
   SMTP_HOST = smtp.gmail.com
@@ -25,7 +25,7 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import nodemailer from 'nodemailer'
-import { notifySlack } from '@/lib/slack'
+import { sendLeadToSignal } from '@/lib/leads'
 
 export async function POST(req: NextRequest) {
   const body = await req.json()
@@ -38,22 +38,19 @@ export async function POST(req: NextRequest) {
     )
   }
 
-  // Slack first: it's the alert we actually watch, and it must not depend on SMTP.
-  const slacked = await notifySlack(
-    '📥 New website enquiry',
-    [
-      { label: 'Name', value: `${firstName} ${lastName ?? ''}`.trim() },
-      { label: 'Email', value: email },
-      { label: 'Company', value: company || 'Not provided' },
-      { label: 'Message', value: message },
-    ],
-    'upperfloor.co contact form',
-  )
+  // Signal first: it stores the lead and pings #leads in Slack, and it must not
+  // depend on SMTP being configured.
+  const slacked = await sendLeadToSignal({
+    name: `${firstName} ${lastName ?? ''}`.trim(),
+    email,
+    company,
+    message,
+  })
 
-  // No SMTP configured? Slack already has the enquiry — don't fail the visitor.
+  // No SMTP configured? Signal already has the enquiry — don't fail the visitor.
   if (!process.env.SMTP_HOST || !process.env.SMTP_USER) {
     if (slacked) return NextResponse.json({ success: true }, { status: 200 })
-    console.error('Contact form: neither Slack nor SMTP configured')
+    console.error('Contact form: neither Signal nor SMTP configured')
     return NextResponse.json({ error: 'Failed to send message' }, { status: 500 })
   }
 
@@ -104,7 +101,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: true }, { status: 200 })
   } catch (error) {
     console.error('Email send error:', error)
-    // The lead is safe in Slack, so only report failure if that missed too.
+    // The lead is safe in Signal, so only report failure if that missed too.
     if (slacked) return NextResponse.json({ success: true }, { status: 200 })
     return NextResponse.json({ error: 'Failed to send message' }, { status: 500 })
   }
