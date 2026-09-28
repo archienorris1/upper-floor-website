@@ -98,3 +98,18 @@
   fit into a category", "a hundred AI ads before lunch"). The page's four headline blocks are now:
   hero "Let's see if we can help." · "Creative and Meta. We're into it." · "Content in all shapes and
   sizes" · "AI isn't the shortcut. Taste is."
+
+- **`/workwithus` repositioned: free ad account audit + qualify/disqualify** (2026-09-28, Archie + Jack)
+  - Why: the first Meta campaigns (LP £22/booking, instant forms £50/lead) booked calls, but from brand-new
+    brands. The page invited them: "or ready to" fit line, "Book the call anyway", free creative on a free call.
+  - Offer is now a **free 30-minute Meta ad account audit** (screen-share Ads Manager → structure, spend,
+    creative, tracking → leave with a plan). Worthless to a pre-launch brand, valuable to a £15k+/month one.
+  - Page opens with "For established ecom brands" / "A second pair of eyes on your Meta account.", then a
+    **for you if / not for you (yet) if** pair, then the Cal embed — calendar sits right under a shorter
+    hero (62svh), no button-press to find it. Proof, work, case studies follow below.
+  - Not a fit = pre-launch / no consistent sales, no Meta yet or under £1k/month, after a quick hack.
+    Ideal = £15k+/month. Lines match the Cal.com spend bands (£0–1k / £1–15k / £15–50k / £50k+), which map
+    to the pricing ladder tiers (Growing / Core / Scaling). **Prices never on the page.**
+  - Narrows the 2026-09-08 "no qualify/gatekeeping" rule: still warm ("we would love to talk when you
+    get there"), but it now says who it's for. That rule was about site copy; ads may be punchier.
+

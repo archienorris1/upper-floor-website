@@ -1,6 +1,27 @@
 # Session Summaries
 *Dated wrap-ups. Newest at top.*
 
+# 2026-09-28 — Meta audit → /workwithus repositioned for established brands
+
+**TL;DR:** The first Meta campaigns booked calls, but from brand-new brands. With Jack's sign-off,
+`/workwithus` now offers a free **ad account audit**, says plainly who it's for and who it isn't, and puts the
+calendar straight under the hero. Relaunching Meta on this positioning with 2 statics + 2 talking-head videos.
+
+## What we discussed
+- Meta MCP audit: ecom history of the ad account wasn't the issue (fresh pixel, 0 events, tiny budget).
+  Audience Network inflated LP clicks with 0 bookings; instant-form leads were poor.
+- Lead quality: Meta optimises for *any* booking; the page and "free creative" offer invited small brands.
+- Pricing ladder (Growing £0–15k / Core £15–50k / Scaling £50k+ spend) → Cal spend bands already right.
+- Creative: 3 re-texted statics and 2 Archie videos reviewed; 4 ads at £30/day, not more.
+
+## What we decided / shipped
+- Instant-form campaign paused; LP campaign → £40/day; then paused for relaunch.
+- `/workwithus`: audit offer, "for you if / not for you (yet) if", Cal embed under the hero. CLAUDE.md D updated.
+- Signal CAPI (Lead + `QualifiedLead` for £15k+ bands) running as its own session.
+
+## Next
+- See `next-actions.md`: relaunch campaign, Cal description, ship CAPI website half.
+
 # 2026-09-23 — Lead alerts: the site hands leads to Signal
 
 **TL;DR:** Archie launched the Meta ads and wanted to be told the moment a lead lands. Leads now live in

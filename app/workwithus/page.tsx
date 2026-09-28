@@ -20,13 +20,13 @@ import StickyCta from './StickyCta'
 export const metadata: Metadata = {
   title: 'Work With Us',
   description:
-    'Upper Floor is a marketing agency for ecom brands: Meta ads management plus the creative that feeds it, from UGC and talking heads to animated explainers and product motion ads. Real creative direction, no slop. Book a free call.',
+    'Upper Floor is a marketing agency for ecom brands: Meta ads management plus the creative that feeds it, from UGC and talking heads to animated explainers and product motion ads. Real creative direction, no slop. Book a free Meta ad account audit.',
   alternates: { canonical: '/workwithus' },
   robots: { index: false, follow: true },
   openGraph: {
     title: 'Work With Upper Floor',
     description:
-      'Meta ads and the creative behind them for ecom brands doing real numbers. Book a free call.',
+      'Meta ads and the creative behind them for ecom brands doing real numbers. Book a free ad account audit.',
     type: 'website',
     url: 'https://upperfloor.co/workwithus',
     siteName: 'Upper Floor',
@@ -76,34 +76,44 @@ const PILLARS = [
   },
 ]
 
+// Qualify and disqualify before the calendar. The spend lines match the bands on the
+// Cal.com booking form, which map to the pricing ladder (we price on Meta spend).
+// Prices themselves never go on the page: they're said on the call.
 const FIT = [
+  'You are an established ecom brand with consistent sales behind you.',
+  'You are already running Meta ads, ideally spending £15k+ a month.',
   'You sell a physical product that people can see on camera.',
-  'You are running Meta ads, or ready to, and want creative that scales them.',
-  'You care how the brand looks, not just what the CPM is.',
+  'You want creative and media handled by one team, for the long run.',
+]
+
+const NOT_FIT = [
+  'You are pre-launch or still waiting on your first consistent sales.',
+  'You have not run Meta ads yet, or spend under £1k a month on them.',
+  'You are after a quick hack or the cheapest option going.',
 ]
 
 const CALL_STEPS = [
   {
     num: '1',
     title: 'Book a slot',
-    body: '30 minutes on Google Meet. No prep, no deck.',
+    body: '30 minutes on Google Meet. Have your Ads Manager open to screen-share. No deck.',
   },
   {
     num: '2',
-    title: 'We look at your brand',
-    body: 'Your product, your Meta account, the creative you are running now, and where the gaps are.',
+    title: 'We audit your ad account',
+    body: 'Structure, spend, creative and tracking: what is working, what is not and where the budget is leaking.',
   },
   {
     num: '3',
-    title: 'If it is a fit, we make you something',
-    body: 'A piece of creative for your brand, free, so you can judge the work before you spend a penny.',
+    title: 'You leave with a plan',
+    body: 'Clear next steps you can act on straight away, whether we end up working together or not.',
   },
 ]
 
 const FAQ = [
   {
-    q: 'What is the free content?',
-    a: 'A piece of content made for your brand, usually a UGC-style ad or an organic clip, that you can run straight away. If you qualify on the call, we make it. No strings.',
+    q: 'What does the audit cover?',
+    a: 'Your campaign and ad set structure, where the budget is going, which creative is carrying the account, your pixel and tracking set-up, and the biggest wins we can see. A second pair of eyes from people who live in ad accounts.',
   },
   {
     q: 'Do you run the ads as well as make the creative?',
@@ -111,15 +121,15 @@ const FAQ = [
   },
   {
     q: 'What does the call cost?',
-    a: 'Nothing. The call and the free content are on us. If we go on to work together, we quote based on what you actually need.',
+    a: 'Nothing. The audit is on us. If we go on to work together, we quote based on your ad spend and what you actually need.',
   },
   {
-    q: 'Why isn&rsquo;t this for everyone?',
-    a: 'Because we keep our client list small enough to do the work properly. We need to know the product can carry great content and that there is a real business behind it.',
+    q: 'Why isn’t this for everyone?',
+    a: 'Because we keep our client list small enough to do the work properly. We do our best work with brands already spending on Meta, where there is real data to dig into and real numbers to move.',
   },
   {
     q: 'Do I need to prepare anything?',
-    a: 'No. Turn up with your product and a rough idea of the content you are currently running. We will take it from there.',
+    a: 'Just have your Meta Ads Manager to hand so you can screen-share. That is it. We will take it from there.',
   },
 ]
 
@@ -184,7 +194,7 @@ export default function WorkWithUsPage() {
         </header>
 
         {/* ── Hero ── */}
-        <section className="relative flex min-h-[92svh] items-center justify-center overflow-hidden">
+        <section className="relative flex min-h-[62svh] items-center justify-center overflow-hidden">
           <video
             className="hero-zoom absolute inset-0 h-full w-full object-cover opacity-50"
             autoPlay
@@ -199,24 +209,59 @@ export default function WorkWithUsPage() {
           <div className="absolute inset-0 bg-gradient-to-b from-brand-ink/70 via-brand-ink/50 to-brand-ink" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(27,138,63,0.25),transparent_60%)]" />
 
-          <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center px-5 pb-20 pt-32 text-center md:pb-28 md:pt-40">
+          <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center px-5 pb-12 pt-28 text-center md:pb-16 md:pt-36">
             <p className="hero-load hero-load-1 text-xs font-semibold uppercase tracking-[0.3em] text-white/60">
-              Work with Upper Floor
+              For established ecom brands
             </p>
             <h1 className="hero-load hero-load-2 mt-6 font-serif text-[2.6rem] leading-[1.05] tracking-headline md:text-7xl">
-              Let&rsquo;s see if we can help.
+              A second pair of eyes on your Meta account.
             </h1>
             <p className="hero-load hero-load-3 mx-auto mt-7 max-w-xl text-base leading-relaxed text-white/80 md:text-lg">
-              We make the creative, run the Meta ads and have helped ecom brands hit $700k months
-              along the way. Good taste, good advertising and absolutely no slop.
+              Book a free audit call. We go through your ad account with you, show you what is
+              working and what is not, and you leave with a plan. From the team that makes the
+              creative and runs the ads behind $700k months.
             </p>
-            <a href="#book" className={`hero-load hero-load-4 mt-9 ${ctaClass}`}>
-              {CTA_LABEL}
-            </a>
-            <p className="hero-load hero-load-4 mt-4 text-xs text-white/50">
-              Free 30-minute call · No pitch deck · No commitment
+            <p className="hero-load hero-load-4 mt-7 text-xs text-white/50">
+              Free 30-minute ad account audit · No pitch deck · No commitment
             </p>
           </div>
+        </section>
+
+        {/* ── Fit check + booking — straight under the hero, no clicking to find it ── */}
+        <section id="book" className="scroll-mt-20 px-4 pb-16 pt-6 md:px-8 md:pb-24 md:pt-10">
+          <div className="mx-auto grid max-w-5xl gap-4 md:grid-cols-2 md:gap-5">
+            <div className="rounded-2xl border border-brand-green/40 bg-brand-green/[0.08] p-6 md:p-7">
+              <p className="text-sm font-semibold text-white">This is for you if&hellip;</p>
+              <ul className="mt-4 space-y-3">
+                {FIT.map((item) => (
+                  <li key={item} className="flex gap-3 text-sm leading-relaxed text-white/85">
+                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-green text-[10px] font-bold">
+                      ✓
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 md:p-7">
+              <p className="text-sm font-semibold text-white">It&rsquo;s not for you (yet) if&hellip;</p>
+              <ul className="mt-4 space-y-3">
+                {NOT_FIT.map((item) => (
+                  <li key={item} className="flex gap-3 text-sm leading-relaxed text-white/65">
+                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white/15 text-[10px] font-bold">
+                      ✕
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5 text-xs leading-relaxed text-white/45">
+                The audit needs real spend and data to dig into. Come back when you have it and we
+                would love to talk.
+              </p>
+            </div>
+          </div>
+          <BookCall />
         </section>
 
         {/* ── Client logo ticker ── */}
@@ -400,29 +445,10 @@ export default function WorkWithUsPage() {
           </div>
         </section>
 
-        {/* ── Who it's for + what happens on the call ── */}
+        {/* ── What happens on the call ── */}
         <section className="px-5 py-20 md:px-8 md:py-28">
-          <div className="mx-auto grid max-w-6xl gap-14 md:grid-cols-2 md:gap-16">
+          <div className="mx-auto max-w-xl">
             <div className="reveal-on-scroll">
-              <Eyebrow>Who this is for</Eyebrow>
-              <h2 className="mt-4 font-serif text-3xl leading-tight md:text-5xl">we do our best work with brands that&hellip;</h2>
-              <ul className="mt-8 space-y-4">
-                {FIT.map((item) => (
-                  <li key={item} className="flex gap-4 text-base text-white/85">
-                    <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-green text-xs font-bold">
-                      ✓
-                    </span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-8 text-sm leading-relaxed text-white/55">
-                Not sure that&rsquo;s you? Book the call anyway. The worst case is a free, honest
-                opinion on your content from people who do this every day.
-              </p>
-            </div>
-
-            <div className="reveal-on-scroll reveal-delay-2">
               <Eyebrow>What happens on the call</Eyebrow>
               <h2 className="mt-4 font-serif text-3xl leading-tight md:text-5xl">three steps, thirty minutes</h2>
               <ol className="mt-8 space-y-6">
@@ -460,19 +486,6 @@ export default function WorkWithUsPage() {
               make the creative and run the Meta ads that sell more.
             </p>
           </div>
-        </section>
-
-        {/* ── Booking ── */}
-        <section id="book" className="scroll-mt-20 px-4 py-20 md:px-8 md:py-28">
-          <div className="reveal-on-scroll mx-auto max-w-2xl text-center">
-            <Eyebrow>Book your call</Eyebrow>
-            <h2 className="mt-4 font-serif text-4xl leading-tight md:text-6xl">pick a time that suits you</h2>
-            <p className="mx-auto mt-4 max-w-lg text-base text-white/75 md:text-lg">
-              Pick a slot below. Thirty minutes, free, and if it is a fit we make you a piece of
-              creative on us.
-            </p>
-          </div>
-          <BookCall />
         </section>
 
         {/* ── FAQ ── */}

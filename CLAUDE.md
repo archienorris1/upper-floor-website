@@ -52,6 +52,14 @@ management + the creative that feeds it; creative-only available). Next.js 14. P
   `signal.upperfloor.co/api/leads` (`lib/leads.ts`, `SIGNAL_LEADS_SECRET`), which stores them and pings
   `#leads` in Slack; Cal.com's webhook points at Signal directly, so there's no Cal route here. Email is
   now OPTIONAL in `/api/contact` — a missing SMTP config can no longer swallow an enquiry
+- `2026-09-28` — `/workwithus` offer is a **free Meta ad account audit**, not free creative (Archie + Jack
+  signed off): targets established brands, and the fit list names **£15k+/month Meta spend** to match the
+  Cal.com spend bands (we price on spend). Copy still friendly, but it now says who it's for; this
+  narrows the 2026-09-08 "no gatekeeping" rule. Meta ads for it go in a fresh campaign
+- `2026-09-28` — `/workwithus` now **qualifies AND disqualifies**: a "for you if / not for you (yet) if"
+  pair (pre-launch, no Meta yet, under £1k/month = not a fit) sits straight under a shorter hero with the
+  Cal embed right below it — no clicking to find the calendar. Prices never go on the page (pricing
+  ladder: said on the call)
 
 ## E · Memory Map
 `memory/` (B.L.A.S.T. scheme): `project-brief` · `task-plan` · `findings` · `progress` ·

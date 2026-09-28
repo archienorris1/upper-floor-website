@@ -1,6 +1,17 @@
 # Progress
 *What was done, errors hit, tests run, results.*
 
+## 2026-09-28 — /workwithus: audit offer, qualify/disqualify, calendar up top
+- Meta audit of the first two Upper Floor campaigns (via Meta MCP): 3 LP bookings @ £22, 2 instant-form
+  leads @ £50 (poor). Audience Network took ~85% of LP clicks, 0 bookings. Instant forms paused, LP → £40/day
+  (Jack's call: leave placements). Then paused to relaunch on the new positioning.
+- Rewrote `/workwithus` copy (audit offer, FAQ, steps), added FIT / NOT_FIT lists, moved the `#book`
+  section (fit check + Cal embed) directly under a shorter hero; old fit column removed from lower section.
+- Fixed FAQ question rendering a literal `&rsquo;` (HTML entity inside a JS string).
+- tsc clean; checked in dev at desktop + 375px: calendar loads (`loading="done"`), no horizontal overflow.
+- Left `components/site/CalEmbed.tsx` + `lib/meta.ts` uncommitted: those are the Conversions API
+  session's in-flight changes (Lead eventID = `cal-booking-<uid>` for dedup with Signal's CAPI event).
+
 ## 2026-09-23 — Contact form → Signal (lead alerts)
 - Added `lib/leads.ts`; `/api/contact` now posts to Signal and treats email as optional; removed
   `lib/slack.ts` + the short-lived `/api/webhooks/cal` route (Cal points at Signal instead).

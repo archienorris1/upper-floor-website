@@ -1,6 +1,12 @@
 # Next Actions — Upper Floor Website
 *The punch list.*
 
+- [ ] **Relaunch Meta** on the audit positioning: 1 campaign, website-leads (Cal booking), £30/day, UK broad,
+      4 ads — statics "Spending £15k+ a month on Meta?" (re-export 1080×1350, current is 3:4) + "Same 6 ads.
+      Bigger budget. Falling ROAS." + videos Arch Ad 1 (cut 43.4–48.5s) and "not even real" (caption the
+      hook, cut dead air ~1.6s, add £15k+ overlay, stroke on captions). Watermelon static = first refresh.
+- [ ] Update the Cal.com event description to mention the audit; switch the spend question to single-choice.
+- [ ] Ship the website half of the CAPI work (`CalEmbed.tsx` + `lib/meta.ts`) once Signal's CAPI is verified.
 - [ ] **Optional now — contact form email copy** (enquiries already reach Signal + #leads since 2026-09-23) — add to Vercel env (Production): `SMTP_HOST=smtp.gmail.com`, `SMTP_PORT=587`, `SMTP_USER=<gmail>`, `SMTP_PASS=<gmail app password>`, `CONTACT_EMAIL=info@upperfloor.co`, then redeploy. Form currently errors and sends nothing (affects whole site, found 2026-08-01).
 - [x] ~~Add `NEXT_PUBLIC_META_PIXEL_ID` to Vercel~~ — done 2026-09-22, pixel live site-wide.
 - [ ] **Click Verify domain** in Meta Business Settings (tag live since 2026-09-22; up to 72h — if it fails, Sharing Debugger → Scrape Again on `https://upperfloor.co/`).
