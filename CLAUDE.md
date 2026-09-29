@@ -1,5 +1,5 @@
 # Upper Floor — Website — CLAUDE.md
-*Last updated: 2026-09-23 · Owner: Archie Norris · Stage: shipped (production)*
+*Last updated: 2026-09-29 · Owner: Archie Norris · Stage: shipped (production)*
 
 ## A · What this folder is
 The production marketing website for **Upper Floor** — an ecom **marketing agency** (Meta ads
@@ -60,6 +60,11 @@ management + the creative that feeds it; creative-only available). Next.js 14. P
   pair (pre-launch, no Meta yet, under £1k/month = not a fit) sits straight under a shorter hero with the
   Cal embed right below it — no clicking to find the calendar. Prices never go on the page (pricing
   ladder: said on the call)
+- `2026-09-29` — `/workwithus` books through **Cal's public API, not the embed**: `page.tsx` fetches free
+  slots server-side (`lib/cal-api.ts`, ISR 60s) so times are in the HTML, `BookCall` is an instant picker in
+  the hero (tap time → name, email, phone, spend band), posting to `/api/book`. Phone is required (Cal
+  `attendeePhoneNumber`, E.164). No full calendar: the day strip scrolls ~3 weeks; the Cal embed shows only if slots fail to load. **Any new required
+  question in the Cal event breaks API bookings until the picker asks it too.** Other pages keep `CalEmbed`
 
 ## E · Memory Map
 `memory/` (B.L.A.S.T. scheme): `project-brief` · `task-plan` · `findings` · `progress` ·

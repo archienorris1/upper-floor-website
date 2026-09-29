@@ -6,7 +6,9 @@
       Bigger budget. Falling ROAS." + videos Arch Ad 1 (cut 43.4–48.5s) and "not even real" (caption the
       hook, cut dead air ~1.6s, add £15k+ overlay, stroke on captions). Watermelon static = first refresh.
 - [ ] Update the Cal.com event description to mention the audit; switch the spend question to single-choice.
-- [ ] Ship the website half of the CAPI work (`CalEmbed.tsx` + `lib/meta.ts`) once Signal's CAPI is verified.
+- [x] Ship the website half of the CAPI work (`CalEmbed.tsx` + `lib/meta.ts`) — shipped 2026-09-29 with the slot picker.
+- [ ] Make ONE real booking through the `/workwithus` slot picker on production, check the invite, #leads, and `Schedule`/`Lead` in Events Manager, then cancel it in Cal.
+- [ ] Consider making phone optional in Cal (less friction) — then drop the field from `BookCall`.
 - [ ] **Optional now — contact form email copy** (enquiries already reach Signal + #leads since 2026-09-23) — add to Vercel env (Production): `SMTP_HOST=smtp.gmail.com`, `SMTP_PORT=587`, `SMTP_USER=<gmail>`, `SMTP_PASS=<gmail app password>`, `CONTACT_EMAIL=info@upperfloor.co`, then redeploy. Form currently errors and sends nothing (affects whole site, found 2026-08-01).
 - [x] ~~Add `NEXT_PUBLIC_META_PIXEL_ID` to Vercel~~ — done 2026-09-22, pixel live site-wide.
 - [ ] **Click Verify domain** in Meta Business Settings (tag live since 2026-09-22; up to 72h — if it fails, Sharing Debugger → Scrape Again on `https://upperfloor.co/`).
@@ -18,7 +20,5 @@
       stale links already shared stop taking bookings into a calendar nobody watches.
 - [ ] Sanity-check the Cal.com booking end to end on production (book a real slot, confirm the
       Google Meet invite arrives) — the embed is verified, an actual booking is not.
-- [ ] Optional (only if "instant" becomes a hard requirement): replace the Cal.com iframe with a
-      custom slot picker on Cal's API, handing off to Cal only at the confirm step. ~5s of the
-      current load is Cal's own app booting and cannot be optimised from our side.
+- [x] Custom slot picker on Cal's API — done for `/workwithus` 2026-09-29 (see decisions.md).
 

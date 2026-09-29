@@ -1,6 +1,26 @@
 # Session Summaries
 *Dated wrap-ups. Newest at top.*
 
+# 2026-09-29 — /workwithus: instant time slots, no embed
+
+**TL;DR:** Ported the AB Systems instant slot picker to `/workwithus`. Real Cal times are baked into the page
+and sit above the fold in a compact day-strip + time grid; booking is tap → name, email, phone, spend band,
+straight through Cal's API. Leads, Slack and CAPI still flow via Cal's webhook to Signal.
+
+## What we discussed
+- Archie wants it to feel like a no-brainer: watch the ad, land, "yeah, this sounds like me", tap a time.
+  Scrolling further should keep wowing (fit list, logos, clip wall, case studies stay below).
+- Cal embed is slow on phones; Cal's public slots + bookings endpoints need no key.
+
+## What we decided / shipped
+- Compact hero (smaller headline, condensed sub), booking card straight under it, no month calendar and no
+  Cal event description. Sticky CTA starts hidden.
+- Phone is required by the Cal event, so the picker asks for it (UK `07…` auto-converted to `+44`).
+- Shipped with the CAPI website half. Details in `decisions.md`.
+
+## Next
+- One real test booking on production, then cancel. Consider making phone optional in Cal.
+
 # 2026-09-28 — Meta audit → /workwithus repositioned for established brands
 
 **TL;DR:** The first Meta campaigns booked calls, but from brand-new brands. With Jack's sign-off,

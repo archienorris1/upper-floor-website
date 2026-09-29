@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { trackMeta } from '@/lib/meta'
+import { calLeadEventId, calMetaMetadata, trackMeta } from '@/lib/meta'
 
 const EMBED_JS = 'https://app.cal.com/embed/embed.js'
 const ORIGIN = 'https://app.cal.com'
@@ -82,6 +82,8 @@ type Props = {
   theme?: 'light' | 'dark'
   /** Reserved height, so the page doesn't jump while the calendar loads. */
   minHeight?: number
+  /** Drop Cal's event title and description, leaving just the calendar. */
+  hideEventTypeDetails?: boolean
   /** Fires once the visitor has confirmed a booking inside the embed. */
   onBookingSuccessful?: () => void
   className?: string
@@ -92,6 +94,7 @@ export default function CalEmbed({
   id,
   theme = 'light',
   minHeight = 700,
+  hideEventTypeDetails = false,
   onBookingSuccessful,
   className,
 }: Props) {
@@ -117,12 +120,12 @@ export default function CalEmbed({
       calLink,
       // theme is set here as well as in ui() below: this one themes the container
       // and loading skeleton, ui() themes the calendar inside the iframe.
-      config: { layout: 'month_view', theme },
+      config: { layout: 'month_view', theme, ...calMetaMetadata() },
     })
     cal.ns[namespace]('ui', {
       theme,
       layout: 'month_view',
-      hideEventTypeDetails: false,
+      hideEventTypeDetails,
       cssVarsPerTheme: {
         light: { 'cal-brand': '#1B8A3F' },
         dark: { 'cal-brand': '#1B8A3F' },
@@ -132,15 +135,18 @@ export default function CalEmbed({
     // needs, since the confirmation never leaves the embed. Every embed reports
     // the booking to Meta, wherever on the site it sits. bookingSuccessfulV2
     // replaces Cal's deprecated bookingSuccessful and fires for new bookings only.
+    // Lead carries the booking uid as its event id: Signal sends the same Lead from
+    // the Cal webhook via the Conversions API, and the shared id makes them one.
     cal.ns[namespace]('on', {
       action: 'bookingSuccessfulV2',
-      callback: () => {
+      callback: (e: unknown) => {
+        const uid = (e as { detail?: { data?: { uid?: string } } })?.detail?.data?.uid
         trackMeta('Schedule')
-        trackMeta('Lead')
+        trackMeta('Lead', undefined, uid ? calLeadEventId(uid) : undefined)
         onBookedRef.current?.()
       },
     })
-  }, [calLink, id, theme])
+  }, [calLink, id, theme, hideEventTypeDetails])
 
   // Drop the skeleton once Cal flags the embed as loaded. Cal sets loading="done"
   // on its <cal-inline> element after the iframe reports its real dimensions.

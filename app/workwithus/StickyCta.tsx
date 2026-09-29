@@ -8,7 +8,9 @@ import { useEffect, useState } from 'react'
  * pointing at a calendar the visitor is already looking at.
  */
 export default function StickyCta() {
-  const [hidden, setHidden] = useState(false)
+  // Starts hidden: the booking card is on the first screen, so the bar only earns
+  // its place once the visitor scrolls past it.
+  const [hidden, setHidden] = useState(true)
 
   useEffect(() => {
     const target = document.getElementById('book')

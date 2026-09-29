@@ -113,3 +113,25 @@
   - Narrows the 2026-09-08 "no qualify/gatekeeping" rule: still warm ("we would love to talk when you
     get there"), but it now says who it's for. That rule was about site copy; ads may be punchier.
 
+- **`/workwithus` books through Cal's public API, not the embed** (2026-09-29, Archie) — paid traffic
+  lands on a phone, often in Instagram's browser, where the Cal embed took seconds to show a calendar.
+  Copied from the AB Systems operations-check picker and tuned for UF.
+  - `page.tsx` calls `freeSlots()` (`lib/cal-api.ts`) on the server, ISR 60s, so real times are in the
+    HTML on first paint. `BookCall` refreshes them quietly after load (`/api/slots`, also ISR 60s).
+  - Layout (Archie's call, modelled on AB): compact hero (smaller h1, one-line sub), then one card with a
+    day strip + 6 time buttons, all above the fold at 375×812. No month calendar, no Cal event description.
+    "More times on <day>" expands the grid. The sticky mobile CTA starts hidden.
+  - Booking: tap a time → name, email, phone, spend band (4 chips) → `/api/book` → `POST api.cal.com/v2/bookings`
+    (event id `6918210`, overridable via `CAL_EVENT_TYPE_ID`). No API key: both endpoints are public.
+  - Cal's required fields are name, email, **phone** (`attendeePhoneNumber`, a system field that only shows
+    up as `type: unknown` in the event-type API; E.164 only, `toE164` turns `07…` into `+44…`) and the spend
+    question `What-is-your-current-ad-spend-on-meta-pm` (array). **Add a required question in Cal and API
+    bookings 400 until the picker asks it too.** Test a booking after any Cal form change.
+  - Cal's booking window is 5 business days, so the strip shows 5 days; widen it in Cal and more appear
+    (fetches 21 days, shows up to 12).
+  - Tracking unchanged: Cal webhook → Signal (lead, #leads, CAPI). The browser fires `Schedule` + `Lead`
+    with event id `cal-booking-<uid>` from the API response; fbp/fbc/ua go in booking `metadata`
+    (`metaBrowserIds()` in `lib/meta.ts`, shared with the embed's `calMetaMetadata()`).
+  - Fallback: the Cal embed (details hidden) renders only if no slots load. Other pages keep `CalEmbed`.
+  - Verified with past-date bookings (Cal rejects only "in the past"), so no real test booking yet.
+

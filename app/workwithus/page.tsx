@@ -9,6 +9,7 @@ import WorkGrid from './WorkGrid'
 import FormatGrid from './FormatGrid'
 import BookCall from './BookCall'
 import StickyCta from './StickyCta'
+import { freeSlots } from '@/lib/cal-api'
 
 /*
   Paid-traffic landing page. Deliberately self-contained: no site nav, no
@@ -176,7 +177,15 @@ function CaseCard({
   )
 }
 
-export default function WorkWithUsPage() {
+// The free call times are baked into the HTML (see BookCall), so re-render at most
+// once a minute to keep them current.
+export const revalidate = 60
+
+export default async function WorkWithUsPage() {
+  // Never let Cal being slow or down break the page: BookCall re-fetches, then falls
+  // back to the embed.
+  const slots = await freeSlots().catch(() => [] as string[])
+
   return (
     <SoundProvider>
       <main className="min-h-screen bg-brand-ink text-white">
@@ -193,8 +202,8 @@ export default function WorkWithUsPage() {
           </div>
         </header>
 
-        {/* ── Hero ── */}
-        <section className="relative flex min-h-[62svh] items-center justify-center overflow-hidden">
+        {/* ── Hero + booking — one screen: a short promise, then real times to tap ── */}
+        <section className="relative overflow-hidden">
           <video
             className="hero-zoom absolute inset-0 h-full w-full object-cover opacity-50"
             autoPlay
@@ -206,29 +215,31 @@ export default function WorkWithUsPage() {
           >
             <source src="/media/hero.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-brand-ink/70 via-brand-ink/50 to-brand-ink" />
+          <div className="absolute inset-0 bg-gradient-to-b from-brand-ink/70 via-brand-ink/60 to-brand-ink" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(27,138,63,0.25),transparent_60%)]" />
 
-          <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center px-5 pb-12 pt-28 text-center md:pb-16 md:pt-36">
-            <p className="hero-load hero-load-1 text-xs font-semibold uppercase tracking-[0.3em] text-white/60">
-              For established ecom brands
-            </p>
-            <h1 className="hero-load hero-load-2 mt-6 font-serif text-[2.6rem] leading-[1.05] tracking-headline md:text-7xl">
-              A second pair of eyes on your Meta account.
-            </h1>
-            <p className="hero-load hero-load-3 mx-auto mt-7 max-w-xl text-base leading-relaxed text-white/80 md:text-lg">
-              Book a free audit call. We go through your ad account with you, show you what is
-              working and what is not, and you leave with a plan. From the team that makes the
-              creative and runs the ads behind $700k months.
-            </p>
-            <p className="hero-load hero-load-4 mt-7 text-xs text-white/50">
-              Free 30-minute ad account audit · No pitch deck · No commitment
-            </p>
+          <div className="relative z-10 mx-auto max-w-2xl px-4 pb-4 pt-20 md:px-8 md:pt-32">
+            <div className="text-center">
+              <p className="hero-load hero-load-1 text-[11px] font-semibold uppercase tracking-[0.25em] text-white/60">
+                For established ecom brands
+              </p>
+              <h1 className="hero-load hero-load-2 mt-3 font-serif text-[2rem] leading-[1.08] tracking-headline md:mt-4 md:text-5xl">
+                A second pair of eyes on your Meta account.
+              </h1>
+              <p className="hero-load hero-load-3 mx-auto mt-3 max-w-md text-[15px] leading-snug text-white/75 md:mt-4 md:text-base">
+                A free 30-minute audit of your ad account. You leave with a plan, from the team
+                behind $700k months.
+              </p>
+            </div>
+
+            <div id="book" className="hero-load hero-load-4 mt-5 scroll-mt-24 md:mt-8">
+              <BookCall initialSlots={slots} />
+            </div>
           </div>
         </section>
 
-        {/* ── Fit check + booking — straight under the hero, no clicking to find it ── */}
-        <section id="book" className="scroll-mt-20 px-4 pb-16 pt-6 md:px-8 md:pb-24 md:pt-10">
+        {/* ── Fit check — straight under the booking card ── */}
+        <section className="px-4 pb-16 pt-10 md:px-8 md:pb-24 md:pt-14">
           <div className="mx-auto grid max-w-5xl gap-4 md:grid-cols-2 md:gap-5">
             <div className="rounded-2xl border border-brand-green/40 bg-brand-green/[0.08] p-6 md:p-7">
               <p className="text-sm font-semibold text-white">This is for you if&hellip;</p>
@@ -261,7 +272,6 @@ export default function WorkWithUsPage() {
               </p>
             </div>
           </div>
-          <BookCall />
         </section>
 
         {/* ── Client logo ticker ── */}

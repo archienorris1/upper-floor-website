@@ -1,6 +1,15 @@
 # Progress
 *What was done, errors hit, tests run, results.*
 
+## 2026-09-29 — /workwithus: instant slot picker (Cal API), times above the fold
+- Built `lib/cal-api.ts`, `app/api/slots`, `app/api/book`; rewrote `app/workwithus/BookCall.tsx` as the picker;
+  hero compacted and the card moved into it; `CalEmbed` gained `hideEventTypeDetails`; `StickyCta` starts hidden.
+- Hit: Cal requires `attendeePhoneNumber` (hidden in API as `type: unknown`) and rejects non-E.164 numbers
+  (even Ofcom drama numbers like 07700 900xxx) → added phone field + `toE164`.
+- Probed the full payload with past dates: every Cal validation passes, only "in the past" fails.
+- tsc clean, `next build` clean; `/workwithus` + `/api/slots` both ISR 60s in the prerender manifest.
+- Shipped the CAPI website half (`CalEmbed.tsx` + `lib/meta.ts`) with it, since the picker reuses it.
+
 ## 2026-09-28 — /workwithus: audit offer, qualify/disqualify, calendar up top
 - Meta audit of the first two Upper Floor campaigns (via Meta MCP): 3 LP bookings @ £22, 2 instant-form
   leads @ £50 (poor). Audience Network took ~85% of LP clicks, 0 bookings. Instant forms paused, LP → £40/day
