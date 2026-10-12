@@ -29,7 +29,6 @@ const BRANDS: Brand[] = [
     displayHeight: 20,
     blurb: 'Organic, ASMR, trends and UGC ads for a night-sky projector brand.',
     videos: [
-      'aurora-7',
       'aurora-8',
       'aurora-9',
       'aurora-10',
