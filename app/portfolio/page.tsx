@@ -4,7 +4,7 @@ import PortfolioClient from './PortfolioClient'
 export const metadata: Metadata = {
   title: 'Portfolio',
   description:
-    'Selected work from Upper Floor — UGC ads, talking heads, animated explainers, motion ads and organic content for brands like Aurora, ION8, KELV, Dissertation Collective, Fastframe, Toastybody and Fidgie.',
+    'Selected work from Upper Floor — UGC ads, talking heads, animated explainers, motion ads and organic content for brands like Fastframe, True Fuels, KELV, Somerwell, ION8, Aurora, Dissertation Collective, Toastybody and Fidgie.',
   alternates: {
     canonical: '/portfolio',
   },
