@@ -38,10 +38,8 @@ export function SoundProvider({ children }: { children: React.ReactNode }) {
   )
 }
 
-/** One screen ahead: fetch just the container metadata so play() can start within a round trip. */
-const META_ROOT_MARGIN = '100% 0px'
-/** A quarter screen ahead: buffer properly, the clip is about to play. */
-const AUTO_ROOT_MARGIN = '25% 0px'
+/** Only warm clips close to the viewport; release buffers once they leave it. */
+const WARM_ROOT_MARGIN = '200px'
 /** Play once this much of the clip is on screen. */
 const PLAY_THRESHOLD = 0.35
 
@@ -70,35 +68,35 @@ export function SoundVideoCard({ id, eager = false, label, className = '' }: Pro
     const video = videoRef.current
     if (!video) return
 
-    // 1. Staged warm-up. Nothing is fetched on mount; a screen ahead we pull the
-    //    metadata, a quarter screen ahead we buffer for real. Keeps a 35-clip
-    //    page from downloading everything at once (and away from Cal.com).
-    const raise = (level: 'metadata' | 'auto') => {
-      if (video.preload === 'auto') return
-      if (level === 'auto' || video.preload === 'none') video.preload = level
+    // Attach sources only near the viewport. Removing distant sources aborts
+    // their in-flight range requests instead of queuing them ahead of visible clips.
+    const ensureSource = (level: 'metadata' | 'auto') => {
+      if (!video.hasAttribute('src')) {
+        video.preload = level
+        video.src = portfolioSrc(id)
+        video.load()
+      } else if (level === 'auto') video.preload = 'auto'
     }
-    if (eager) raise('auto')
-    const stage = (level: 'metadata' | 'auto', rootMargin: string) => {
-      const io = new IntersectionObserver(
-        (entries) => {
-          if (entries.some((e) => e.isIntersecting)) {
-            raise(level)
-            io.disconnect()
-          }
-        },
-        { rootMargin }
-      )
-      io.observe(video)
-      return io
-    }
-    const metaIo = stage('metadata', META_ROOT_MARGIN)
-    const autoIo = stage('auto', AUTO_ROOT_MARGIN)
+    const warmIo = new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) ensureSource(eager ? 'auto' : 'metadata')
+        else if (video.hasAttribute('src')) {
+          video.pause()
+          video.removeAttribute('src')
+          video.load()
+          setPlaying(false)
+          if (unmutedRef.current) setUnmutedId(null)
+        }
+      }
+    }, { rootMargin: WARM_ROOT_MARGIN })
+    warmIo.observe(video)
 
     // 2. Play / pause on visibility, like a social feed.
     const playIo = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            ensureSource('auto')
             video.play().catch(() => {
               // Unmuted autoplay is blocked without a fresh gesture —
               // fall back to muted playback
@@ -120,8 +118,7 @@ export function SoundVideoCard({ id, eager = false, label, className = '' }: Pro
     playIo.observe(video)
 
     return () => {
-      metaIo.disconnect()
-      autoIo.disconnect()
+      warmIo.disconnect()
       playIo.disconnect()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -140,7 +137,6 @@ export function SoundVideoCard({ id, eager = false, label, className = '' }: Pro
     >
       <video
         ref={videoRef}
-        src={portfolioSrc(id)}
         muted={!unmuted}
         loop
         playsInline
