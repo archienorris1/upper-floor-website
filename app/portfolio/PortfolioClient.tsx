@@ -40,9 +40,9 @@ const BRANDS: Brand[] = [
   },
   {
     name: 'Somerwell',
-    logo: '/media/portfolio/logo-somerwell-v1.png',
-    logoWidth: 500,
-    logoHeight: 161,
+    logo: '/media/portfolio/logo-somerwell-v2.svg',
+    logoWidth: 613,
+    logoHeight: 194,
     displayHeight: 28,
     blurb: 'Podcast-style ad creative.',
     videos: ['somerwell-1'],
@@ -141,7 +141,7 @@ BRANDS.sort((a, b) => brandRank(a.name) - brandRank(b.name))
 
 export const TICKER_LOGOS = [
   { src: '/media/portfolio/logo-truefuels-v1.png', alt: 'True Fuels', w: 427, h: 70, height: 19 },
-  { src: '/media/portfolio/logo-somerwell-v1.png', alt: 'Somerwell', w: 500, h: 161, height: 26 },
+  { src: '/media/portfolio/logo-somerwell-v2.svg', alt: 'Somerwell', w: 613, h: 194, height: 26 },
   { src: '/media/portfolio/logo-fastframe.svg', alt: 'Fastframe', w: 222, h: 30, height: 17 },
   { src: '/media/portfolio/logo-ion8.png', alt: 'ION8', w: 484, h: 240, height: 22 },
   { src: '/media/portfolio/logo-songarchitect.png', alt: 'Song Architect', w: 305, h: 147, height: 38 },
@@ -287,10 +287,10 @@ export default function PortfolioClient() {
         {/* ── Hero — compact masthead so the work sits above the fold ── */}
         <header className="flex flex-col items-center px-6 pb-8 pt-10 text-center md:pb-10 md:pt-14">
           <Image
-            src="/media/portfolio/logo-upperfloor.png"
+            src="/media/portfolio/logo-upperfloor-v2.svg"
             alt="Upper Floor"
-            width={620}
-            height={354}
+            width={833}
+            height={476}
             priority
             className="hero-load hero-load-1 w-24 md:w-32"
           />
