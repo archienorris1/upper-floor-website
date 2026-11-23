@@ -25,6 +25,7 @@ type Brand = {
   videos: string[]
   statics?: StaticAd[]
   result?: { value: string; label: string }
+  videoResults?: Record<string, { value: string; label: string }>
 }
 
 const PRIORITY_BRANDS = ['Fastframe', 'Mello', 'True Fuels', 'Aurora', 'KELV', 'Somerwell', 'ION8']
@@ -77,6 +78,7 @@ const BRANDS: Brand[] = [
     logoHeight: 30,
     displayHeight: 20,
     blurb: 'UGC ads and product content.',
+    videoResults: { 'fastframe-7': { value: '140k', label: 'organic views' } },
     videos: [
       'fastframe-7',
       'fastframe-8',
@@ -345,6 +347,12 @@ function BrandSection({ brand, index, format }: { brand: Brand; index: number; f
           {isVideo ? brand.videos.map((id, i) => (
             <div key={id} className={cardClass}>
               <SoundVideoCard id={id} eager={index === 0 && i < 2} />
+              {brand.videoResults?.[id] && (
+                <p className="mt-3 flex items-baseline gap-2 px-1">
+                  <span className="text-2xl font-bold tracking-tight text-[#E07BA3]">{brand.videoResults[id].value}</span>
+                  <span className="text-xs text-white/70">{brand.videoResults[id].label}</span>
+                </p>
+              )}
             </div>
           )) : statics.map(ad => {
             const src = `/media/portfolio/statics/${ad.id}.webp`
