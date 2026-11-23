@@ -28,7 +28,7 @@ type Brand = {
   videoResults?: Record<string, { value: string; label: string }>
 }
 
-const PRIORITY_BRANDS = ['Fastframe', 'Mello', 'True Fuels', 'Aurora', 'KELV', 'Somerwell', 'ION8']
+const PRIORITY_BRANDS = ['Mello', 'True Fuels', 'Aurora', 'Somerwell', 'Fastframe', 'KELV', 'ION8']
 const brandRank = (name: string) => {
   const rank = PRIORITY_BRANDS.indexOf(name)
   return rank < 0 ? PRIORITY_BRANDS.length : rank
