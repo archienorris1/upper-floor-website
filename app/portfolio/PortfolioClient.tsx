@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 import { STATIC_ADS, type StaticAd } from './static-ads'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -25,7 +25,6 @@ type Brand = {
   videos: string[]
   statics?: StaticAd[]
   result?: { value: string; label: string }
-  videoResults?: Record<string, { value: string; label: string }>
 }
 
 const PRIORITY_BRANDS = ['Fastframe', 'Mello', 'True Fuels', 'Aurora', 'KELV', 'Somerwell', 'ION8']
@@ -43,8 +42,12 @@ const BRANDS: Brand[] = [
     logoWidth: 420,
     logoHeight: 136,
     displayHeight: 28,
-    blurb: 'Animated explainers and gifting ads.',
-    videos: ['mello-1', 'mello-2', 'mello-3'],
+    blurb: 'UGC, animation and gifting ads.',
+    result: { value: '£82k', label: 'in Meta ad spend in 30 days' },
+    videos: [
+      'mello-1', 'mello-2', 'mello-3', 'mello-4', 'mello-5', 'mello-6',
+      'mello-7', 'mello-8', 'mello-9', 'mello-10', 'mello-11',
+    ],
   },
   {
     name: 'True Fuels',
@@ -54,6 +57,7 @@ const BRANDS: Brand[] = [
     logoHeight: 70,
     displayHeight: 22,
     blurb: 'Paid social creative.',
+    result: { value: '3.6×', label: 'ROAS' },
     videos: ['truefuels-5', 'truefuels-6', 'truefuels-7', 'truefuels-1', 'truefuels-2', 'truefuels-3', 'truefuels-4'],
   },
   {
@@ -63,6 +67,7 @@ const BRANDS: Brand[] = [
     logoHeight: 194,
     displayHeight: 28,
     blurb: 'Podcast-style and musical ads.',
+    result: { value: '$481k', label: 'in Meta ad spend in 30 days' },
     videos: ['somerwell-1', 'somerwell-2'],
   },
   {
@@ -72,7 +77,6 @@ const BRANDS: Brand[] = [
     logoHeight: 30,
     displayHeight: 20,
     blurb: 'UGC ads and product content.',
-    videoResults: { 'fastframe-7': { value: '140k', label: 'organic views' } },
     videos: [
       'fastframe-7',
       'fastframe-8',
@@ -94,7 +98,7 @@ const BRANDS: Brand[] = [
     logoHeight: 48,
     displayHeight: 20,
     blurb: 'Organic, ASMR, trends and UGC ads for a night-sky projector brand.',
-    result: { value: '2000x', label: 'increase in engagement' },
+    result: { value: '$700k', label: 'in revenue in 30 days' },
     videos: [
       'aurora-11',
       'aurora-12',
@@ -152,8 +156,8 @@ const BRANDS: Brand[] = [
     logoWidth: 325,
     logoHeight: 64,
     displayHeight: 24,
-    blurb: 'UGC ads that took the brand to a $28.5k day.',
-    result: { value: '4x', label: 'ROAS' },
+    blurb: 'UGC and paid social ads.',
+    result: { value: '4×', label: 'ROAS on $25k spend' },
     videos: ['toastybody-1', 'toastybody-2'],
   },
   {
@@ -232,19 +236,47 @@ function BrandLogo({
    Brand section
    ───────────────────────────────────────────── */
 
-/** Desktop grid: 4-up when the set divides by four, otherwise 3-up; pairs sit centred. */
-function gridClass(count: number) {
-  if (count <= 2) return 'md:flex md:justify-center'
-  if (count % 4 === 0) return 'md:grid md:grid-cols-3 md:gap-6 xl:grid-cols-4'
-  return 'md:grid md:grid-cols-3 md:gap-6'
-}
-
 function BrandSection({ brand, index, format }: { brand: Brand; index: number; format: Format }) {
   const isVideo = format === 'Videos'
   const statics = brand.statics ?? []
   const count = isVideo ? brand.videos.length : statics.length
-  const pair = count <= 2
-  const cardClass = `w-[72vw] max-w-[340px] flex-none snap-center md:w-full ${pair ? 'md:max-w-[340px]' : 'md:max-w-none'}`
+  const rowRef = useRef<HTMLDivElement>(null)
+  const rowId = useId()
+  const [edges, setEdges] = useState({ atStart: true, atEnd: true })
+  const cardClass = 'w-[72vw] max-w-[340px] flex-none snap-center md:w-[30%] md:min-w-[220px] md:snap-start'
+
+  useEffect(() => {
+    const row = rowRef.current
+    if (!row) return
+
+    function syncEdges() {
+      if (!row) return
+      const atStart = row.scrollLeft < 2
+      const atEnd = row.scrollLeft + row.clientWidth >= row.scrollWidth - 2
+      setEdges(prev => prev.atStart === atStart && prev.atEnd === atEnd ? prev : { atStart, atEnd })
+    }
+
+    const resize = new ResizeObserver(syncEdges)
+    resize.observe(row)
+    row.addEventListener('scroll', syncEdges, { passive: true })
+    syncEdges()
+    return () => {
+      resize.disconnect()
+      row.removeEventListener('scroll', syncEdges)
+    }
+  }, [])
+
+  function move(direction: number) {
+    const row = rowRef.current
+    const card = row?.firstElementChild
+    if (!row || !card) return
+    const step = card.getBoundingClientRect().width + parseFloat(getComputedStyle(row).columnGap)
+    row.scrollBy({
+      left: direction * step * Math.max(1, Math.floor(row.clientWidth / step)),
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
+    })
+  }
+
   const logo = (
     <BrandLogo
       src={brand.logo}
@@ -263,6 +295,25 @@ function BrandSection({ brand, index, format }: { brand: Brand; index: number; f
         <div className="flex items-center gap-5 md:gap-8">
           {brand.website ? <a href={brand.website}>{logo}</a> : logo}
           <div className="h-px flex-1 bg-white/10" />
+          {!(edges.atStart && edges.atEnd) && (
+            <div className="hidden gap-2 md:flex">
+              {(['Previous', 'Next'] as const).map(action => (
+                <button
+                  key={action}
+                  type="button"
+                  aria-label={`${action} ${brand.name} ${format.toLowerCase()}`}
+                  aria-controls={rowId}
+                  disabled={action === 'Previous' ? edges.atStart : edges.atEnd}
+                  onClick={() => move(action === 'Previous' ? -1 : 1)}
+                  className="grid h-10 w-10 place-items-center rounded-full border border-white/25 text-white hover:bg-white/10 focus-visible:outline-white disabled:opacity-25"
+                >
+                  <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d={action === 'Previous' ? 'M15 5l-7 7 7 7' : 'M9 5l7 7-7 7'} />
+                  </svg>
+                </button>
+              ))}
+            </div>
+          )}
           <span className="shrink-0 text-xs font-medium tracking-[0.25em] text-white/30">
             {String(index + 1).padStart(2, '0')}
           </span>
@@ -273,7 +324,7 @@ function BrandSection({ brand, index, format }: { brand: Brand; index: number; f
               ? <>{brand.blurb} <span className="text-white/25">· {count} {count === 1 ? 'clip' : 'clips'}</span></>
               : <>{count} static {count === 1 ? 'ad' : 'ads'}</>}
           </p>
-          {isVideo && brand.result && (
+          {brand.result && (
             <p className="flex shrink-0 items-baseline gap-2">
               <span className="text-2xl font-bold tracking-tight text-[#E07BA3]">{brand.result.value}</span>
               <span className="text-xs text-white/70">{brand.result.label}</span>
@@ -282,46 +333,44 @@ function BrandSection({ brand, index, format }: { brand: Brand; index: number; f
         </div>
       </div>
 
-      {/* Swipe row on mobile, grid on desktop */}
-      <div
-        className={`hide-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 md:mx-auto md:max-w-[1200px] md:snap-none md:gap-6 md:overflow-visible lg:px-12 ${gridClass(
-          count
-        )}`}
-      >
-        {isVideo ? brand.videos.map((id, i) => (
-          <div key={id} className={cardClass}>
-            <SoundVideoCard id={id} eager={index === 0 && i < 2} />
-            {brand.videoResults?.[id] && (
-              <p className="mt-3 flex items-baseline gap-2 px-1">
-                <span className="text-2xl font-bold tracking-tight text-[#E07BA3]">{brand.videoResults[id].value}</span>
-                <span className="text-xs text-white/70">{brand.videoResults[id].label}</span>
-              </p>
-            )}
-          </div>
-        )) : statics.map(ad => {
-          const src = `/media/portfolio/statics/${ad.id}.webp`
-          return (
-            <a
-              key={ad.id}
-              href={src}
-              target="_blank"
-              rel="noopener"
-              aria-label={`Open full-size ${brand.name} ad in a new tab: ${ad.alt}`}
-              className={`${cardClass} self-start rounded-2xl focus-visible:outline-white`}
-            >
-              <Image
-                src={src}
-                alt={`${brand.name} — ${ad.alt}`}
-                width={ad.width}
-                height={ad.height}
-                unoptimized
-                className="block h-auto w-full rounded-2xl"
-              />
-            </a>
-          )
-        })}
-        {/* trailing spacer so the last card can centre on mobile */}
-        <div className="w-2 flex-none md:hidden" aria-hidden="true" />
+      <div className="mx-auto max-w-[1200px] md:px-6 lg:px-12">
+        <div
+          ref={rowRef}
+          id={rowId}
+          role="region"
+          aria-label={`${brand.name} ${format.toLowerCase()}`}
+          tabIndex={0}
+          className="hide-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 focus-visible:outline-white md:gap-6 md:px-0"
+        >
+          {isVideo ? brand.videos.map((id, i) => (
+            <div key={id} className={cardClass}>
+              <SoundVideoCard id={id} eager={index === 0 && i < 2} />
+            </div>
+          )) : statics.map(ad => {
+            const src = `/media/portfolio/statics/${ad.id}.webp`
+            return (
+              <a
+                key={ad.id}
+                href={src}
+                target="_blank"
+                rel="noopener"
+                aria-label={`Open full-size ${brand.name} ad in a new tab: ${ad.alt}`}
+                className={`${cardClass} self-start rounded-2xl focus-visible:outline-white`}
+              >
+                <Image
+                  src={src}
+                  alt={`${brand.name} — ${ad.alt}`}
+                  width={ad.width}
+                  height={ad.height}
+                  unoptimized
+                  className="block h-auto w-full rounded-2xl"
+                />
+              </a>
+            )
+          })}
+          {/* trailing spacer so the last card can centre on mobile */}
+          <div className="w-2 flex-none md:hidden" aria-hidden="true" />
+        </div>
       </div>
     </section>
   )
