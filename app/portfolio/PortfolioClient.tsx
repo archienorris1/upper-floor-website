@@ -11,6 +11,7 @@ import { SoundProvider, SoundVideoCard } from '@/components/site/SoundVideo'
 type Brand = {
   name: string
   logo: string
+  website?: string
   logoWidth: number
   logoHeight: number
   /* rendered logo height (px) in the section header */
@@ -22,7 +23,7 @@ type Brand = {
   videoResults?: Record<string, { value: string; label: string }>
 }
 
-const PRIORITY_BRANDS = ['Fastframe', 'True Fuels', 'KELV', 'Somerwell', 'ION8', 'Aurora']
+const PRIORITY_BRANDS = ['Fastframe', 'Mello', 'True Fuels', 'Aurora', 'KELV', 'Somerwell', 'ION8']
 const brandRank = (name: string) => {
   const rank = PRIORITY_BRANDS.indexOf(name)
   return rank < 0 ? PRIORITY_BRANDS.length : rank
@@ -30,13 +31,23 @@ const brandRank = (name: string) => {
 
 const BRANDS: Brand[] = [
   {
+    name: 'Mello',
+    website: 'https://www.mellorelief.com',
+    logo: '/media/portfolio/logo-mello.png',
+    logoWidth: 420,
+    logoHeight: 136,
+    displayHeight: 28,
+    blurb: 'Animated explainers and gifting ads.',
+    videos: ['mello-1', 'mello-2', 'mello-3'],
+  },
+  {
     name: 'True Fuels',
     logo: '/media/portfolio/logo-truefuels-v1.png',
     logoWidth: 427,
     logoHeight: 70,
     displayHeight: 22,
     blurb: 'Paid social creative.',
-    videos: ['truefuels-1', 'truefuels-2', 'truefuels-3', 'truefuels-4'],
+    videos: ['truefuels-5', 'truefuels-6', 'truefuels-7', 'truefuels-1', 'truefuels-2', 'truefuels-3', 'truefuels-4'],
   },
   {
     name: 'Somerwell',
@@ -44,8 +55,8 @@ const BRANDS: Brand[] = [
     logoWidth: 613,
     logoHeight: 194,
     displayHeight: 28,
-    blurb: 'Podcast-style ad creative.',
-    videos: ['somerwell-1'],
+    blurb: 'Podcast-style and musical ads.',
+    videos: ['somerwell-1', 'somerwell-2'],
   },
   {
     name: 'Fastframe',
@@ -140,6 +151,7 @@ const BRANDS: Brand[] = [
 BRANDS.sort((a, b) => brandRank(a.name) - brandRank(b.name))
 
 export const TICKER_LOGOS = [
+  { src: '/media/portfolio/logo-mello.png', alt: 'Mello', w: 420, h: 136, height: 24 },
   { src: '/media/portfolio/logo-truefuels-v1.png', alt: 'True Fuels', w: 427, h: 70, height: 19 },
   { src: '/media/portfolio/logo-somerwell-v2.svg', alt: 'Somerwell', w: 613, h: 194, height: 26 },
   { src: '/media/portfolio/logo-fastframe.svg', alt: 'Fastframe', w: 222, h: 30, height: 17 },
@@ -209,20 +221,23 @@ function gridClass(count: number) {
 
 function BrandSection({ brand, index }: { brand: Brand; index: number }) {
   const pair = brand.videos.length <= 2
+  const logo = (
+    <BrandLogo
+      src={brand.logo}
+      alt={brand.name}
+      width={brand.logoWidth}
+      height={brand.logoHeight}
+      displayHeight={brand.displayHeight}
+      className="shrink-0"
+    />
+  )
 
   return (
     <section data-portfolio-brand={brand.name} className="py-14 md:py-20">
       {/* header */}
       <div className="mx-auto mb-7 max-w-[1200px] px-6 md:mb-10 lg:px-12 reveal-on-scroll">
         <div className="flex items-center gap-5 md:gap-8">
-          <BrandLogo
-            src={brand.logo}
-            alt={brand.name}
-            width={brand.logoWidth}
-            height={brand.logoHeight}
-            displayHeight={brand.displayHeight}
-            className="shrink-0"
-          />
+          {brand.website ? <a href={brand.website}>{logo}</a> : logo}
           <div className="h-px flex-1 bg-white/10" />
           <span className="shrink-0 text-xs font-medium tracking-[0.25em] text-white/30">
             {String(index + 1).padStart(2, '0')}
