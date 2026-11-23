@@ -1,5 +1,7 @@
 'use client'
 
+import { useState } from 'react'
+import { STATIC_ADS, type StaticAd } from './static-ads'
 import Image from 'next/image'
 import Link from 'next/link'
 import { SoundProvider, SoundVideoCard } from '@/components/site/SoundVideo'
@@ -7,6 +9,8 @@ import { SoundProvider, SoundVideoCard } from '@/components/site/SoundVideo'
 /* ─────────────────────────────────────────────
    Data
    ───────────────────────────────────────────── */
+
+type Format = 'Videos' | 'Statics'
 
 type Brand = {
   name: string
@@ -19,6 +23,7 @@ type Brand = {
   /* one-line description of what we make for them */
   blurb: string
   videos: string[]
+  statics?: StaticAd[]
   result?: { value: string; label: string }
   videoResults?: Record<string, { value: string; label: string }>
 }
@@ -32,6 +37,7 @@ const brandRank = (name: string) => {
 const BRANDS: Brand[] = [
   {
     name: 'Mello',
+    statics: STATIC_ADS.mello,
     website: 'https://www.mellorelief.com',
     logo: '/media/portfolio/logo-mello.png',
     logoWidth: 420,
@@ -42,6 +48,7 @@ const BRANDS: Brand[] = [
   },
   {
     name: 'True Fuels',
+    statics: STATIC_ADS.truefuels,
     logo: '/media/portfolio/logo-truefuels-v1.png',
     logoWidth: 427,
     logoHeight: 70,
@@ -81,6 +88,7 @@ const BRANDS: Brand[] = [
   },
   {
     name: 'Aurora',
+    statics: STATIC_ADS.aurora,
     logo: '/media/portfolio/logo-aurora.png',
     logoWidth: 280,
     logoHeight: 48,
@@ -139,6 +147,7 @@ const BRANDS: Brand[] = [
   },
   {
     name: 'Toastybody',
+    statics: STATIC_ADS.toastybody,
     logo: '/media/portfolio/logo-toastybody.png',
     logoWidth: 325,
     logoHeight: 64,
@@ -146,6 +155,17 @@ const BRANDS: Brand[] = [
     blurb: 'UGC ads that took the brand to a $28.5k day.',
     result: { value: '4x', label: 'ROAS' },
     videos: ['toastybody-1', 'toastybody-2'],
+  },
+  {
+    name: 'Glasselle',
+    website: 'https://www.glasselle.com',
+    logo: '/media/portfolio/logo-glasselle.png',
+    logoWidth: 426,
+    logoHeight: 113,
+    displayHeight: 27,
+    blurb: '',
+    videos: [],
+    statics: STATIC_ADS.glasselle,
   },
 ]
 BRANDS.sort((a, b) => brandRank(a.name) - brandRank(b.name))
@@ -219,8 +239,12 @@ function gridClass(count: number) {
   return 'md:grid md:grid-cols-3 md:gap-6'
 }
 
-function BrandSection({ brand, index }: { brand: Brand; index: number }) {
-  const pair = brand.videos.length <= 2
+function BrandSection({ brand, index, format }: { brand: Brand; index: number; format: Format }) {
+  const isVideo = format === 'Videos'
+  const statics = brand.statics ?? []
+  const count = isVideo ? brand.videos.length : statics.length
+  const pair = count <= 2
+  const cardClass = `w-[72vw] max-w-[340px] flex-none snap-center md:w-full ${pair ? 'md:max-w-[340px]' : 'md:max-w-none'}`
   const logo = (
     <BrandLogo
       src={brand.logo}
@@ -245,13 +269,11 @@ function BrandSection({ brand, index }: { brand: Brand; index: number }) {
         </div>
         <div className="mt-3 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm text-white/45">
-            {brand.blurb}
-            <span className="text-white/25">
-              {' '}
-              · {brand.videos.length} {brand.videos.length === 1 ? 'clip' : 'clips'}
-            </span>
+            {isVideo
+              ? <>{brand.blurb} <span className="text-white/25">· {count} {count === 1 ? 'clip' : 'clips'}</span></>
+              : <>{count} static {count === 1 ? 'ad' : 'ads'}</>}
           </p>
-          {brand.result && (
+          {isVideo && brand.result && (
             <p className="flex shrink-0 items-baseline gap-2">
               <span className="text-2xl font-bold tracking-tight text-[#E07BA3]">{brand.result.value}</span>
               <span className="text-xs text-white/70">{brand.result.label}</span>
@@ -260,19 +282,14 @@ function BrandSection({ brand, index }: { brand: Brand; index: number }) {
         </div>
       </div>
 
-      {/* videos — swipe row on mobile, grid on desktop */}
+      {/* Swipe row on mobile, grid on desktop */}
       <div
         className={`hide-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 md:mx-auto md:max-w-[1200px] md:snap-none md:gap-6 md:overflow-visible lg:px-12 ${gridClass(
-          brand.videos.length
+          count
         )}`}
       >
-        {brand.videos.map((id, i) => (
-          <div
-            key={id}
-            className={`w-[72vw] max-w-[340px] flex-none snap-center md:w-full ${
-              pair ? 'md:max-w-[340px]' : 'md:max-w-none'
-            }`}
-          >
+        {isVideo ? brand.videos.map((id, i) => (
+          <div key={id} className={cardClass}>
             <SoundVideoCard id={id} eager={index === 0 && i < 2} />
             {brand.videoResults?.[id] && (
               <p className="mt-3 flex items-baseline gap-2 px-1">
@@ -281,7 +298,28 @@ function BrandSection({ brand, index }: { brand: Brand; index: number }) {
               </p>
             )}
           </div>
-        ))}
+        )) : statics.map(ad => {
+          const src = `/media/portfolio/statics/${ad.id}.webp`
+          return (
+            <a
+              key={ad.id}
+              href={src}
+              target="_blank"
+              rel="noopener"
+              aria-label={`Open full-size ${brand.name} ad in a new tab: ${ad.alt}`}
+              className={`${cardClass} self-start rounded-2xl focus-visible:outline-white`}
+            >
+              <Image
+                src={src}
+                alt={`${brand.name} — ${ad.alt}`}
+                width={ad.width}
+                height={ad.height}
+                unoptimized
+                className="block h-auto w-full rounded-2xl"
+              />
+            </a>
+          )
+        })}
         {/* trailing spacer so the last card can centre on mobile */}
         <div className="w-2 flex-none md:hidden" aria-hidden="true" />
       </div>
@@ -293,94 +331,126 @@ function BrandSection({ brand, index }: { brand: Brand; index: number }) {
    Page
    ───────────────────────────────────────────── */
 
-const CLIP_COUNT = BRANDS.reduce((n, b) => n + b.videos.length, 0)
+const videoBrands = BRANDS.filter(brand => brand.videos.length)
+const staticBrands = BRANDS.filter(brand => brand.statics?.length)
+const clipCount = videoBrands.reduce((total, brand) => total + brand.videos.length, 0)
+const staticCount = staticBrands.reduce((total, brand) => total + (brand.statics?.length ?? 0), 0)
+const staticLogos = staticBrands.map(brand => ({
+  src: brand.logo, alt: brand.name, w: brand.logoWidth, h: brand.logoHeight, height: brand.displayHeight,
+}))
 
 export default function PortfolioClient() {
+  const [format, setFormat] = useState<Format>('Videos')
+  const isVideo = format === 'Videos'
+  const brands = isVideo ? videoBrands : staticBrands
+  const logos = isVideo ? TICKER_LOGOS : staticLogos
+
   return (
-    <SoundProvider>
-      <main className="min-h-screen bg-[#0E0E0E] text-white">
-        {/* ── Hero — compact masthead so the work sits above the fold ── */}
-        <header className="flex flex-col items-center px-6 pb-8 pt-10 text-center md:pb-10 md:pt-14">
-          <Image
-            src="/media/portfolio/logo-upperfloor-v2.svg"
-            alt="Upper Floor"
-            width={833}
-            height={476}
-            priority
-            className="hero-load hero-load-1 w-24 md:w-32"
-          />
-          <p className="hero-load hero-load-2 mt-5 text-[11px] font-medium tracking-[0.4em] text-white/40">
-            CLIENT PORTFOLIO
-          </p>
-          <p className="hero-load hero-load-3 mt-2 text-sm text-white/50">
-            {CLIP_COUNT} clips across {BRANDS.length} brands. Tap any clip for sound.
-          </p>
-        </header>
+    <main className="min-h-screen bg-[#0E0E0E] text-white">
+      {/* ── Hero — compact masthead so the work sits above the fold ── */}
+      <header className="flex flex-col items-center px-6 pb-8 pt-10 text-center md:pb-10 md:pt-14">
+        <Image
+          src="/media/portfolio/logo-upperfloor-v2.svg"
+          alt="Upper Floor"
+          width={833}
+          height={476}
+          priority
+          className="hero-load hero-load-1 w-24 md:w-32"
+        />
+        <p className="hero-load hero-load-2 mt-5 text-[11px] font-medium tracking-[0.4em] text-white/40">
+          CLIENT PORTFOLIO
+        </p>
+        <p className="hero-load hero-load-3 mt-2 text-sm text-white/50">
+          {isVideo
+            ? `${clipCount} clips across ${brands.length} brands. Tap any clip for sound.`
+            : `${staticCount} static ads across ${brands.length} brands. Tap any ad to enlarge.`}
+        </p>
+      </header>
 
-        {/* ── Client logo ticker ── */}
-        <div className="overflow-hidden border-y border-white/10 py-5">
-          <div className="ticker-track items-center">
-            {[0, 1].map((copy) => (
-              <div key={copy} className="flex shrink-0 items-center" aria-hidden={copy === 1}>
-                {TICKER_LOGOS.map((logo) => (
-                  <div
-                    key={`${copy}-${logo.alt}`}
-                    className="mx-8 flex items-center md:mx-12"
-                  >
-                    <BrandLogo
-                      src={logo.src}
-                      alt={copy === 0 ? logo.alt : ''}
-                      width={logo.w}
-                      height={logo.h}
-                      displayHeight={logo.height}
-                      className="opacity-60"
-                    />
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* ── Brand sections ── */}
-        <div>
-          {BRANDS.map((brand, i) => (
-            <BrandSection key={brand.name} brand={brand} index={i} />
+      {/* ── Client logo ticker ── */}
+      <div className="overflow-hidden border-y border-white/10 py-5">
+        <div className="ticker-track items-center">
+          {[0, 1].map((copy) => (
+            <div key={copy} className="flex min-w-[100vw] shrink-0 items-center justify-around" aria-hidden={copy === 1}>
+              {logos.map((logo) => (
+                <div
+                  key={`${copy}-${logo.alt}`}
+                  className="mx-8 flex items-center md:mx-12"
+                >
+                  <BrandLogo
+                    src={logo.src}
+                    alt={copy === 0 ? logo.alt : ''}
+                    width={logo.w}
+                    height={logo.h}
+                    displayHeight={logo.height}
+                    className="opacity-60"
+                  />
+                </div>
+              ))}
+            </div>
           ))}
         </div>
+      </div>
 
-        {/* ── CTA ── */}
-        <section className="border-t border-white/10 px-6 py-24 text-center md:py-32">
-          <h2
-            className="mx-auto max-w-[700px] font-black leading-tight tracking-tight reveal-on-scroll"
-            style={{ fontSize: 'clamp(1.9rem, 6vw, 3.2rem)' }}
+      <fieldset className="mx-auto mt-8 grid w-48 grid-cols-2 rounded-full border border-white/15 bg-white/5 p-1">
+        <legend className="sr-only">Portfolio format</legend>
+        <span aria-hidden="true" className={`col-start-1 row-start-1 rounded-full bg-white transition-transform duration-200 ${isVideo ? '' : 'translate-x-full'}`} />
+        {(['Videos', 'Statics'] as const).map((value, i) => (
+          <label key={value} className={`relative row-start-1 cursor-pointer ${i === 0 ? 'col-start-1' : 'col-start-2'}`}>
+            <input
+              type="radio"
+              name="portfolio-format"
+              checked={format === value}
+              onChange={() => setFormat(value)}
+              aria-controls="portfolio-gallery"
+              className="peer sr-only"
+            />
+            <span className={`block rounded-full py-2.5 text-center text-sm font-semibold peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-white ${format === value ? 'text-black' : 'text-white/70'}`}>
+              {value}
+            </span>
+          </label>
+        ))}
+      </fieldset>
+
+      <div id="portfolio-gallery">
+        <SoundProvider key={format}>
+          {brands.map((brand, i) => (
+            <BrandSection key={brand.name} brand={brand} index={i} format={format} />
+          ))}
+        </SoundProvider>
+      </div>
+
+      {/* ── CTA ── */}
+      <section className="border-t border-white/10 px-6 py-24 text-center md:py-32">
+        <h2
+          className="mx-auto max-w-[700px] font-black leading-tight tracking-tight reveal-on-scroll"
+          style={{ fontSize: 'clamp(1.9rem, 6vw, 3.2rem)' }}
+        >
+          Want content like this for your brand?
+        </h2>
+        <div className="mt-10 reveal-on-scroll reveal-delay-1">
+          <Link
+            href="/contact"
+            className="inline-block rounded-full bg-white px-9 py-4 text-sm font-black text-black transition-colors duration-200 hover:bg-white/85"
           >
-            Want content like this for your brand?
-          </h2>
-          <div className="mt-10 reveal-on-scroll reveal-delay-1">
-            <Link
-              href="/contact"
-              className="inline-block rounded-full bg-white px-9 py-4 text-sm font-black text-black transition-colors duration-200 hover:bg-white/85"
-            >
-              Get in touch →
-            </Link>
-          </div>
-          <p className="mt-8 text-sm text-white/40 reveal-on-scroll reveal-delay-2">
-            or email{' '}
-            <a
-              href="mailto:info@upperfloor.co"
-              className="text-white/70 underline underline-offset-4 hover:text-white"
-            >
-              info@upperfloor.co
-            </a>
-          </p>
-        </section>
+            Get in touch →
+          </Link>
+        </div>
+        <p className="mt-8 text-sm text-white/40 reveal-on-scroll reveal-delay-2">
+          or email{' '}
+          <a
+            href="mailto:info@upperfloor.co"
+            className="text-white/70 underline underline-offset-4 hover:text-white"
+          >
+            info@upperfloor.co
+          </a>
+        </p>
+      </section>
 
-        {/* ── Footer ── */}
-        <footer className="border-t border-white/10 px-6 py-8 text-center text-xs text-white/30">
-          © {new Date().getFullYear()} Upper Floor · upperfloor.co
-        </footer>
-      </main>
-    </SoundProvider>
+      {/* ── Footer ── */}
+      <footer className="border-t border-white/10 px-6 py-8 text-center text-xs text-white/30">
+        © {new Date().getFullYear()} Upper Floor · upperfloor.co
+      </footer>
+    </main>
   )
 }

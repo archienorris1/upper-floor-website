@@ -49,12 +49,9 @@ export default function ScrollReveal() {
 
     mo.observe(document.body, { childList: true, subtree: true })
 
-    const timeout = setTimeout(() => mo.disconnect(), 5000)
-
     return () => {
       io.disconnect()
       mo.disconnect()
-      clearTimeout(timeout)
     }
   }, [])
 

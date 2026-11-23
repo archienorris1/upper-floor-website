@@ -4,14 +4,14 @@ import PortfolioClient from './PortfolioClient'
 export const metadata: Metadata = {
   title: 'Portfolio',
   description:
-    'Selected work from Upper Floor — UGC ads, talking heads, animated explainers, motion ads and organic content for brands like Fastframe, Mello, True Fuels, Aurora, KELV, Somerwell, ION8, Dissertation Collective, Toastybody and Fidgie.',
+    'Selected work from Upper Floor — UGC ads, talking heads, animated explainers, motion ads, static ads and organic content for brands like Fastframe, Mello, True Fuels, Aurora, KELV, Somerwell, ION8, Dissertation Collective, Toastybody, Fidgie and Glasselle.',
   alternates: {
     canonical: '/portfolio',
   },
   openGraph: {
     title: 'Portfolio | Upper Floor',
     description:
-      'Selected work from Upper Floor — UGC ads, animation, motion ads and organic content for ecom brands.',
+      'Selected work from Upper Floor — UGC ads, animation, motion ads, static ads and organic content for ecom brands.',
     type: 'website',
     url: 'https://upperfloor.co/portfolio',
     siteName: 'Upper Floor',
